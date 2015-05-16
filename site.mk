@@ -26,14 +26,13 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 
-
-DEFAULT_GLUON_RELEASE := 0.7-exp
+DEFAULT_GLUON_RELEASE := 0.7
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= experimental
+GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
