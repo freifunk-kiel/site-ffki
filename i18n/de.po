@@ -25,7 +25,7 @@ msgstr ""
 "(<em><%=hostname%></em>) an <a href="
 "\"mailto:freifunk-keys@in-kiel.de?subject=Anmeldung:%20<%=hostname%>&amp;"
 "body=%23%20<%=hostname%>%0A%23%20<%=sysconfig.primary_mac%>%0Akey%20%22<"
-"%=pubkey%>%22%3B\">keys@freifunk-keys@in-kiel.de</a>."
+"%=pubkey%>%22%3B\">freifunk-keys@in-kiel.de</a>."
 
 msgid "gluon-config-mode:reboot"
 msgstr ""
