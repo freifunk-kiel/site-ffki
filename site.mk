@@ -25,6 +25,18 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 
+ifeq ($(GLUON_TARGET),x86-generic)
+# support the usb stack on x86 devices
+# and add a few common USB NICs
+GLUON_SITE_PACKAGES += \
+	kmod-usb-core \
+	kmod-usb2 \
+	kmod-usb-hid \
+	kmod-usb-net \
+	kmod-usb-net-asix \
+	kmod-usb-net-dm9601-ether
+endif
+
 # if you build only one target use the generic versioning
 # if you build several targets in one go, you have to set the version
 #DEFAULT_GLUON_RELEASE := 0.8~exp$(shell date '+%y%m%d%H%M')
