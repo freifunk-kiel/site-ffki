@@ -25,7 +25,10 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 
-DEFAULT_GLUON_RELEASE := 0.8~exp$(shell date '+%y-%m-%d_%H%M')
+# if you build only one target use the generic versioning
+# if you build several targets in one go, you have to set the version
+#DEFAULT_GLUON_RELEASE := 0.8~exp$(shell date '+%y%m%d%H%M')
+DEFAULT_GLUON_RELEASE := 0.8~exp201511212000
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
