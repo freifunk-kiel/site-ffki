@@ -44,7 +44,8 @@ GLUON_LANGS ?= en de
 # support the USB stack
 USB_PACKAGES_BASIC := \
 	kmod-usb-core \
-	kmod-usb2
+	kmod-usb2 \
+	usbutils
 # FAT32 Support for USB
 USB_PACKAGES := $(USB_PACKAGES_BASIC) \
 	block-mount \
