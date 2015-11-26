@@ -43,12 +43,12 @@ GLUON_LANGS ?= en de
 
 # support the USB stack
 USB_PACKAGES_BASIC := \
-	kmod-usb-core \
-	kmod-usb2 \
-	usbutils
+    kmod-usb-core \
+    kmod-usb2
 # FAT32 Support for USB
 USB_PACKAGES := $(USB_PACKAGES_BASIC) \
-	block-mount \
+    usbutils \
+    block-mount \
     kmod-fs-ext4 \
     kmod-fs-vfat \
     kmod-usb-storage  \
@@ -80,7 +80,7 @@ ifeq ($(GLUON_TARGET),x86-generic)
 endif
 
 ifeq ($(GLUON_TARGET),ar71xx-generic)
-	GLUON_TLWR710_SITE_PACKAGES := $(USB_PACKAGES_BASIC)
+	# GLUON_TLWR710_SITE_PACKAGES := $(USB_PACKAGES_BASIC) # some wr710 versions only have 4MB
 	GLUON_TLWR1043_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_TLWR842_SITE_PACKAGES := $(USB_PACKAGES)
 	GLUON_TLWDR4300_SITE_PACKAGES := $(USB_PACKAGES)
