@@ -8,7 +8,7 @@ GLUON_SITE_FEEDS='ffki ssidnotifier roamguide'
 ##	PACKAGES_$feedname_REPO
 #		the  git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
-PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/ruben/roamguide
+PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 
 # contains the packet
 # * gluon-usb-media
