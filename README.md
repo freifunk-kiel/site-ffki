@@ -2,21 +2,25 @@ Doku: https://gluon.readthedocs.org/en/v2015.1/user/site.html
 
 Gluon versions used for specific Kieler Freifunk Firmware builds:
 
-* 2016.1.5 - Gluon 2016.1.5
-* 0.7.1 v2015.1.1
-* 0.7: v2015.1
-* 0.6: v2014.4
-* 0.5.2: v2014.3.1
-* 0.5:   v2014.3
-* 0.4.1: de223ceaf2fd0c9e7892dbaf6a12058fc3fc6269
-* 0.4: 5a4767b78fef2a6c8c9ffd76c69731b9d8b37557
-* 0.3.100-exp (0.4 Beta 1): 2c751d3612a7229de878c40ae724611f2f4f0bee
+- 2016.1.5 - Gluon 2016.1.5
+	- USB-auto-mount
+	- Kontaktfeld pflicht
+	- roamguide (initial inaktiv)
+- 0.7.1    - Gluon v2015.1.1 (5.7.2015)
+- 0.7      - Gluon 2015.1 (22.5.2015)
+- 0.6      - Gluon 2014.4 (30.3.2015)
+- 0.5.2    - Gluon 2014.3.1
+- 0.5      - Gluon 2014.3
+- 0.4.1    - Gluon de223ceaf2fd0c9e7892dbaf6a12058fc3fc6269
+- 0.4      - Gluon (24.4.2014) 5a4767b78fef2a6c8c9ffd76c69731b9d8b37557
+- 0.3.2.1  - (02.04.2013)
+- 0.3.100-exp (0.4 Beta 1): 2c751d3612a7229de878c40ae724611f2f4f0bee
 
 
 Download der Firmware:
 ----------------------
 
-* https://kiel.freifunk.net/firmware.html
+- https://kiel.freifunk.net/firmware.html
 
 Build
 -----
