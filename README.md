@@ -6,6 +6,9 @@ Gluon versions used for specific Kieler Freifunk Firmware builds:
 	- USB-auto-mount
 	- Kontaktfeld pflicht
 	- roamguide (initial inaktiv)
+- 0.9    - Gluon v2016.1.5
+    - temporäre Zwischenversion um den update Branch bei Routern mit 0.8 auf stable zu setzen
+- 0.8.x    - Gluon v2015.2
 - 0.7.1    - Gluon v2015.1.1 (5.7.2015)
 - 0.7      - Gluon 2015.1 (22.5.2015)
 - 0.6      - Gluon 2014.4 (30.3.2015)
