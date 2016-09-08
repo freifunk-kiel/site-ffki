@@ -19,7 +19,7 @@ PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 
 ##	PACKAGES_$feedname_COMMIT
 #		the version/commit of the git repository to clone
-PACKAGES_FFKI_COMMIT=67ffe553db95684aa144aa5b5d15905d18d44efb
+PACKAGES_FFKI_COMMIT=6d375423b15b05098fcc9f8716c9b14e7085d48f
 PACKAGES_ROAMGUIDE_COMMIT=152f5649d06e4a1fecb96ee754bbd44fb1334f24
 
 ##  PACKAGES_$feedname_BRANCH
