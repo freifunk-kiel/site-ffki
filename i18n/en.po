@@ -31,6 +31,12 @@ msgstr ""
 "<%= pubkey %>"
 "</div>"
 
+msgid "gluon-config-mode:nopubkey"
+msgstr ""
+"<p><strong>You selected not to use Mesh-VPN. Your node will only be able  "
+"to connect to the internet if other nodes in reach already have a  "
+"connection</strong></p>"
+
 msgid "gluon-config-mode:reboot"
 msgstr ""
 "<p>The node is currently rebooting and will try to connect to other "

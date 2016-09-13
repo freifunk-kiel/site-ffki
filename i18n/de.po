@@ -40,6 +40,12 @@ msgstr ""
 "<%= pubkey %>"
 "</div>"
 
+msgid "gluon-config-mode:nopubkey"
+msgstr ""
+"<p><strong>Du hast ausgewählt die Internetverbindung (Mesh-VPN) nicht zu nutzen. "
+"Dein Knoten kann also nur eine Internetverbindung aufbauen, wenn andere Freifunk-"
+"Knoten in Reichweite schon eine Internetverbindung haben.</strong></p>"
+
 msgid "gluon-config-mode:reboot"
 msgstr ""
 "<p>Dein Knoten startet gerade neu und wird anschließend versuchen, "
