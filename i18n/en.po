@@ -47,3 +47,10 @@ msgstr ""
 "10 seconds during normal operation. The device will then reboot into config "
 "mode.</p>"
 "<p>Have fun with your node and exploring the Freifunk network!</p>"
+
+msgid "gluon-config-mode:altitude-string"
+msgstr ""
+"Height is optional and should be approximated if no exact value is known."
+
+msgid "gluon-config-mode:altitude-label"
+msgstr "Height (3m per Storey)"

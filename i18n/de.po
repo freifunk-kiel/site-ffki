@@ -71,3 +71,9 @@ msgstr ""
 "<p><small>Hilf uns, weitere Anleitungen, Texte, Grafiken, Applikationen, Schaubilder, und ähnliches zu erstellen die wir hier verlinken können, um jedem neuen Freifunker einen guten Start zu ermöglichen</small>"
 "</p>"
 
+msgid "gluon-config-mode:altitude-string"
+msgstr ""
+"Die Höhenangabe ist optional und kann geschätzt werden, wenn kein genauer Wert bekannt ist."
+
+msgid "gluon-config-mode:altitude-label"
+msgstr "Höhe (3m pro Stockwerk)"
