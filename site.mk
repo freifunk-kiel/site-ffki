@@ -9,6 +9,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-hostname \
 	gluon-config-mode-mesh-vpn \
 	gluon-config-mode-geo-location \
+	gluon-config-mode-contact-info \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
 	gluon-luci-admin \
@@ -26,9 +27,6 @@ GLUON_SITE_PACKAGES := \
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
-# from ffki-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-contact-obligatory
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
