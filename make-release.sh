@@ -22,10 +22,17 @@ if [ ! -d "site" ]; then
 	return
 fi
 
-rm build.log
-rm -r output
+echo "############## starting build process #################" >> build.log
+date >> build.log
+echo "if you want to start over empty the folder ../output/"
+echo "see debug output with"
+echo "tail -f ../build.log &"
+sleep 3
+
+#rm -r output
 for TARGET in  ar71xx-generic ar71xx-mikrotik ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-rt305x sunxi x86-64 x86-generic x86-kvm_guest x86-xen_domu
 do
+	date >> build.log
 	if [ -z "$VERSION" ]
 	then
 		echo "Starting work on target $TARGET" | tee -a build.log
@@ -47,6 +54,8 @@ do
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
+date >> build.log
+
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
 echo -e "make GLUON_BRANCH=experimental manifest" >> build.log
@@ -84,4 +93,5 @@ then
 	contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/stable.manifest >> build.log 2>&1
 fi
 cd site
+date >> build.log
 echo "Done :)"
