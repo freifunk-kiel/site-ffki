@@ -24,6 +24,11 @@ if [ ! -d "site" ]; then
 	return
 fi
 
+if [ "$(whoami)" == "root" ]; then 
+	echo "Make may not be run as root"
+	return
+fi
+
 echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
