@@ -20,12 +20,12 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 cd ..
 if [ ! -d "site" ]; then
 	echo "This script must be called from within the site directory"
-	return
+	exit
 fi
 
 if [ "$(whoami)" == "root" ]; then 
 	echo "Make may not be run as root"
-	return
+	exit
 fi
 
 echo "############## starting build process #################" >> build.log
