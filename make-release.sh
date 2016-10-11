@@ -12,9 +12,11 @@
 # if version is unset, will use the default experimental version from site.mk
 VERSION=${3:-"2016.2~exp$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
-BRANCH=${2:-"experimental"}
+BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
+#BROKEN must be set to "" or "BROKEN=1"
+BROKEN="BROKEN=1"
 
 cd ..
 if [ ! -d "site" ]; then
@@ -40,8 +42,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	else
 		echo "Starting work on target $TARGET" | tee -a build.log
@@ -49,8 +51,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
