@@ -48,6 +48,9 @@ export GLUON_BRANCH
 GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
 
+GLUON_REGION ?= eu
+GLUON_ATH10K_MESH ?= ibss
+
 GLUON_LANGS ?= en de
 
 # basic support the USB stack
