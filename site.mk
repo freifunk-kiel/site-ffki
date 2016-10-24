@@ -39,15 +39,16 @@ DEFAULT_GLUON_RELEASE := 2016.2~exp$(shell date '+%y%m%d%H%M')
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
-# Region code required for some images; supported values: us eu
-GLUON_REGION ?= eu
-
 GLUON_PRIORITY ?= 0
 GLUON_BRANCH ?= experimental
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
 export GLUON_TARGET
+
+# Region code required for some images; supported values: us eu
+GLUON_REGION ?= eu
+GLUON_ATH10K_MESH ?= ibss
 
 GLUON_LANGS ?= en de
 
