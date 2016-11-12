@@ -16,7 +16,7 @@ BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
-BROKEN="BROKEN=1"
+BROKEN=""
 
 cd ..
 if [ ! -d "site" ]; then
@@ -24,7 +24,7 @@ if [ ! -d "site" ]; then
 	return
 fi
 
-if [ "$(whoami)" == "root" ]; then 
+if [ "$(whoami)" == "root" ]; then
 	echo "Make may not be run as root"
 	return
 fi
