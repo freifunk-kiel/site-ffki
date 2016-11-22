@@ -30,6 +30,9 @@ GLUON_SITE_PACKAGES += \
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
+# from eulenfunk-packages (branch aus Nord):
+GLUON_SITE_PACKAGES += \
+	gluon-quickfix
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
