@@ -48,6 +48,7 @@ msgstr ""
 "mode.</p>"
 "<p>Have fun with your node and exploring the Freifunk network!</p>"
 
+# only applies, if this gets merged: https://github.com/freifunk-gluon/gluon/pull/883
 msgid "gluon-config-mode:altitude-string"
 msgstr ""
 "Height is optional and should be approximated if no exact value is known."
