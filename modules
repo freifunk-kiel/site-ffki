@@ -2,19 +2,22 @@
 # when building gluon.
 
 #	for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki ffhh roamguide'
+GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk'
 
 #	the  git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
 PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
+PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 
 #	the version/commit of the git repository to clone
-PACKAGES_FFKI_COMMIT=6d375423b15b05098fcc9f8716c9b14e7085d48f
-PACKAGES_FFHH_COMMIT=818765060bc76a109dde1558513fd086e5973ef1
+PACKAGES_FFKI_COMMIT=3c436ff1318d77a82e3de4a0a820486b907f8e87
+PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
 PACKAGES_ROAMGUIDE_COMMIT=cc8253d6dd62cd6ba4f04506711edd0705dc5532
+PACKAGES_EULENFUNK_COMMIT=b4f89eff180c6a78f86d0f8c9c8a116c620136ac
 
 # the branch to check out
 PACKAGES_FFKI_BRANCH=master
 PACKAGES_FFHH_BRANCH=master
 PACKAGES_ROAMGUIDE_BRANCH=master
+PACKAGES_EULENFUNK_BRANCH=v2016.2-ibss
