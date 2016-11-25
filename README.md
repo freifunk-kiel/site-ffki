@@ -2,6 +2,8 @@ Doku: https://gluon.readthedocs.org/en/v2015.1/user/site.html
 
 Gluon versions used for specific Kieler Freifunk Firmware builds:
 
+- 2016.1.2 - Gluon 2016.1.2
+  - BugFixes
 - 2016.1.5 - Gluon 2016.1.5
 	- USB-auto-mount
 	- Kontaktfeld pflicht
