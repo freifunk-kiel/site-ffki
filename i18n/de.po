@@ -83,11 +83,3 @@ msgstr ""
 
 msgid "e.g. E-mail or phone number"
 msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
-
-# only applies, if this gets merged: https://github.com/freifunk-gluon/gluon/pull/883
-msgid "gluon-config-mode:altitude-string"
-msgstr ""
-"Die Höhenangabe ist optional und kann geschätzt werden, wenn kein genauer Wert bekannt ist."
-
-msgid "gluon-config-mode:altitude-label"
-msgstr "Höhe (3m pro Stockwerk)"
