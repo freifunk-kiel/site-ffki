@@ -6,10 +6,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-setup-mode \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
-	gluon-config-mode-hostname \
 	gluon-config-mode-mesh-vpn \
 	gluon-config-mode-geo-location \
-	gluon-config-mode-contact-info \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
 	gluon-luci-admin \
@@ -33,6 +31,10 @@ GLUON_SITE_PACKAGES += \
 # from eulenfunk-packages (branch aus Nord):
 GLUON_SITE_PACKAGES += \
 	gluon-quickfix
+	# from ffki-packages:
+GLUON_SITE_PACKAGES += \
+	gluon-config-mode-hostname-no-pretty \
+	gluon-config-mode-contact-info-anonymous-hint
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
