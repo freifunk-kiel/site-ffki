@@ -31,7 +31,7 @@ GLUON_SITE_PACKAGES += \
 # from eulenfunk-packages (branch aus Nord):
 GLUON_SITE_PACKAGES += \
 	gluon-quickfix
-	# from ffki-packages:
+# from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
 	gluon-config-mode-contact-info-anonymous-hint
