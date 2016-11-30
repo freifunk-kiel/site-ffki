@@ -2,9 +2,9 @@ Doku: https://gluon.readthedocs.org/en/v2015.1/user/site.html
 
 Gluon versions used for specific Kieler Freifunk Firmware builds:
 
-- 2016.1.2 - Gluon 2016.1.2
+- 2016.2.1 - Gluon 2016.2.1
   - BugFixes
-- 2016.1.5 - Gluon 2016.1.5
+- 2016.1.5.1 - Gluon 2016.1.5
 	- USB-auto-mount
 	- Kontaktfeld pflicht
 	- roamguide (initial inaktiv)
@@ -40,6 +40,3 @@ You can easily create your own experimental build with these commands:
     for TARGET in ar71xx-generic ar71xx-nand mpc85xx-generic x86-generic x86-kvm_guest x86-64 x86-xen_domu; do
     	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.1.5~exp$D BROKEN=1;
     done
-
-
-
