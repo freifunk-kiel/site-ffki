@@ -1,18 +1,25 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-We have three branches:
+# Autoupdater sources
 
-## stable
-built on the site-ffki branch `master` on gluon 2016.2.1
+We are working with those autoupdater branches:
 
-## release-candidate (rc)
-built on the site-ffki branch `master` too, but with BROKEN=1 on gluon 2016.2.1
+### stable
+Built on the site-ffki branch `master` on gluon 2016.2.1
 
-## nightly (exp)
-build on the site-ffki branch `experimental` with BROKEN=1 on gluon 2016.2.x (or later on gluon branch master)
+### release-candidate (rc)
+Built on the site-ffki branch `master` too, but with BROKEN=1 on gluon 2016.2.1
 
-Doku: https://gluon.readthedocs.org/en/v2016.2.1/user/site.html
+### nightly (exp)
+Build on the site-ffki branch `experimental` with BROKEN=1 on gluon 2016.2.x (or later on gluon branch master)
+
+### 802.11s (11s)
+Build on the site-ffki branch `802.11s` with BROKEN=1 and support for ralink Routers on gluon 2016.2.x
+
+Gluon Dokumentation: https://gluon.readthedocs.io/en/latest/user/site.html
+
+#Releases
 
 Gluon versions used for specific Kieler Freifunk Firmware builds:
 
@@ -45,7 +52,9 @@ Download der Firmware:
 
 Build
 -----
-You can easily create your own experimental build with these commands:
+You can easily create your own experimental firmware with the build script `make-release.sh`
+
+Or build with these commands:
 
     sudo apt-get install git make gcc g++ unzip libncurses5-dev zlib1g-dev subversion gawk bzip2 libssl-dev
     git clone https://github.com/freifunk-gluon/gluon.git
@@ -53,6 +62,11 @@ You can easily create your own experimental build with these commands:
     git clone git@git.freifunk.in-kiel.de:ffki-site.git site
     make update
     D=$(date '+%y%m%d%H%M');
-    for TARGET in ar71xx-generic ar71xx-nand mpc85xx-generic x86-generic x86-kvm_guest x86-64 x86-xen_domu; do
+    ONLY_11S="ramips-rt305x ramips-mt7621"
+    BANANAPI="sunxi"
+    RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
+    X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
+    WDR4900="mpc85xx-generic"
+    for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86; do
     	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~exp$D BROKEN=1;
     done
