@@ -48,7 +48,7 @@ Gluon versions used for specific Kieler Freifunk Firmware builds:
 Download der Firmware:
 ----------------------
 
-- https://kiel.freifunk.net/firmware.html
+- https://freifunk.in-kiel.de/firmware.html
 
 Build
 -----
