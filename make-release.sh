@@ -40,6 +40,7 @@ sleep 3
 
 #rm -r output
 ONLY_11S="ramips-rt305x ramips-mt7621"
+ONLY_MASTER="mvebu" # Linksys WRT1200AC
 BANANAPI="sunxi"
 RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
 X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
