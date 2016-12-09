@@ -17,6 +17,8 @@ BRANCH=${2:-"stable"}
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
+#set num cores
+CORES="-j1"
 
 cd ../
 if [ ! -d "site" ]; then
@@ -52,8 +54,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	else
 		echo "Starting work on target $TARGET" | tee -a build.log
@@ -61,8 +63,8 @@ do
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES" >> build.log
+		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
