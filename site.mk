@@ -38,7 +38,7 @@ GLUON_SITE_PACKAGES += \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2016.2.1
+DEFAULT_GLUON_RELEASE := 2016.2.2~rc$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line
@@ -86,6 +86,26 @@ USB_PACKAGES_TETHERING := \
 	kmod-usb-net-asix \
 	kmod-usb-net-dm9601-ether
 
+USB_X86_GENERIC_NETWORK_MODULES := \
+	kmod-usb-ohci-pci \
+	kmod-sky2 \
+	kmod-atl2 \
+	kmod-igb \
+	kmod-3c59x \
+	kmod-e100 \
+	kmod-e1000 \
+	kmod-e1000e \
+	kmod-natsemi \
+	kmod-ne2k-pci \
+	kmod-pcnet32 \
+	kmod-8139too \
+	kmod-r8169 \
+	kmod-sis900 \
+	kmod-tg3 \
+	kmod-via-rhine \
+	kmod-via-velocity \
+	kmod-forcedeth
+
 # storage support for USB
 USB_PACKAGES_STORAGE := \
 	block-mount \
@@ -108,27 +128,6 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-iso8859-2 \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
-
-USB_X86_GENERIC_NETWORK_MODULES := \
-kmod-usb-ohci-pci \
-kmod-sky2 \
-kmod-atl2 \
-kmod-igb \
-kmod-3c59x \
-kmod-e100 \
-kmod-e1000 \
-kmod-e1000e \
-kmod-natsemi \
-kmod-ne2k-pci \
-kmod-pcnet32 \
-kmod-8139too \
-kmod-r8169 \
-kmod-sis900 \
-kmod-tg3 \
-kmod-via-rhine \
-kmod-via-velocity \
-kmod-forcedeth
-
 # from ffki-packages:
 USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
