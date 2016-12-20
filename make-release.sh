@@ -58,7 +58,7 @@ WDR4900="mpc85xx-generic"
 
 TARGETS=ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86
 if [ $BROKEN != "" ]; then
-	TARGETS+="$BANANAPI $MICROTIK"
+	TARGETS+="$BANANAPI $MICROTIK $WRT1200AC"
 fi
 
 for TARGET in $TARGETS
