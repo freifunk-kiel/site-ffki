@@ -2,12 +2,13 @@
 # when building gluon.
 
 #	for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk'
+GLUON_SITE_FEEDS='ffki ffhh roamguide ddhcpd eulenfunk'
 
 #	the  git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
 PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
+PACKAGES_DDHCPD_REPO=https://git.toppoint.de/sargon/gluon-ddhcpd
 PACKAGES_EULENFUNK_REPO=https://github.com/eulenfunk/packages
 
 #	the version/commit of the git repository to clone
@@ -20,4 +21,5 @@ PACKAGES_EULENFUNK_COMMIT=f3c001be57820f76f580df2110ef7791e4c34e39
 PACKAGES_FFKI_BRANCH=master
 PACKAGES_FFHH_BRANCH=master
 PACKAGES_ROAMGUIDE_BRANCH=master
+PACKAGES_DDHCPD_BRANCH=master
 PACKAGES_EULENFUNK_BRANCH=v2016.2

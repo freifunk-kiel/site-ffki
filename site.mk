@@ -24,7 +24,8 @@ GLUON_SITE_PACKAGES := \
 	haveged
 # from sargon:
 GLUON_SITE_PACKAGES += \
-	roamguide
+	roamguide \
+	ddhcpd
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
