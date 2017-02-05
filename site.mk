@@ -14,7 +14,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-luci-portconfig \
 	gluon-luci-private-wifi \
 	gluon-luci-wifi-config \
-	gluon-next-node \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
 	gluon-status-page \
@@ -53,6 +52,8 @@ export GLUON_TARGET
 
 # Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
+
+# enable generation of images for ath10k devices with ibss mode
 GLUON_ATH10K_MESH ?= ibss
 
 GLUON_LANGS ?= en de
