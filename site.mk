@@ -21,8 +21,9 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 # from sargon:
-GLUON_SITE_PACKAGES += \
-	ddhcpd
+#GLUON_SITE_PACKAGES += \
+#	roamguide
+#	ddhcpd
 # from ffhh-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-reboot-ffhh
