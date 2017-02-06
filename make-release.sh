@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2016.2.1~11s$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2016.2.2~11s$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -48,17 +48,18 @@ WRT1200AC="mvebu" # Linksys WRT1200AC BROKEN: No AP+IBSS+mesh support
 ONLY_11S="ramips-rt305x ramips-mt7621" 		# BROKEN only
 
 ONLY_LEDE="ar71xx-tiny" # Support for for 841 on lede, needs less packages, so the 4MB will suffice!
+NOT_LEDE="x86-kvm_guest" # The x86-kvm_guest target has been dropped from LEDE; x86-64 should be used
 
 BANANAPI="sunxi" 													# BROKEN: Untested, no sysupgrade support
 MICROTIK="ar71xx-mikrotik" 								# BROKEN: no sysupgrade support
 
 RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
-X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
+X86="x86-64 x86-generic x86-xen_domu"
 WDR4900="mpc85xx-generic"
 
-TARGETS=ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86
+TARGETS="ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86 $NOT_LEDE"
 if [ $BROKEN != "" ]; then
-	TARGETS+="$BANANAPI $MICROTIK $WRT1200AC $ONLY_11S"
+	TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
 fi
 
 for TARGET in $TARGETS
