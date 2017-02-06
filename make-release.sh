@@ -57,9 +57,9 @@ RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
 X86="x86-64 x86-generic x86-xen_domu"
 WDR4900="mpc85xx-generic"
 
-TARGETS=ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86 $ONLY_LEDE
+TARGETS="ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86 $ONLY_LEDE"
 if [ $BROKEN != "" ]; then
-	TARGETS+="$BANANAPI $MICROTIK $WRT1200AC"
+	TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
 fi
 
 for TARGET in $TARGETS
