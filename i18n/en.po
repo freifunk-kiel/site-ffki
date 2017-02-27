@@ -55,27 +55,14 @@ msgstr ""
 "mode.</p>"
 "<p>Have fun with your node and exploring the Freifunk network!</p>"
 
-
-# translations from within default gluon:
-
-msgid "Altitude"
-msgstr "Altitude (3m per storey)"
-
-msgid ""
-"Specifying the altitude is optional and should only be done if a proper "
-"value is known."
-msgstr ""
-"Specifying the altitude is optional and can be aproximated with 3m per storey."
-
-msgid "e.g. E-mail or phone number"
-msgstr "e.g. E-mail, chat buddy or phone number"
-
-
-# translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
-
 msgid "gluon-config-mode:altitude-label"
 msgstr "Altitude (3m per storey)"
 
 msgid "gluon-config-mode:altitude-help"
 msgstr ""
 "Specifying the altitude is optional and can be aproximated with 3m per storey."
+
+# translations from within default gluon:
+
+msgid "e.g. E-mail or phone number"
+msgstr "e.g. E-mail, chat buddy or phone number"

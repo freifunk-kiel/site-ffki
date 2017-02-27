@@ -78,27 +78,15 @@ msgstr ""
 "<p>Viel Spaß mit deinem Knoten und bei der Erkundung von Freifunk!</p>"
 "</p>"
 
-
-# translations from within default gluon:
-
-msgid "Altitude"
-msgstr "Höhe (3m pro Stock)"
-
-msgid ""
-"Specifying the altitude is optional and should only be done if a proper "
-"value is known."
-msgstr ""
-"Die Höhenangabe ist optional und kann geschätzt werden mit 3m pro Stockwerk."
-
-msgid "e.g. E-mail or phone number"
-msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
-
-
-# translations needed for gluon master (commit/34deeac380527d5bfc2a87d1ebae0a784af76c6f)
-
 msgid "gluon-config-mode:altitude-label"
 msgstr "Höhe (3m pro Stock)"
 
 msgid "gluon-config-mode:altitude-help"
 msgstr ""
 "Die Höhenangabe ist optional und kann geschätzt werden mit 3m pro Stockwerk."
+
+
+# translations from within default gluon:
+
+msgid "e.g. E-mail or phone number"
+msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
