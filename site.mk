@@ -24,16 +24,19 @@ GLUON_SITE_PACKAGES := \
 #GLUON_SITE_PACKAGES += \
 #	roamguide
 #	ddhcpd
+
 # from ffhh-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-reboot-ffhh
+#GLUON_SITE_PACKAGES += \
+#	gluon-config-mode-reboot-ffhh
+
 # from eulenfunk-packages (branch aus Nord):
-GLUON_SITE_PACKAGES += \
-	gluon-quickfix
+#GLUON_SITE_PACKAGES += \
+#	gluon-quickfix
+
 # from ffki-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-hostname-no-pretty \
-	gluon-config-mode-contact-info-anonymous-hint
+#GLUON_SITE_PACKAGES += \
+#	gluon-config-mode-hostname-no-pretty \
+#	gluon-config-mode-contact-info-anonymous-hint
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
