@@ -21,9 +21,16 @@ msgstr ""
 "connect the node to the Freifunk mesh VPN after the key has been registered on "
 "the Freifunk Kiel servers.  "
 "To register the key send it together with your node's name (<em><%= pcdata(hostname) %></em>) to <a href="
-"\"mailto:freifunk-keys@lists.in-kiel.de?subject=Anmeldung:%20<%= urlencode(hostname) %>&amp;"
-"body=%23%20<%= urlencode(hostname) %>%0A%23%20<%= sysconfig.primary_mac %>%0Akey%20%22"
-"<%= pubkey %>%22%3B\">freifunk-keys@lists.in-kiel.de</a>."
+"\"mailto:freifunk-keys@lists.in-kiel.de?"
+"subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
+"body=<%= urlencode(
+   '# ' .. hostname ..'\n'
+.. '# ' .. primary_mac .. '\n'
+.. 'key="' .. pubkey .. ' %>";\n\n'
+.. 'I would like to be informed whenever my node is offline.\n'
+.. 'Please add my contact to the nodewatcher.\n\nThanks, \n\n'
+) %>"
+"\">freifunk-keys@lists.in-kiel.de</a>."
 "</p>"
 "<div class=\"the-key\">"
 " # <%= pcdata(hostname) %>"

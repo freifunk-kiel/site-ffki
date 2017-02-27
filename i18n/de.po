@@ -28,12 +28,15 @@ msgstr ""
 "kann sich dein Knoten mit dem Kieler Mesh-VPN zu verbinden. Bitte "
 "schicke dazu diesen Schlüssel und den Namen deines Knotens "
 "(<em><%= pcdata(hostname) %></em>) an <a href="
-"\"mailto:freifunk-keys@lists.in-kiel.de?subject=Anmeldung:%20<%= urlencode(hostname) %>&amp;"
-"body=%23%20<%= urlencode(hostname) %>%0A"
-"%23%20<%= sysconfig.primary_mac %>%0A"
-"key%20%22<%= pubkey %>%22%3B%0A%0A"
-"Ich%20m%C3%B6chte%20informiert%20werden%2C%20falls%20mein%20Knoten%20offline%20ist.%0A"
-"Bitte%20meldet%20mich%20beim%20Knotenalarm%20an.%0A%0AGru%C3%9F%2C%20%0A%0A"
+"\"mailto:freifunk-keys@lists.in-kiel.de?"
+"subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
+"body=<%= urlencode(
+   '# ' .. hostname ..'\n'
+.. '# ' .. primary_mac .. '\n'
+.. 'key="' .. pubkey .. ' %>";\n\n'
+.. 'Ich möchte informiert werden, falls mein Knoten offline ist.\n'
+.. 'Bitte meldet mich beim Knotenalarm an.\n\nGruß, \n\n'
+) %>"
 "\">freifunk-keys@lists.in-kiel.de</a>. <small>Ein Klick auf "
 "den E-Mail Link müsste&trade; dein E-Mail Programm öffnen und alle benötigten "
 "Informationen in eine neue Mail einfügen. Deine E-Mail Adresse wird selbstverständlich vertraulich "
