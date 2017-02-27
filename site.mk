@@ -56,8 +56,8 @@ export GLUON_TARGET
 # Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
 
-# enable generation of images for ath10k devices with ibss mode
-GLUON_ATH10K_MESH ?= ibss
+# enable generation of images for ath10k devices with 802.11s mode
+GLUON_ATH10K_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
