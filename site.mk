@@ -38,7 +38,7 @@ GLUON_SITE_PACKAGES += \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2016.2.4~rc$(shell date '+%y%m%d%H%M')
+DEFAULT_GLUON_RELEASE := 2016.2.5~rc$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line
