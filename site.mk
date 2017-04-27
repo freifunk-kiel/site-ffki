@@ -1,5 +1,6 @@
 GLUON_SITE_PACKAGES := \
 	gluon-mesh-batman-adv-14 \
+	gluon-core \
 	gluon-respondd \
 	gluon-autoupdater \
 	gluon-setup-mode \
