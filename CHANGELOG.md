@@ -1,7 +1,38 @@
+Änderungen mit Firmwareversion 2016.2.5.1 basierend auf Gluon 2016.2.5
+================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+ * Der Eulenfunk-Patch startet frühesten nach einer Stunde den Router neu, wenn kein Gateway erreichbar ist.
+
+
+Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.5
+================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+ * Texte im Config Mode überarbeitet
+ * Der Knotenalarm auf unserer Webseite wird besser beworben
+ * In der Anmelde-Email kann man sich gleich für den Knotenalarm anmelden
+ 
+ Generelle Änderungen an Gluon 2016.2.5
+----------------------------
+ * Ein Fehler wurde behoben, der nur batman-adv 15 betrifft, welches wir in Kiel nicht nutzen
+
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.5.html
+
+
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
 ================================================================
 
-Änderungen an Gluon 2016.2.4
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+ * Im Config Mode kann man jetzt das Pico Peering Agreement akzeptieren
+
+Generelle Änderungen an Gluon 2016.2.4
 ----------------------------
  * Ein Problem mit batman-adv (compat 15) wurde behoben. Dieses führte dazu, dass Pakete einer bestimmten Größe nicht übertragen werden konnen (b7eeef9).
  Die Gluon Entwickler gehen davon aus, dass dies der Grund für hängende Autoupdateprozesse war.
@@ -43,6 +74,7 @@ Mehr Routermodelle werden unterstützt
 ------------------------------------
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.3.html
+
 
 Änderungen mit Firmwareversion 2016.2.2 basierend auf Gluon 2016.2.2
 ================================================================
