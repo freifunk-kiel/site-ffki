@@ -30,9 +30,12 @@ GLUON_SITE_PACKAGES := \
 #GLUON_SITE_PACKAGES += \
 #	gluon-config-mode-reboot-ffhh
 
-# from eulenfunk-packages (branch aus Nord):
+# from https://github.com/Freifunk-Nord/eulenfunk-packages
+GLUON_SITE_PACKAGE += \
+	gluon-quickfix
+
+# from https://github.com/Freifunk-Nord/gluon-ssid-changer:
 GLUON_SITE_PACKAGES += \
-	gluon-quickfix \
 	gluon-ssid-changer
 
 # from ffki-packages:

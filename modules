@@ -9,7 +9,7 @@ PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
 #PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
 #PACKAGES_DDHCPD_REPO=https://git.toppoint.de/sargon/gluon-ddhcpd
-PACKAGES_EULENFUNK_REPO=https://github.com/eulenfunk/packages
+PACKAGES_EULENFUNK_REPO=git://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer.git
 
 #	the version/commit of the git repository to clone
@@ -17,7 +17,7 @@ PACKAGES_FFKI_COMMIT=a85172564fe6463bb8b900d53ede8d642433c3a7
 PACKAGES_FFHH_COMMIT=ef9fcc1222f74c3c045b1450537a4b8b80efb56c
 #PACKAGES_ROAMGUIDE_COMMIT=cc8253d6dd62cd6ba4f04506711edd0705dc5532
 #PACKAGES_DDHCPD_COMMIT=2fddf309d76d9acb11f1437e4160b687dc0e4291
-PACKAGES_EULENFUNK_COMMIT=f3c001be57820f76f580df2110ef7791e4c34e39
+PACKAGES_EULENFUNK_COMMIT=492bd812b85ba4eb70debf9eaa965e24051eab62
 PACKAGES_SSIDCHANGER_COMMIT=5e548c87add078ef70d11c1f72100d45879bf327
 
 # the branch to check out
