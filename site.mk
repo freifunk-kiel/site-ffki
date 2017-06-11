@@ -24,8 +24,8 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	haveged
 # from sargon:
-#GLUON_SITE_PACKAGES += \
-#	roamguide
+GLUON_SITE_PACKAGES += \
+	roamguide
 #	ddhcpd
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
