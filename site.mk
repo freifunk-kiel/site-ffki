@@ -4,6 +4,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-respondd \
 	gluon-autoupdater \
 	gluon-setup-mode \
+	gluon-config-mode-hostname \
+	gluon-config-mode-contact-info \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-mesh-vpn \
