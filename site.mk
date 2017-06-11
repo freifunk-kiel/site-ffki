@@ -26,10 +26,6 @@ GLUON_SITE_PACKAGES := \
 #	roamguide
 #	ddhcpd
 
-# from ffhh-packages:
-#GLUON_SITE_PACKAGES += \
-#	gluon-config-mode-reboot-ffhh
-
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
 GLUON_SITE_PACKAGE += \
 	gluon-quickfix
