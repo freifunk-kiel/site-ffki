@@ -21,8 +21,8 @@ BROKEN="BROKEN=1"
 CORES="-j1"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
-ONLY_TARGET=""
-#ONLY_TARGET="ar71xx-tiny"
+#ONLY_TARGET=""
+ONLY_TARGET="ar71xx-tiny ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=""
 #DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
