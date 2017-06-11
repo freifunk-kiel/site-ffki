@@ -31,8 +31,9 @@ GLUON_SITE_PACKAGES := \
 #	gluon-config-mode-reboot-ffhh
 
 # from eulenfunk-packages (branch aus Nord):
-#GLUON_SITE_PACKAGES += \
-#	gluon-quickfix
+GLUON_SITE_PACKAGES += \
+	gluon-quickfix \
+	gluon-ssid-changer
 
 # from ffki-packages:
 #GLUON_SITE_PACKAGES += \
@@ -41,7 +42,7 @@ GLUON_SITE_PACKAGES := \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2017.0.0~lede$(shell date '+%y%m%d%H%M')
+DEFAULT_GLUON_RELEASE := 2017.0.1~lede$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line

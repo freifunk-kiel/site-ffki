@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2017.0.0~lede$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.0.1~lede$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -21,11 +21,11 @@ BROKEN="BROKEN=1"
 CORES="-j1"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
-#ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic"
+ONLY_TARGET=""
+#ONLY_TARGET="ar71xx-tiny"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-#DEVICES=""
-DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
+DEVICES=""
+#DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
 
 cd ../
 if [ ! -d "site" ]; then
