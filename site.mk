@@ -35,7 +35,8 @@ GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 
 # from ffki-packages:
-#GLUON_SITE_PACKAGES += \
+GLUON_SITE_PACKAGES += \
+	gluon-config-mode-ppa
 #	gluon-config-mode-hostname-no-pretty \
 #	gluon-config-mode-contact-info-anonymous-hint
 
