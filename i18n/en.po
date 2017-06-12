@@ -26,11 +26,10 @@ msgstr ""
 "body=<%= urlencode(
    '# ' .. hostname ..'\n'
 .. '# ' .. primary_mac .. '\n'
-.. 'key="' .. pubkey .. ' %>";\n\n'
+.. 'key="' .. pubkey .. '";\n\n'
 .. 'I would like to be informed whenever my node is offline.\n'
 .. 'Please add my contact to the nodewatcher.\n\nThanks, \n\n'
-) %>"
-"\">freifunk-keys@lists.in-kiel.de</a>."
+) %>">freifunk-keys@lists.in-kiel.de</a>."
 "</p>"
 "<div class=\"the-key\">"
 " # <%= pcdata(hostname) %>"
@@ -42,7 +41,17 @@ msgid "gluon-config-mode:nopubkey"
 msgstr ""
 "<p><div class=\"the-key\">You selected not to use Mesh-VPN. Your node will only be able  "
 "to connect to the internet if other nodes in reach already have a  "
-"connection</div></p>"
+"connection</div>Please register your node (<em><%= pcdata(hostname) %></em>) and"
+"send an email to <a href=\"mailto:freifunk-keys@lists.in-kiel.de?"
+"subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
+"body=<%= urlencode(
+   '# ' .. hostname ..'\n'
+.. '# ' .. primary_mac .. '\n'
+.. '# no mesh-VPN\n\n'
+.. 'I would like to be informed whenever my node is offline.\n'
+.. 'Please add my contact to the nodewatcher.\n\nThanks, \n\n'
+) %>"
+"\">freifunk-keys@lists.in-kiel.de</a>.</p>"
 
 msgid "gluon-config-mode:reboot"
 msgstr ""
