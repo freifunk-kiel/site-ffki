@@ -4,7 +4,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-respondd \
 	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-hostname \
 	gluon-config-mode-contact-info \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
@@ -38,8 +37,8 @@ GLUON_SITE_PACKAGES += \
 
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-ppa
-#	gluon-config-mode-hostname-no-pretty \
+	gluon-config-mode-ppa \
+	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # Always call `make` from the command line with the desired release version!
