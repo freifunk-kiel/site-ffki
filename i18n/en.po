@@ -20,16 +20,12 @@ msgstr ""
 "<p>This is the public key for your Freifunk node. You can only "
 "connect the node to the Freifunk mesh VPN after the key has been registered on "
 "the Freifunk Kiel servers.  "
-"To register the key send it together with your node's name (<em><%= pcdata(hostname) %></em>) to <a href="
+"To register the key send it together with your node's name "
+"(<em><%= pcdata(hostname) %></em>) to <a href="
 "\"mailto:freifunk-keys@lists.in-kiel.de?"
 "subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
 "body=<%= urlencode(
-   '# ' .. hostname ..'\n'
-.. '# ' .. primary_mac .. '\n'
-.. 'key="' .. pubkey .. '";\n\n'
-.. 'I would like to be informed whenever my node is offline.\n'
-.. 'Please add my contact to the nodewatcher.\n\nThanks, \n\n'
-) %>">freifunk-keys@lists.in-kiel.de</a>."
+   '# ' .. hostname ..'\n# ' .. primary_mac .. '\nkey="' .. pubkey .. '";\n\nI would like to be informed whenever my node is offline.\nPlease add my contact to the nodewatcher.\n\nThanks, \n\n') %>">freifunk-keys@lists.in-kiel.de</a>."
 "</p>"
 "<div class=\"the-key\">"
 " # <%= pcdata(hostname) %>"
@@ -44,13 +40,7 @@ msgstr ""
 "connection</div>Please register your node (<em><%= pcdata(hostname) %></em>) and"
 "send an email to <a href=\"mailto:freifunk-keys@lists.in-kiel.de?"
 "subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
-"body=<%= urlencode(
-   '# ' .. hostname ..'\n'
-.. '# ' .. primary_mac .. '\n'
-.. '# no mesh-VPN\n\n'
-.. 'I would like to be informed whenever my node is offline.\n'
-.. 'Please add my contact to the nodewatcher.\n\nThanks, \n\n'
-) %>"
+"body=<%= urlencode('# ' .. hostname ..'\n# ' .. primary_mac .. '\n# no mesh-VPN\n\nI would like to be informed whenever my node is offline.\nPlease add my contact to the nodewatcher.\n\nThanks, \n\n') %>"
 "\">freifunk-keys@lists.in-kiel.de</a>.</p>"
 
 msgid "gluon-config-mode:reboot"
