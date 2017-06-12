@@ -33,11 +33,10 @@ msgstr ""
 "body=<%= urlencode(
    '# ' .. hostname ..'\n'
 .. '# ' .. primary_mac .. '\n'
-.. 'key="' .. pubkey .. ' %>";\n\n'
+.. 'key="' .. pubkey .. '";\n\n'
 .. 'Ich möchte informiert werden, falls mein Knoten offline ist.\n'
 .. 'Bitte meldet mich beim Knotenalarm an.\n\nGruß, \n\n'
-) %>"
-"\">freifunk-keys@lists.in-kiel.de</a>. <small>Ein Klick auf "
+) %>\">freifunk-keys@lists.in-kiel.de</a>. <small>Ein Klick auf "
 "den E-Mail Link müsste&trade; dein E-Mail Programm öffnen und alle benötigten "
 "Informationen in eine neue Mail einfügen. Deine E-Mail Adresse wird selbstverständlich vertraulich "
 "behandelt und nicht weitergegeben. Alternativ kannst du uns den Schlüssel auch im Webchat mitteilen.</small>"
@@ -53,6 +52,20 @@ msgstr ""
 "<p><div class=\"the-key\">Du hast ausgewählt die Internetverbindung (Mesh-VPN) nicht zu nutzen. "
 "Dein Knoten kann also nur eine Internetverbindung aufbauen, wenn andere Freifunk-"
 "Knoten in Reichweite schon eine Internetverbindung haben.</div></p>"
+"Bitte registriere deinen Knoten "
+"(<em><%= pcdata(hostname) %></em>) indem du eine E-Mail schickst an <a href="
+"\"mailto:freifunk-keys@lists.in-kiel.de?subject=<%= urlencode('Anmeldung: ' .. hostname) %>&amp;"
+"body=<%= urlencode(
+   '# ' .. hostname ..'\n'
+.. '# ' .. primary_mac .. '\n'
+.. '# kein mesh-VPN\n\n'
+.. 'Ich möchte informiert werden, falls mein Knoten offline ist.\n'
+.. 'Bitte meldet mich beim Knotenalarm an.\n\nGruß, \n\n'
+) %>\">freifunk-keys@lists.in-kiel.de</a>. <small>Ein Klick auf "
+"den E-Mail Link müsste&trade; dein E-Mail Programm öffnen und alle benötigten "
+"Informationen in eine neue Mail einfügen. Deine E-Mail Adresse wird selbstverständlich vertraulich "
+"behandelt und nicht weitergegeben. Alternativ kannst du uns deine Anmeldung auch im Webchat mitteilen.</small>"
+"</p>"
 
 msgid "gluon-config-mode:reboot"
 msgstr ""
