@@ -20,6 +20,9 @@ BROKEN="BROKEN=1"
 #set num cores
 CORES="-j1"
 
+# set this to 1 if you want to use make clean before make
+MAKE_CLEAN="0"
+
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-tiny ar71xx-generic"
@@ -84,20 +87,24 @@ do
 	then
 		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
+		make GLUON_TARGET=$0ARGET GLUON_BRANCH=stable update >> build.log 2>&1
+		if [ $MAKE_CLEAN = 1 ]; then
+			echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
+			make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
+		fi
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
+		time make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	else
 		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
 		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
+		if [ $MAKE_CLEAN = 1 ]; then
+			echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
+			make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
+		fi
 		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
+		time make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 	fi
 done
