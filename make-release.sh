@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2017.0.1~lede$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.0.2~lede$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -24,8 +24,8 @@ CORES="-j1"
 MAKE_CLEAN="0"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
-#ONLY_TARGET=""
-ONLY_TARGET="ar71xx-tiny ar71xx-generic"
+ONLY_TARGET=""
+#ONLY_TARGET="ar71xx-tiny ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=""
 #DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
@@ -41,8 +41,8 @@ if [ "$(whoami)" == "root" ]; then
 	return
 fi
 
-if [ -d ../lede/ ]; then
-	echo lede was checked out, this will break, if you build 2016.2.x now
+if [ -d ../openwrt/ ]; then
+	echo openwrt was checked out, this will break, if you build master now
 fi
 
 echo "############## starting build process #################" >> build.log
