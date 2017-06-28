@@ -76,7 +76,7 @@ if [ "$BROKEN" != "" ]; then
 	TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
 fi
 
-if [ $ONLY_TARGET != "" ]; then
+if [ "$ONLY_TARGET" != "" ]; then
 	TARGETS="$ONLY_TARGET"
 fi
 
