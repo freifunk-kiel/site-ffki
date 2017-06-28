@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2017.0.2~lede$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.1~lede$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -18,14 +18,14 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
 #set num cores
-CORES="-j1"
+CORES="-j5"
 
 # set this to 1 if you want to use make clean before make
-MAKE_CLEAN="0"
+MAKE_CLEAN="1"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
-ONLY_TARGET=""
-#ONLY_TARGET="ar71xx-tiny ar71xx-generic"
+#ONLY_TARGET=""
+ONLY_TARGET="ar71xx-tiny ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=""
 #DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
