@@ -83,50 +83,41 @@ fi
 for TARGET in $TARGETS
 do
 	date >> build.log
-	if [ -z "$VERSION" ]
-	then
-		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
-		make GLUON_TARGET=$0ARGET GLUON_BRANCH=stable update >> build.log 2>&1
-		if [ $MAKE_CLEAN = 1 ]; then
-			echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
-			make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		fi
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES" >> build.log
-		time make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
-		echo -e "\n\n\n============================================================\n\n" >> build.log
-	else
-		echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
-		if [ $MAKE_CLEAN = 1 ]; then
-			echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
-			make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		fi
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES" >> build.log
-		time make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN $CORES $DEVICES >> build.log 2>&1
-		echo -e "\n\n\n============================================================\n\n" >> build.log
+	echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
+	$OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=stable GLUON_RELEASE=$VERSION"
+	echo -e "\n===========\n\n\n\n\nmake $OPTIONS update" >> build.log
+	time make $OPTIONS update >> build.log 2>&1
+	if [ $MAKE_CLEAN = 1 ]; then
+		echo -e "\n===========\n\n\n\n\nmake $OPTIONS clean" >> build.log
+		time make $OPTIONS clean >> build.log 2>&1
 	fi
+	echo -e "\n===========\n\n\n\n\nmake $OPTIONS $DEVICES V=s" >> build.log
+	time make $OPTIONS $DEVICES V=s >> build.log 2>&1
+	echo -e "\n\n\n============================================================\n\n" >> build.log
 done
 date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=experimental manifest" >> build.log
-make GLUON_BRANCH=experimental manifest >> build.log 2>&1
-echo -e "\n\n\n============================================================\n\n" >> build.log
-
-if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]
-then
-	echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=beta manifest" >> build.log
-	make GLUON_BRANCH=beta manifest >> build.log 2>&1
+$MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES manifest"
+if [[ true ]]; then
+	$B="experimental"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
-if [[ "$BRANCH" == "stable" ]]
-then
-	echo -e "make GLUON_RELEASE=$VERSION GLUON_BRANCH=stable manifest" >> build.log
-	make GLUON_BRANCH=stable manifest >> build.log 2>&1
+if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]; then
+	$B="beta"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
+	echo -e "\n\n\n============================================================\n\n" >> build.log
+fi
+
+if [[ "$BRANCH" == "stable" ]]; then
+	$B="stable"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
