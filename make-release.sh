@@ -85,7 +85,7 @@ for TARGET in $TARGETS
 do
 	date >> build.log
 	echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-	$OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=stable GLUON_RELEASE=$VERSION"
+	OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION"
 	echo -e "\n===========\n\n\n\n\nmake $OPTIONS update" >> build.log
 	time make $OPTIONS update >> build.log 2>&1
 	if [ $MAKE_CLEAN = 1 ]; then
@@ -100,24 +100,24 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-$MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES manifest"
+MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
 if [[ true ]]; then
-	$B="experimental"
-	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	B="experimental"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
 	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
 if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]; then
-	$B="beta"
-	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	B="beta"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
 	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
 if [[ "$BRANCH" == "stable" ]]; then
-	$B="stable"
-	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B" >> build.log
+	B="stable"
+	echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
 	make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
