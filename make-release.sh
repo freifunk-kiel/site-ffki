@@ -20,12 +20,15 @@ BROKEN="BROKEN=1"
 #set num cores
 CORES="-j5"
 
+source util.sh
+source hooks-ramips-rt305x.sh
+
 # set this to 1 if you want to use make clean before make
 MAKE_CLEAN="1"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-tiny ar71xx-generic"
+ONLY_TARGET="ramips-rt305x"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=""
 #DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
@@ -83,17 +86,27 @@ fi
 
 for TARGET in $TARGETS
 do
+	MAKE_OPTS="GLUON_TARGET=$TARGET GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION $BROKEN $CORES"
+
 	date >> build.log
+
 	echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-	OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION"
-	echo -e "\n===========\n\n\n\n\nmake $OPTIONS update" >> build.log
-	time make $OPTIONS update >> build.log 2>&1
+
+	echo -e "\n===========\n\n\n\n\nmake $MAKE_OPTS update" >> build.log
+	call_if_exists "$TARGET"_UPDATE_PRE | tee -a build.log
+	time make $MAKE_OPTS update >> build.log 2>&1
+	call_if_exists "$TARGET"_UPDATE_POST | tee -a build.log
+
 	if [ $MAKE_CLEAN = 1 ]; then
-		echo -e "\n===========\n\n\n\n\nmake $OPTIONS clean" >> build.log
-		time make $OPTIONS clean >> build.log 2>&1
+		echo -e "\n===========\n\n\n\n\nmake $MAKE_OPTS clean" >> build.log
+		call_if_exists "$TARGET"_CLEAN_PRE | tee -a build.log
+		time make $MAKE_OPTS clean >> build.log 2>&1
+		call_if_exists "$TARGET"_CLEAN_POST | tee -a build.log
 	fi
-	echo -e "\n===========\n\n\n\n\nmake $OPTIONS $DEVICES V=s" >> build.log
-	time make $OPTIONS $DEVICES V=s >> build.log 2>&1
+	echo -e "\n===========\n\n\n\n\nmake $MAKE_OPTS $DEVICES V=s" >> build.log
+	call_if_exists "$TARGET"_BUILD_PRE | tee -a build.log
+	time make $MAKE_OPTS $DEVICES V=s >> build.log 2>&1
+	call_if_exists "$TARGET"_BUILD_POST | tee -a build.log
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 done
 date >> build.log
