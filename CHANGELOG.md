@@ -1,3 +1,23 @@
+Änderungen mit Firmwareversion 2016.2.6.1 basierend auf Gluon 2016.2.6
+================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+ * roamguide löscht jetzt seine log-Dateien im /tmp Ordner
+ * quickfix scannt mit niedrigerer Priorität
+ 
+ Generelle Änderungen an Gluon 2016.2.6
+----------------------------
+ * Der TP-Link TL-WR841N/ND v12 wird unterstützt
+ * Fix: Wenn zwischen Clients, die am LAN Port angeschlossen sind und Clients im WLAN am selben Knoten Verbindungen aufrecht gehalten werden und dabei der Client im WLAN zu einem anderen Knoten "roamt", dann bleiben diese Verbindungen jetzt aufrecht erhalten (#1121).
+ * **Offloader und andere Knoten mit einer x86er-Firmware benötigen mindestens diese Version, bevor sie auf einen späteren 2017.x release mit lede updaten**
+
+ Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2016.2.6.html
+
+
 Änderungen mit Firmwareversion 2016.2.5.1 basierend auf Gluon 2016.2.5
 ================================================================
 
