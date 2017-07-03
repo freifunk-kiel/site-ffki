@@ -10,7 +10,7 @@
 ## properly configured in this script.
 
 # if version is unset, will use the default experimental version from site.mk
-VERSION=${3:-"2016.2.3~nightly$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2016.2.6.3~nightly$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -19,6 +19,10 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 BROKEN="BROKEN=1"
 #set num cores
 CORES="-j1"
+
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
+#ONLY_TARGET=""
+ONLY_TARGET="ar71xx-generic"
 
 cd ../
 if [ ! -d "site" ]; then
@@ -29,6 +33,10 @@ fi
 if [ "$(whoami)" == "root" ]; then
 	echo "Make may not be run as root"
 	return
+fi
+
+if [ -d ../lede/ ]; then
+	echo lede was checked out, this will break, if you build master now
 fi
 
 echo "############## starting build process #################" >> build.log
@@ -60,6 +68,10 @@ WDR4900="mpc85xx-generic"
 TARGETS="ar71xx-generic ar71xx-nand $WDR4900 $RASPBPI $X86 $NOT_LEDE"
 if [ "$BROKEN" != "" ]; then
 	TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
+fi
+
+if [ $ONLY_TARGET != "" ]; then
+	TARGETS="$ONLY_TARGET"
 fi
 
 for TARGET in $TARGETS

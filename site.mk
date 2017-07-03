@@ -39,7 +39,8 @@ GLUON_SITE_PACKAGES += \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2016.2.3~nightly$(shell date '+%y%m%d%H%M')
+#DEFAULT_GLUON_RELEASE := 2016.2.6.2
+DEFAULT_GLUON_RELEASE := 2016.2.6.3~exp$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line
@@ -54,7 +55,7 @@ export GLUON_TARGET
 
 # Region code required for some images; supported values: us eu
 GLUON_REGION ?= eu
-GLUON_ATH10K_MESH ?= ibss
+GLUON_ATH10K_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
