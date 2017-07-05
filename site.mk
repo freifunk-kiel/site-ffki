@@ -28,7 +28,7 @@ GLUON_SITE_PACKAGES += \
 #	ddhcpd
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
-GLUON_SITE_PACKAGE += \
+GLUON_SITE_PACKAGES += \
 	gluon-quickfix
 
 # from https://github.com/Freifunk-Nord/gluon-ssid-changer:
