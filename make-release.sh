@@ -9,6 +9,11 @@
 ## Call from site directory with the version and branch variables
 ## properly configured in this script.
 
+# report the usage of uninitialized variables, etc
+set -u
+# stop on first error (not working in if clauses)
+set -e
+
 # if version is unset, will use the default experimental version from site.mk
 VERSION=${3:-"2017.1.1~lede$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
@@ -112,7 +117,7 @@ done
 date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
-
+set +e
 MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
 if [[ true ]]; then
 	B="experimental"
