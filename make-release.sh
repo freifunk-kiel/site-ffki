@@ -11,8 +11,10 @@
 
 # report the usage of uninitialized variables, etc
 set -u
+# stop on first error (not working in if clauses)
+set -e
 
-echo $asdfasdf
+echo (
 
 # if version is unset, will use the default experimental version from site.mk
 VERSION=${3:-"2016.2.6.3~nightly$(date '+%y%m%d%H%M')"}
