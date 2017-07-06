@@ -9,6 +9,11 @@
 ## Call from site directory with the version and branch variables
 ## properly configured in this script.
 
+# report the usage of uninitialized variables, etc
+set -u
+
+echo $asdfasdf
+
 # if version is unset, will use the default experimental version from site.mk
 VERSION=${3:-"2016.2.6.3~nightly$(date '+%y%m%d%H%M')"}
 # branch must be set to either experimental, beta or stable
