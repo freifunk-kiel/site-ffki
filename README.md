@@ -1,57 +1,105 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-# Autoupdater sources
+The Freifunk firmware is based on gluon.
+
+You can always find
+the latest gluon documentation at:
+https://gluon.readthedocs.io/en/latest/user/site.html
+
+# The lede branch
+The site-ffki branch `lede` is not built by the buildbot automatically. It
+should be built with BROKEN=1. A Firmware built on the `lede` branch will
+possibly break your devices. Use only if you know what you are doing.
+
+# Autoupdater Sources
 
 We are working with those autoupdater branches:
 
-### stable
-Built on the site-ffki branch `master` on gluon 2016.2.1
+## nightly
+Build on the site-ffki branch `nightly`, probably with BROKEN=1.
+These builds are created automatically and will possibly break your devices
+without prior notice. Use only if you know what you are doing.
 
-### release-candidate (rc)
-Built on the site-ffki branch `master` too, but with BROKEN=1 on gluon 2016.2.1
+## release-candidate (rc)
+Built on the site-ffki branch `master`. These builds are initiated manually
+and should be more or less stable. However they are still in testing for a
+reason. Use this if you want to offer your devices as test-platforms for the
+upcoming stable releases.
 
-### nightly (exp)
-Build on the site-ffki branch `experimental` with BROKEN=1 on gluon 2016.2.x (or later on gluon branch master)
-
-### 802.11s (11s)
-Build on the site-ffki branch `802.11s` with BROKEN=1 and support for ralink Routers on gluon 2016.2.x
-
-Gluon Dokumentation: https://gluon.readthedocs.io/en/latest/user/site.html
-
-#Releases
-
-Gluon versions used for specific Kieler Freifunk Firmware builds:
-
-- 2016.2.1 - Gluon 2016.2.1
-  - BugFixes
-  - Kontaktfeld pflicht, mit Hinweis auf anonym betreiben 
-- 2016.1.6 - Gluon 2016.1.6
-  - USB-auto-mount um USB Speichermedien im Config mode freizugeben
-- 2016.1.5.1 - Gluon 2016.1.5
-	- Kontaktfeld pflicht
-	- roamguide (initial inaktiv)
-- 0.9    - Gluon v2016.1.5
-    - temporäre Zwischenversion um den update Branch bei Routern mit 0.8 auf stable zu setzen
-- 0.8.x    - Gluon v2015.2
-- 0.7.1    - Gluon v2015.1.1 (5.7.2015)
-- 0.7      - Gluon 2015.1 (22.5.2015)
-- 0.6      - Gluon 2014.4 (30.3.2015)
-- 0.5.2    - Gluon 2014.3.1
-- 0.5      - Gluon 2014.3
-- 0.4.1    - Gluon de223ceaf2fd0c9e7892dbaf6a12058fc3fc6269
-- 0.4      - Gluon (24.4.2014) 5a4767b78fef2a6c8c9ffd76c69731b9d8b37557
-- 0.3.2.1  - (02.04.2013)
-- 0.3.100-exp (0.4 Beta 1): 2c751d3612a7229de878c40ae724611f2f4f0bee
+## stable
+Not built directly but instead release-candidates are "promoted" to stable
+after they have been thoroughly tested.
 
 
-Download der Firmware:
-----------------------
+# Firmware Download
 
-- https://freifunk.in-kiel.de/firmware.html
+You can always find the current release at https://freifunk.in-kiel.de/firmware.html
 
-Build
------
+# Development
+
+## General process
+
+- Usually no commits should affect `master` directly.
+- Development for new firmwares takes place in the `nightly` branch.
+- Buildbot creates new firmwares from `nightly` as needed.
+- Release for new firmware is prepared through pull request from `nightly` to `master`
+- After consensus over pull request, new master is manually built in buildbot as release candidate.
+- Initial signature by developer allows update of rc nodes.
+- After testing, release candidate is promoted to stable and signed by developers.
+
+## Releases
+
+These Kieler Freifunk firmwares have been released:
+
+- 2016.2.6.2
+  - Based on Gluon 2016.2.6
+  - Deactivated legacy ibss meshing protocol
+- 2016.2.6.1
+  - Based on Gluon 2016.2.6
+  - Activated 11s meshing protocol as well as old ibss meshing protocol
+  - Eulenfunk Quickfix reboots broken nodes
+- 2016.2.5
+  - Based on Gluon 2016.2.5
+  - Included acceptance of PPA in config mode
+  - Included option to register for "Knotenalarm" in config mode
+- 2016.2.1
+  - Based on Gluon 2016.2.1
+  - Contact information has information about anonymous option (one space)
+  - Various bugfixes
+- 2016.1.6
+  - Based on Gluon 2016.1.6
+  - USB-auto-mount for sharing attached USB memory devices (configuration in config-mode)
+- 2016.1.5.1
+  - Based on Gluon 2016.1.5
+  - Contact information mandatory
+  - roamguide added but initially deactivated
+- 0.9
+  - Based on Gluon v2016.1.5
+  - intermediate version to change auto updater branch of old experimental routers to stable
+- 0.8.x (experimental)
+  - Based on Gluon v2015.2
+- 0.7.1
+  - Based on Gluon v2015.1.1 (5.7.2015)
+- 0.7
+  - Based on Gluon 2015.1 (22.5.2015)
+- 0.6
+  - Based on Gluon 2014.4 (30.3.2015)
+- 0.5.2
+  - Based on Gluon 2014.3.1
+- 0.5
+  - Based on Gluon 2014.3
+- 0.4.1
+  - Based on Gluon reference de223ceaf2fd0c9e7892dbaf6a12058fc3fc6269
+- 0.4
+  - Based on Gluon reference 5a4767b78fef2a6c8c9ffd76c69731b9d8b37557
+- 0.3.2.1
+  - Based on Gluon version from 2013-04-02
+- 0.3.100-exp
+  - Based on Gluon reference 2c751d3612a7229de878c40ae724611f2f4f0bee
+
+## Building
+
 You can easily create your own experimental firmware with the build script `make-release.sh`
 
 Or build with these commands:
@@ -59,7 +107,7 @@ Or build with these commands:
     sudo apt-get install git make gcc g++ unzip libncurses5-dev zlib1g-dev subversion gawk bzip2 libssl-dev
     git clone https://github.com/freifunk-gluon/gluon.git
     cd gluon
-    git clone git@git.freifunk.in-kiel.de:ffki-site.git site
+    git clone https://github.com/freifunk-kiel/ffki-site.git site
     make update
     D=$(date '+%y%m%d%H%M');
     ONLY_11S="ramips-rt305x ramips-mt7621"
