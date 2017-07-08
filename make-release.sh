@@ -18,7 +18,8 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
 #set num cores
-CORES="-j5"
+CORES=$(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)
+CORES="-j$CORES"
 
 # set this to 1 if you want to use make clean before make
 MAKE_CLEAN="1"
