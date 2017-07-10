@@ -23,7 +23,8 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
 #set num cores
-CORES="-j1"
+CORES=$(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)
+CORES="-j$CORES"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
 #ONLY_TARGET=""
@@ -61,6 +62,7 @@ WRT1200AC="mvebu" # Linksys WRT1200AC BROKEN: No AP+IBSS+mesh support
 ONLY_11S="ramips-rt305x ramips-mt7621" 		# BROKEN only
 
 ONLY_LEDE="ar71xx-tiny" # Support for for 841 on lede, needs less packages, so the 4MB will suffice!
+ONLY_LEDE+=" x86-geode ipq806x ramips-mt7628"
 NOT_LEDE="x86-kvm_guest" # The x86-kvm_guest target has been dropped from LEDE; x86-64 should be used
 
 BANANAPI="sunxi" 													# BROKEN: Untested, no sysupgrade support
