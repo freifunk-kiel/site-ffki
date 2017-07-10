@@ -8,19 +8,16 @@ GLUON_SITE_FEEDS='ffki ffhh roamguide ddhcpd eulenfunk'
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
 PACKAGES_ROAMGUIDE_REPO=https://github.com/sargon/roamguide.git
-PACKAGES_DDHCPD_REPO=https://github.com/sargon/ddhcpd.git
 PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 
 #	the version/commit of the git repository to clone
 PACKAGES_FFKI_COMMIT=5ba5aaf73aab4937978ad98150518e0d1f32d611
 PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
 PACKAGES_ROAMGUIDE_COMMIT=859cf67417c14ae37e3e8201f438df315651adf9
-PACKAGES_DDHCPD_COMMIT=2f0a1f6468444e8cfdebdbcc6c212336bb400d8d
 PACKAGES_EULENFUNK_COMMIT=8dfa9f6fe1fb8eb7ad724c35f74388a19eaba227
 
 # the branch to check out
 PACKAGES_FFKI_BRANCH=master
 PACKAGES_FFHH_BRANCH=master
 PACKAGES_ROAMGUIDE_BRANCH=master
-PACKAGES_DDHCPD_BRANCH=master
 PACKAGES_EULENFUNK_BRANCH=v2016.2
