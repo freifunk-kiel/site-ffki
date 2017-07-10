@@ -1,3 +1,11 @@
+Änderungen mit Firmwareversion 2016.2.6.2 basierend auf Gluon 2016.2.6
+================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+ * ibss (AdHoc) wird deaktiviert. Der Übergang zu 802.11s-only ist vollbracht.
+
+
 Änderungen mit Firmwareversion 2016.2.6.1 basierend auf Gluon 2016.2.6
 ================================================================
 
@@ -5,14 +13,15 @@ Freifunk Kiel spezifische Änderungen:
 -------------------------------------
  * roamguide löscht jetzt seine log-Dateien im /tmp Ordner
  * quickfix scannt mit niedrigerer Priorität
+ * mesh (802.11s) und ibss (AdHoc) sind aktiviert, um den Übergang zu 802.11s-only vorzubereiten.
  
- Generelle Änderungen an Gluon 2016.2.6
+Generelle Änderungen an Gluon 2016.2.6
 ----------------------------
  * Der TP-Link TL-WR841N/ND v12 wird unterstützt
  * Fix: Wenn zwischen Clients, die am LAN Port angeschlossen sind und Clients im WLAN am selben Knoten Verbindungen aufrecht gehalten werden und dabei der Client im WLAN zu einem anderen Knoten "roamt", dann bleiben diese Verbindungen jetzt aufrecht erhalten (#1121).
  * **Offloader und andere Knoten mit einer x86er-Firmware benötigen mindestens diese Version, bevor sie auf einen späteren 2017.x release mit lede updaten**
 
- Offizielle Changelogs zum nachlesen:
+Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.6.html
@@ -35,11 +44,11 @@ Freifunk Kiel spezifische Änderungen:
  * Der Knotenalarm auf unserer Webseite wird besser beworben
  * In der Anmelde-Email kann man sich gleich für den Knotenalarm anmelden
  
- Generelle Änderungen an Gluon 2016.2.5
+Generelle Änderungen an Gluon 2016.2.5
 ----------------------------
  * Ein Fehler wurde behoben, der nur batman-adv 15 betrifft, welches wir in Kiel nicht nutzen
 
- Offizielle Changelogs zum nachlesen:
+Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.5.html
@@ -67,7 +76,7 @@ Probleme mit Gluon 2016.2.4
  * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen.
  * Die TX Leistung der meisten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren.
  
- Offizielle Changelogs zum nachlesen:
+Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.4.html
@@ -90,7 +99,7 @@ Mehr Routermodelle werden unterstützt
     ramips-rt305x
         Fonera:     20N
 
- Offizielle Changelogs zum nachlesen:
+Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.3.html
