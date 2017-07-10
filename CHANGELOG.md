@@ -5,6 +5,9 @@ Freifunk Kiel spezifische Änderungen:
 -------------------------------------
  * ibss (AdHoc) wird deaktiviert. Der Übergang zu 802.11s-only ist vollbracht.
 
+Release Note: https://github.com/freifunk-kiel/site-ffki/releases/tag/v2016.2.6.2
+
+<br>
 
 Änderungen mit Firmwareversion 2016.2.6.1 basierend auf Gluon 2016.2.6
 ================================================================
@@ -26,6 +29,7 @@ Offizielle Changelogs zum nachlesen:
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.6.html
 
+<br>
 
 Änderungen mit Firmwareversion 2016.2.5.1 basierend auf Gluon 2016.2.5
 ================================================================
@@ -34,6 +38,7 @@ Freifunk Kiel spezifische Änderungen:
 -------------------------------------
  * Der Eulenfunk-Patch startet frühesten nach einer Stunde den Router neu, wenn kein Gateway erreichbar ist.
 
+<br>
 
 Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.5
 ================================================================
@@ -53,6 +58,7 @@ Offizielle Changelogs zum nachlesen:
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.5.html
 
+<br>
 
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
 ================================================================
@@ -81,6 +87,7 @@ Offizielle Changelogs zum nachlesen:
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.4.html
 
+<br>
 
 Änderungen mit Firmwareversion 2016.2.3 basierend auf Gluon 2016.2.3
 ================================================================
@@ -104,6 +111,7 @@ Offizielle Changelogs zum nachlesen:
 
 * https://gluon.readthedocs.io/en/latest/releases/v2016.2.3.html
 
+<br>
 
 Änderungen mit Firmwareversion 2016.2.2 basierend auf Gluon 2016.2.2
 ================================================================
