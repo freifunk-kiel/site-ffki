@@ -4,7 +4,7 @@
 
 GLUON_SITEDIR="." lua5.1 tests/site_config.lua
 
-P=.
+P=$(pwd)
 
 echo "validating $P/make-release.sh ..."
 bash -n $P/make-release.sh 
