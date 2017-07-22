@@ -47,11 +47,10 @@ cd gluon
 git checkout v2016.2.6
 cp -a package/ $testpath/packages
 cd $testpath/packages/package
-# remove standard packages:
-rm -Rf iwinfo iptables haveged
 
 echo "validating GLUON_SITE_PACKAGES from $P/site.mk ..."
-sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G)'> $testpath/site.mk.sh
+# ignore standard packages:
+sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
 while read packet; do
