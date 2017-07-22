@@ -2,7 +2,7 @@
 # when building gluon.
 
 #	for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki ffhh roamguide ddhcpd eulenfunk button'
+GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk button'
 
 #	the  git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
