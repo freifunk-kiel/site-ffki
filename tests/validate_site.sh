@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-
-GLUON_SITEDIR="." lua5.1 tests/site_config.lua
+GLUON_BRANCH='v2017.1.1'
 
 P=$(pwd)
+echo "####### validating $P/site.conf ..."
+GLUON_SITEDIR="." lua5.1 tests/site_config.lua
 
-echo "validating $P/make-release.sh ..."
+echo "####### validating $P/make-release.sh ..."
 bash -n $P/make-release.sh 
 
-echo "validating $P/modules ..."
+echo "####### validating $P/modules ..."
 source $P/modules
 testpath=/tmp/site-validate
 rm -Rf $testpath
@@ -35,20 +36,24 @@ for feed in $GLUON_SITE_FEEDS; do
     echo "branch $branch_var missing"
     exit 1
   fi
-  git clone $(echo $repo) $feed
+  git clone -b "$branch" --single-branch "$repo" $feed
+  if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
-  git checkout $(echo $branch)
-  git checkout $(echo $commit)
+  git checkout "$commit"
+  if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
 cd $testpath
-git clone https://github.com/freifunk-gluon/gluon
+git init gluon
 cd gluon
-git checkout v2017.1.1
+git remote add origin https://github.com/freifunk-gluon/gluon
+git config core.sparsecheckout true
+echo "package/*" >> .git/info/sparse-checkout
+git pull --depth=1 origin $GLUON_BRANCH
 cp -a package/ $testpath/packages
 cd $testpath/packages/package
 
-echo "validating GLUON_SITE_PACKAGES from $P/site.mk ..."
+echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 # ignore standard packages:
 sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
