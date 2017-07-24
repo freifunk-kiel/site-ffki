@@ -47,6 +47,7 @@ msgstr ""
 "<p>Dein Knoten startet gerade neu und wird anschließend versuchen, "
 "sich mit anderen Freifunk-Knoten in seiner Nähe "
 "und über deine Internetleitung, online mit einem Freifunk-Server zu verbinden.</p>"
+"<p>Bitte vergiss nicht das Netzwerkkabel vom gelben LAN Port in den blauen WAN Port umzustecken.</p>"
 
 msgid "gluon-config-mode:nopubkey"
 msgstr ""
