@@ -9,20 +9,14 @@ PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 #PACKAGES_DDHCPD_REPO=https://git.toppoint.de/sargon/gluon-ddhcpd
 PACKAGES_EULENFUNK_REPO=git://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer.git
-#ROAMGUID from GitHub Fork
-PACKAGES_ROAMGUIDE_REPO=https://github.com/Freifunk-Nord/roamguide
-#PACKAGES_ROAMGUIDE_REPO=https://git.toppoint.de/sargon/roamguide
-# for roamguide:
-#GIT_SSL_NO_VERIFY=true git clone https://git.toppoint.de/sargon/roamguide
-#cd roamguide
-#git config http.sslVerify false
+PACKAGES_ROAMGUIDE_REPO=https://github.com/sargon/roamguide
 
 #	the version/commit of the git repository to clone
 PACKAGES_FFKI_COMMIT=d19bf247092eee2bc40cb4ff17ddd720b8a2a976
 #PACKAGES_DDHCPD_COMMIT=2fddf309d76d9acb11f1437e4160b687dc0e4291
-PACKAGES_EULENFUNK_COMMIT=0125e990d10aa2b4c5760e1e4c0707e0021e7f4c
+PACKAGES_EULENFUNK_COMMIT=6731a24461ef96f11624a118d7eb2e5bd4c5c980
 PACKAGES_SSIDCHANGER_COMMIT=b008c4244afb9793e189ad64eb2ac25d31abaf67
-PACKAGES_ROAMGUIDE_COMMIT=bece51ec4e06c72210e52b7a53b67946ad46df01
+PACKAGES_ROAMGUIDE_COMMIT=491e2acb48e72ae4d0d22476efa51eb6c0c7970b
 
 # the branch to check out
 PACKAGES_FFKI_BRANCH=lede
