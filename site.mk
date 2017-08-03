@@ -30,6 +30,9 @@ GLUON_SITE_PACKAGES += \
 # from eulenfunk-packages (branch aus Nord):
 GLUON_SITE_PACKAGES += \
 	gluon-quickfix
+# from https://github.com/Freifunk-Nord/gluon-ssid-changer:
+GLUON_SITE_PACKAGES += \
+	gluon-ssid-changer
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
