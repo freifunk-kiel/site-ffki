@@ -39,8 +39,9 @@ GLUON_SITE_PACKAGES += \
 	gluon-config-mode-contact-info-anonymous-hint \
 	gluon-config-mode-ppa
 # from ffm-packages
-GLUON_SITE_PACKAGES += \
-	ffffm-button-bind
+#GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
+#	better at the bottom for only some models
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
@@ -172,4 +173,13 @@ endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_TLWDR4900_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(USB_PACKAGES_STORAGE)
+endif
+
+# from ffm-packages
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_TLWR1043_SITE_PACKAGES += \ ffffm-button-bind
+	GLUON_TLWR740_SITE_PACKAGES += \ ffffm-button-bind
+	GLUON_TLWR741_SITE_PACKAGES += \ ffffm-button-bind
+	GLUON_TLWR841_SITE_PACKAGES += \ ffffm-button-bind
+	GLUON_TLWR842_SITE_PACKAGES += \ ffffm-button-bind
 endif
