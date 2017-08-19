@@ -47,10 +47,10 @@ DEFAULT_GLUON_RELEASE := 2017.1~rc$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line
-GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
+GLUON_RELEASE ?= 2017.0.2
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= experimental
+GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
