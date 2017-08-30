@@ -30,16 +30,23 @@ GLUON_SITE_PACKAGES += \
 # from eulenfunk-packages (branch aus Nord):
 GLUON_SITE_PACKAGES += \
 	gluon-quickfix
+# from https://github.com/Freifunk-Nord/gluon-ssid-changer:
+GLUON_SITE_PACKAGES += \
+	gluon-ssid-changer
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
 	gluon-config-mode-contact-info-anonymous-hint \
 	gluon-config-mode-ppa
+# from ffm-packages
+#GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
+#	better at the bottom for only some models
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2016.2.6.2
-#DEFAULT_GLUON_RELEASE := 2016.2.6.1~rc$(shell date '+%y%m%d%H%M')
+DEFAULT_GLUON_RELEASE := 2016.2.7
+#DEFAULT_GLUON_RELEASE := 2016.2.7~ngly$(shell date '+%y%m%d%H%M')
 
 
 # Allow overriding the release number from the command line
@@ -166,4 +173,13 @@ endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_TLWDR4900_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(USB_PACKAGES_STORAGE)
+endif
+
+# from ffm-packages
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_TLWR1043_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR740_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR741_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR841_SITE_PACKAGES += ffffm-button-bind
+	GLUON_TLWR842_SITE_PACKAGES += ffffm-button-bind
 endif
