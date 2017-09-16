@@ -62,7 +62,7 @@ msgstr "Altitude (3m per storey)"
 
 msgid "gluon-config-mode:altitude-help"
 msgstr ""
-"Specifying the altitude is optional and can be aproximated with 3m per storey."
+"Specifying the altitude is optional and can be approximated with 3m per storey."
 
 # translations from within default gluon:
 
