@@ -1,5 +1,28 @@
+Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.7
+====================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * quickfix [1] verbesserung: der Grund für die ersten 5 Reboots wird jetzt reboot-sicher geloggt
+ * Neu: Bei WR1043ND und WR740/841/2N/ND kann ist der WiFi Button deaktiviert und man kann diverse Funktionen im Config mode aktivieren [2]
+ * Neu: gluon-ssid-changer 3] schaltet die SSID eines Routers auf "FF_Offline_Knotenname" wenn dieser 24h offline ist
+
+ - [1] - https://github.com/Freifunk-Nord/eulenfunk-packages/tree/v2016.2.x/gluon-quickfix
+ - [2] - https://github.com/rubo77/ffm-packages/tree/master/ffffm-button-bind
+ - [3] - https://github.com/Freifunk-Nord/gluon-ssid-changer/
+
+Release Note: https://github.com/freifunk-kiel/site-ffki/releases/tag/v2016.2.7
+
+Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2016.2.7.html
+
+<br>
+
 Änderungen mit Firmwareversion 2016.2.6.2 basierend auf Gluon 2016.2.6
-================================================================
+======================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
@@ -10,7 +33,7 @@ Release Note: https://github.com/freifunk-kiel/site-ffki/releases/tag/v2016.2.6.
 <br>
 
 Änderungen mit Firmwareversion 2016.2.6.1 basierend auf Gluon 2016.2.6
-================================================================
+======================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
@@ -41,7 +64,7 @@ Freifunk Kiel spezifische Änderungen:
 <br>
 
 Änderungen mit Firmwareversion 2016.2.5 basierend auf Gluon 2016.2.5
-================================================================
+====================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
@@ -61,7 +84,7 @@ Offizielle Changelogs zum nachlesen:
 <br>
 
 Änderungen mit Firmwareversion 2016.2.4 basierend auf Gluon 2016.2.4
-================================================================
+===================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
@@ -90,7 +113,7 @@ Offizielle Changelogs zum nachlesen:
 <br>
 
 Änderungen mit Firmwareversion 2016.2.3 basierend auf Gluon 2016.2.3
-================================================================
+====================================================================
 
 Änderungen an Gluon 2016.2.3
 ----------------------------
@@ -114,7 +137,7 @@ Offizielle Changelogs zum nachlesen:
 <br>
 
 Änderungen mit Firmwareversion 2016.2.2 basierend auf Gluon 2016.2.2
-================================================================
+====================================================================
 
 Änderungen an Gluon 2016.2.2
 ----------------------------
