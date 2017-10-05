@@ -42,8 +42,8 @@ GLUON_SITE_PACKAGES += \
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
-#GLUON_SITE_PACKAGES += \
-#	ffffm-button-bind
+GLUON_SITE_PACKAGES += \
+	ffffm-button-bind
 
 # from T-X alt-esc package:
 GLUON_SITE_PACKAGES += \
