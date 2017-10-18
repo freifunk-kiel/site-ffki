@@ -1,3 +1,23 @@
+Änderungen mit Firmwareversion 2017.1.3 basierend auf Gluon 2017.1.3
+====================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Neu: gluon-alt-esc [1] erlaubt den lokalen Knoten für andere Knoten als lokalen Exit bereitzustellen
+
+ - [1] - https://github.com/rubo77/gluon-alt-esc
+
+Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.2.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.3.html
+
+<br>
+
 Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.7
 ====================================================================
 
