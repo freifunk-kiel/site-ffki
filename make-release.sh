@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default nightly version from site.mk
-VERSION=${3:-"2016.2.7~ngly$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.1.3~ngly$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -34,13 +34,12 @@ MAKE_CLEAN="1"
 # set this to "V=s" to get more output
 VERBOSE=""
 
-#ONLY_TARGET must be set to "" or i.e. "ar71xx-generic" 
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny" 
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-DEVICES=""
-#not supportedin 2016.x: 
-#DEVICES="DEVICES=tp-link-tl-wr842n-nd-v3"
+DEVICES=''
+#DEVICES='DEVICES="tp-link-tl-wr842n-nd-v1 tp-link-tl-wr842n-nd-v2 tp-link-tl-wr842n-nd-v3"'
 
 cd ../
 if [ ! -d "site" ]; then
@@ -53,7 +52,7 @@ if [ "$(whoami)" == "root" ]; then
   return
 fi
 
-if [ -d ../lede/ ]; then
+if [ -d ../openwrt/ ]; then
   echo openwrt was checked out, this will break, if you build master now
 fi
 
@@ -84,7 +83,7 @@ RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
 X86="x86-64 x86-generic x86-xen_domu"
 WDR4900="mpc85xx-generic"
 
-TARGETS="ar71xx-generic $NOT_LEDE ar71xx-nand $WDR4900 $RASPBPI $X86"
+TARGETS="ar71xx-generic $ONLY_LEDE ar71xx-nand $WDR4900 $RASPBPI $X86"
 if [ "$BROKEN" != "" ]; then
   TARGETS+=" $BANANAPI $MICROTIK $WRT1200AC"
 fi
@@ -111,8 +110,7 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 set +e
-#lede: MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
-MANIFEST_OPTINS="$BROKEN $CORES"
+MANIFEST_OPTINS="GLUON_RELEASE=$VERSION $BROKEN $CORES"
 if [[ true ]]; then
   B="nightly"
   echo -e "make $MANIFEST_OPTINS GLUON_BRANCH=$B manifest" >> build.log
@@ -135,8 +133,8 @@ contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.
 if [[ "$BRANCH" == "nightly" ]] || [[ "$BRANCH" == "stable" ]]; then
   echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest" >> build.log
   contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.log 2>&1
-	# set date to before 04:00 
-	sed -e 's/DATE=.*/DATE='$(date '+%y-%m-%d')' 00:00:00+02:00/g' output/images/sysupgrade/nightly.manifest
+  # set date to before 04:00 
+  sed -e 's/DATE=.*/DATE='$(date '+%y-%m-%d')' 00:00:00+02:00/g' output/images/sysupgrade/nightly.manifest
 fi
 
 if [[ "$BRANCH" == "stable" ]]; then

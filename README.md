@@ -33,6 +33,12 @@ You can always find the current release at https://freifunk.in-kiel.de/firmware.
 
 # Development
 
+## Validation
+
+You can validate your changes to this repository by calling the validate_site.sh file with
+
+    tests/validate_site.sh
+
 ## General process
 
 - Usually no commits should affect `master` directly.
