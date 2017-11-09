@@ -51,6 +51,10 @@ GLUON_SITE_PACKAGES += \
 	gluon-alt-esc-client \
 	gluon-alt-esc-provider
 
+# from ffhb-packages:
+GLUON_SITE_PACKAGES += \
+	gluon-radv-filterd
+
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2017.1.3

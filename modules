@@ -2,7 +2,7 @@
 # when building gluon.
 
 # for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki roamguide eulenfunk ssidchanger alt button'
+GLUON_SITE_FEEDS='ffki roamguide eulenfunk ssidchanger alt button ffhb'
 
 # the git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
@@ -12,6 +12,7 @@ PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
 PACKAGES_ALT_REPO=https://github.com/rubo77/gluon-alt-esc
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
+PACKAGES_FFHB_REPO=https://github.com/FreifunkBremen/ffhb-packages
 
 #	the version/commit of the git repository to clone
 PACKAGES_FFKI_COMMIT=59df8ebf69ccf5ad2ed77c5b93d59f04a0e18e10
@@ -21,6 +22,7 @@ PACKAGES_EULENFUNK_COMMIT=a4be61c88e4628d3f039510c86cd20fe7f417261
 PACKAGES_SSIDCHANGER_COMMIT=c6dc54f7d42f0871372df4dbbbe0dfffe7d56c51
 PACKAGES_ALT_COMMIT=796302e274495564549fd43a237552f992fd51df
 PACKAGES_BUTTON_COMMIT=48169b6d2063a6eba7212065de627012ba7add6a
+PACKAGES_FFHB_COMMIT=ee75f9971712b1595e2f397963c0bdfb03114a1c
 
 # the branch to check out
 PACKAGES_FFKI_BRANCH=lede
@@ -30,3 +32,4 @@ PACKAGES_EULENFUNK_BRANCH=lede
 PACKAGES_SSIDCHANGER_BRANCH=lede
 PACKAGES_ALT_BRANCH=master
 PACKAGES_BUTTON_BRANCH=2017.1.x
+PACKAGES_FFHB_BRANCH=v2017.1
