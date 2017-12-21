@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default nightly version from site.mk
-VERSION=${3:-"2017.1.3~ngly$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2017.1.4~ngly$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -34,7 +34,7 @@ MAKE_CLEAN="1"
 # set this to "V=s" to get more output
 VERBOSE=""
 
-#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny" 
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
@@ -133,7 +133,7 @@ contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.
 if [[ "$BRANCH" == "nightly" ]] || [[ "$BRANCH" == "stable" ]]; then
   echo -e "contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest" >> build.log
   contrib/sign.sh $SIGNING_KEY output/images/sysupgrade/nightly.manifest >> build.log 2>&1
-  # set date to before 04:00 
+  # set date to before 04:00
   sed -e 's/DATE=.*/DATE='$(date '+%y-%m-%d')' 00:00:00+02:00/g' output/images/sysupgrade/nightly.manifest
 fi
 
