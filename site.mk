@@ -71,7 +71,7 @@ export GLUON_TARGET
 GLUON_REGION ?= eu
 
 # enable generation of images for ath10k devices with 802.11s mode
-GLUON_ATH10K_MESH ?= 11s
+GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
