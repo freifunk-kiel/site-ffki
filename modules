@@ -2,10 +2,10 @@
 # when building gluon.
 
 # for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='sargon eulenfunk ssidchanger alt button'
+GLUON_SITE_FEEDS='ffki sargon eulenfunk ssidchanger alt button'
 
 # the git repository from where to clone the package feed
-#PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
+PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
 PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon
 PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
@@ -13,7 +13,7 @@ PACKAGES_ALT_REPO=https://github.com/rubo77/gluon-alt-esc
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 
 #	the version/commit of the git repository to clone
-#PACKAGES_FFKI_COMMIT=59df8ebf69ccf5ad2ed77c5b93d59f04a0e18e10
+PACKAGES_FFKI_COMMIT=67d8f952e9001f33a829a833719e402dc0f6d73f
 PACKAGES_SARGON_COMMIT=1f469b898d2684a96743bad306fbd8bddf0635ac
 PACKAGES_EULENFUNK_COMMIT=a4be61c88e4628d3f039510c86cd20fe7f417261
 PACKAGES_SSIDCHANGER_COMMIT=af7dcfcf3178281649afaf301f783eab7149eb66
@@ -21,7 +21,7 @@ PACKAGES_ALT_COMMIT=796302e274495564549fd43a237552f992fd51df
 PACKAGES_BUTTON_COMMIT=48169b6d2063a6eba7212065de627012ba7add6a
 
 # the branch to check out
-#PACKAGES_FFKI_BRANCH=lede
+PACKAGES_FFKI_BRANCH=2018.1.x
 PACKAGES_SARGON_BRANCH=master
 PACKAGES_EULENFUNK_BRANCH=lede
 PACKAGES_SSIDCHANGER_BRANCH=2018.1.x
