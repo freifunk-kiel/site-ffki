@@ -38,8 +38,8 @@ VERBOSE=""
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-DEVICES=''
-#DEVICES='DEVICES="tp-link-tl-wr842n-nd-v1 tp-link-tl-wr842n-nd-v2 tp-link-tl-wr842n-nd-v3"'
+#DEVICES=''
+DEVICES='DEVICES=tp-link-tl-wr1043n-v5'
 
 cd ../
 if [ ! -d "site" ]; then
