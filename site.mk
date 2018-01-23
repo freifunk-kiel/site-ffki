@@ -36,9 +36,9 @@ GLUON_SITE_PACKAGES += \
 	gluon-ssid-changer
 
 # from ffki-packages:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
+#GLUON_SITE_PACKAGES += \
+#	gluon-config-mode-ppa \
+#	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
@@ -54,7 +54,7 @@ GLUON_SITE_PACKAGES += \
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2017.1.4
-DEFAULT_GLUON_RELEASE := 2017.1.4~ngly$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.1~test$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
@@ -147,9 +147,9 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
 # from ffki-packages:
-USB_PACKAGES_STORAGE += \
-	gluon-usb-media \
-	gluon-config-mode-usb-media
+#USB_PACKAGES_STORAGE += \
+#	gluon-usb-media \
+#	gluon-config-mode-usb-media
 
 # add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
