@@ -15,6 +15,8 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.io/en/latest/releases/v2017.1.1.html
 * https://gluon.readthedocs.io/en/latest/releases/v2017.1.2.html
 * https://gluon.readthedocs.io/en/latest/releases/v2017.1.3.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.4.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
 
 <br>
 
@@ -60,7 +62,7 @@ Freifunk Kiel spezifische Änderungen:
  * roamguide löscht jetzt seine log-Dateien im /tmp Ordner
  * quickfix scannt mit niedrigerer Priorität
  * mesh (802.11s) und ibss (AdHoc) sind aktiviert, um den Übergang zu 802.11s-only vorzubereiten.
- 
+
 Generelle Änderungen an Gluon 2016.2.6
 ----------------------------
  * Der TP-Link TL-WR841N/ND v12 wird unterstützt
@@ -91,7 +93,7 @@ Freifunk Kiel spezifische Änderungen:
  * Texte im Config Mode überarbeitet
  * Der Knotenalarm auf unserer Webseite wird besser beworben
  * In der Anmelde-Email kann man sich gleich für den Knotenalarm anmelden
- 
+
 Generelle Änderungen an Gluon 2016.2.5
 ----------------------------
  * Ein Fehler wurde behoben, der nur batman-adv 15 betrifft, welches wir in Kiel nicht nutzen
@@ -124,7 +126,7 @@ Probleme mit Gluon 2016.2.4
  * Beim Update von x86 Systemen kann es zum Verlust der Konfiguration kommen, wenn die Kernel Partition anwächst.
  * Wenn Mesh on WAN aktiviert ist, wird bei bestimmten Modellen die MAC Adresse des WAN Ports verändert. Dies kann in Umgebungen mit vorgeschalteten MAC Filterregeln zu Problemen führen.
  * Die TX Leistung der meisten Ubiquiti Geräte ist zu hoch eingestellt. Genaue Werte sind unbekannt. Es wird empfolen die Sendeleistung per Hand zu reduzieren.
- 
+
 Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
@@ -140,7 +142,7 @@ Offizielle Changelogs zum nachlesen:
  * respondd wird nun bei einem Fehler automatisch neu gestartet (#863)
  * autoupdater timeouts verändert, dies verhindert ein "hängen" des Autoupdaters beim Manifest-Download. Er wurde nun so verbessert, dass der wget Prozess jederzeit sicher beendet werden kann. (#987)
  * Änderung der WLAN-Länderkodierung wurde verbessert (#1001)
- 
+
 Mehr Routermodelle werden unterstützt
 -------------------------------------
 
@@ -169,7 +171,7 @@ Offizielle Changelogs zum nachlesen:
  * Fix: Netzwerk-Port des Ubiquiti UAP AC Lite (#911)
  * Build: /tmp Verzeichnis des Hosts wird nicht länger genutzt (f9072a36411b)
  * Fix: mesh interface type respondd/alfred announcements wenn VLANs über IBSS genutzt werden (#941)
- * Fix: next-node ebtables Regeln ohne next_node.ip4 (9dbe9f785d2b) 
+ * Fix: next-node ebtables Regeln ohne next_node.ip4 (9dbe9f785d2b)
  * x86-generic und x86-64 images haben nun PATA und MMC support.
  * Clean up opkg postinst scripts während der Imageerstellung.
 
@@ -177,7 +179,7 @@ Mehr Routermodelle werden unterstützt
 -------------------------------------
 
     ar71xx-generic
-        TP-Link:    CPE210/510 EU/US versions, TL-WA801N/ND v3, TL-WR841ND v11 EU/US versions 
+        TP-Link:    CPE210/510 EU/US versions, TL-WA801N/ND v3, TL-WR841ND v11 EU/US versions
 
 Offizielle Changelogs zum nachlesen:
 ------------------------------------
