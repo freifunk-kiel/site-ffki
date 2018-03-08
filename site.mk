@@ -194,9 +194,9 @@ endif
 
 # from ffm-packages
 ifeq ($(GLUON_TARGET),ar71xx-generic)
-	GLUON_tp-link-tl-wr1043nd-v2_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043nd-v3_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043nd-v4_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES += ffffm-button-bind
