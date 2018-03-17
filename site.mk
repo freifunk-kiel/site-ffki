@@ -8,6 +8,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-mesh-vpn \
+	gluon-config-mode-hostname \
 	gluon-config-mode-geo-location \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
@@ -38,7 +39,6 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
