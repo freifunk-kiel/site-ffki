@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 2017.1.3 basierend auf Gluon 2017.1.3
+Änderungen mit Firmwareversion 2017.1.7 basierend auf Gluon 2017.1.7
 ====================================================================
 
 Freifunk Kiel spezifische Änderungen:
@@ -17,6 +17,8 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.io/en/latest/releases/v2017.1.3.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.4.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.6.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
 
 <br>
 
