@@ -22,7 +22,9 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 	iwinfo \
 	iptables \
-	haveged
+	haveged \
+	autoupdater-proxy
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide \
@@ -53,8 +55,8 @@ GLUON_SITE_PACKAGES += \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2017.1.4
-DEFAULT_GLUON_RELEASE := 2018.1~test$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1~devel$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
