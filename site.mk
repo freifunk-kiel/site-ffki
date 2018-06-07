@@ -63,7 +63,7 @@ DEFAULT_GLUON_RELEASE := 2018.1~devel$(shell date '+%y%m%d')
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= experimental
+GLUON_BRANCH ?= devel
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
