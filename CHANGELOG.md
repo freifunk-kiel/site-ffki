@@ -1,12 +1,10 @@
-Änderungen mit Firmwareversion 2017.1.7 basierend auf Gluon 2017.1.7
+Änderungen mit Firmwareversion 2017.1.8 basierend auf Gluon 2017.1.8
 ====================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
 
- * Neu: gluon-alt-esc [1] erlaubt den lokalen Knoten für andere Knoten als lokalen Exit bereitzustellen
-
- - [1] - https://github.com/rubo77/gluon-alt-esc
+ * Kontaktfeld ist nicht mehr Pflicht
 
 Offizielle Changelogs zum nachlesen:
 ------------------------------------
@@ -19,7 +17,20 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.6.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
 
+<br>
+
+Änderungen mit Firmwareversion 2017.1.7 basierend auf Gluon 2017.1.7
+====================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Neu: gluon-alt-esc [1] erlaubt den lokalen Knoten für andere Knoten als lokalen Exit bereitzustellen
+
+ - [1] - https://github.com/rubo77/gluon-alt-esc
+ 
 <br>
 
 Änderungen mit Firmwareversion 2016.2.7 basierend auf Gluon 2016.2.7

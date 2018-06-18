@@ -1,7 +1,7 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-The Freifunk firmware is based on gluon.
+The Freifunk nightly firmware is based on gluon branch 2017.1.x
 
 You can always find
 the latest gluon documentation at:
@@ -53,6 +53,8 @@ You can validate your changes to this repository by calling the validate_site.sh
 
 These Kieler Freifunk firmwares have been released:
 
+- 2016.2.7
+  - Based on Gluon 2016.2.7
 - 2016.2.6.2
   - Based on Gluon 2016.2.6
   - Deactivated legacy ibss meshing protocol
