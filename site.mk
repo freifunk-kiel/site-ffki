@@ -12,6 +12,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-geo-location \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
+	gluon-ebtables-limit-arp \
 	gluon-web-admin \
 	gluon-web-autoupdater \
 	gluon-web-network \
