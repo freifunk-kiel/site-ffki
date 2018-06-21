@@ -1,29 +1,29 @@
 # This file allows specifying additional repositories to use
 # when building gluon.
 
-#	for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki ffhh roamguide eulenfunk ssidchanger button'
+# for each feed name given, add the corresponding PACKAGES_* lines
+GLUON_SITE_FEEDS='ffki sargon eulenfunk ssidchanger alt button'
 
-#	the  git repository from where to clone the package feed
+# the git repository from where to clone the package feed
 PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages.git
-PACKAGES_FFHH_REPO=git://github.com/freifunkhamburg/ffhh-packages.git
-PACKAGES_ROAMGUIDE_REPO=https://github.com/sargon/roamguide.git
+PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon
 PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
-PACKAGES_SSIDCHANGER_REPO=https://github.com/freifunk-nord/gluon-ssid-changer.git
+PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
+PACKAGES_ALT_REPO=https://github.com/rubo77/gluon-alt-esc
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 
 #	the version/commit of the git repository to clone
-PACKAGES_FFKI_COMMIT=187e200c25fa1497269a3d4daa8d7b4bf6d34c47
-PACKAGES_FFHH_COMMIT=c9d083f52384c2a52c303924de3960705c7c945b
-PACKAGES_ROAMGUIDE_COMMIT=859cf67417c14ae37e3e8201f438df315651adf9
-PACKAGES_EULENFUNK_COMMIT=7d8ed92ca9501410d14f8036e7bbd9f56e638fca
-PACKAGES_SSIDCHANGER_COMMIT=4bef5af47b1a74b3cb58769634e79e237972dc3c
-PACKAGES_BUTTON_COMMIT=dc6c431b4e015791517f50d7f3eeaeb0778455b4
+PACKAGES_FFKI_COMMIT=59df8ebf69ccf5ad2ed77c5b93d59f04a0e18e10
+PACKAGES_SARGON_COMMIT=f0c35c53ee119e37081a42772ff1eb6bb2bb7133
+PACKAGES_EULENFUNK_COMMIT=a4be61c88e4628d3f039510c86cd20fe7f417261
+PACKAGES_SSIDCHANGER_COMMIT=3d15977d25d07c039680f0ace4c98c8c5223a9e9
+PACKAGES_ALT_COMMIT=796302e274495564549fd43a237552f992fd51df
+PACKAGES_BUTTON_COMMIT=48169b6d2063a6eba7212065de627012ba7add6a
 
 # the branch to check out
-PACKAGES_FFKI_BRANCH=master
-PACKAGES_FFHH_BRANCH=master
-PACKAGES_ROAMGUIDE_BRANCH=master
-PACKAGES_EULENFUNK_BRANCH=v2016.2.x
-PACKAGES_SSIDCHANGER_BRANCH=2016.2.x
-PACKAGES_BUTTON_BRANCH=master
+PACKAGES_FFKI_BRANCH=lede
+PACKAGES_SARGON_BRANCH=master
+PACKAGES_EULENFUNK_BRANCH=lede
+PACKAGES_SSIDCHANGER_BRANCH=2017.1.x
+PACKAGES_ALT_BRANCH=master
+PACKAGES_BUTTON_BRANCH=2017.1.x
