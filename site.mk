@@ -193,11 +193,7 @@ ifeq ($(GLUON_TARGET),mpc85xx-generic)
 endif
 
 # from ffm-packages
-ifeq ($(GLUON_TARGET),ar71xx-generic)
-	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
 	GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
@@ -205,6 +201,13 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
+endif
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind
 	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
