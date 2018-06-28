@@ -8,9 +8,11 @@ GLUON_SITE_PACKAGES := \
 	gluon-config-mode-core \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-mesh-vpn \
+	gluon-config-mode-hostname \
 	gluon-config-mode-geo-location \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
+	gluon-ebtables-limit-arp \
 	gluon-web-admin \
 	gluon-web-autoupdater \
 	gluon-web-network \
@@ -38,7 +40,6 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
@@ -47,21 +48,21 @@ GLUON_SITE_PACKAGES += \
 #	better at the bottom for only some models
 
 # from T-X alt-esc package:
-GLUON_SITE_PACKAGES += \
-	gluon-alt-esc-client \
-	gluon-alt-esc-provider
+#GLUON_SITE_PACKAGES += \
+#	gluon-alt-esc-client \
+#	gluon-alt-esc-provider
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2017.1.8
-DEFAULT_GLUON_RELEASE := 2017.1.8~ngly$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2018.0
+DEFAULT_GLUON_RELEASE := 2018.0~ngly$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= stable
+GLUON_BRANCH ?= nightly
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
@@ -71,7 +72,7 @@ export GLUON_TARGET
 GLUON_REGION ?= eu
 
 # enable generation of images for ath10k devices with 802.11s mode
-GLUON_ATH10K_MESH ?= 11s
+GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
