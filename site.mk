@@ -20,6 +20,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-web-wifi-config \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
+	gluon-radv-filterd \
 	gluon-status-page \
 	iwinfo \
 	iptables \
