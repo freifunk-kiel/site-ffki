@@ -40,7 +40,7 @@ clone:
   stage: clone
   image: $CI_REGISTRY_IMAGE/build
   script:
-    - ./update-git.sh $GLUON_GIT $GLUON_BRANCH | tee -a debug.log
+    - ./update-git.sh | tee -a debug.log
   artifacts:
     untracked: false
     paths:
@@ -51,7 +51,7 @@ host:
   image: $CI_REGISTRY_IMAGE/build
   script:
       # We can't be sure the cache is actually available right now, thus we might have to update here
-    - ./update-git.sh $GLUON_GIT $GLUON_BRANCH | tee -a debug.log
+    - ./update-git.sh | tee -a debug.log
     - ./build.sh -c host -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
   artifacts:
     untracked: false
@@ -67,7 +67,7 @@ build:
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
       # We can't be sure the cache is actually available right now, thus we have to perform all cache steps here, too
-    - ./update-git.sh $GLUON_GIT $GLUON_BRANCH | tee -a debug.log
+    - ./update-git.sh | tee -a debug.log
     - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
       # We should never need this, should we?
     - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
@@ -94,7 +94,7 @@ sign:
   script:
     - echo $SIGNING_KEY > signing_key
       # Update git in case cache is empty
-    - ./update-git.sh $GLUON_GIT $GLUON_BRANCH | tee -a debug.log
+    - ./update-git.sh | tee -a debug.log
     - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false

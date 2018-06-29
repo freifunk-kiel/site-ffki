@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 
-GLUON_GIT="$1"
-GLUON_BRANCH="$2"
-
-echo "$1"
-echo "$2"
-
 function update() {
 	# Kill it with fire
 	rm -rf gluon
-	git clone "$GLUON_GIT" -b "GLUON_BRANCH" gluon
+	git clone "$GLUON_GIT" -b "$GLUON_BRANCH" gluon
 }
 
 (
