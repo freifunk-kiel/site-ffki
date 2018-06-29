@@ -32,9 +32,7 @@ prepare:
     - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_BUILD_REF -t $CONTAINER_IMAGE:latest contrib/build-container
     - docker push $CONTAINER_IMAGE:$CI_BUILD_REF
     - docker push $CONTAINER_IMAGE:latest
-    cache:
-      key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-      paths: []
+  cache: {}
 
 # Cache maintenance
 
@@ -120,6 +118,4 @@ upload:
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-    paths: []
+  cache: {}
