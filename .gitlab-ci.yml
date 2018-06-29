@@ -68,3 +68,4 @@ upload:
     paths:
       - output      
     expire_in: 1 week
+    when: always
