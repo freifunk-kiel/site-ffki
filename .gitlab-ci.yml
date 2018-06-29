@@ -62,4 +62,6 @@ upload:
   script:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
+      # create fake gluon dir to satisfy build script
+    - mkdir gluon
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
