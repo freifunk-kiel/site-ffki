@@ -10,15 +10,19 @@ function update() {
 
 (
 	if ! [[ -e gluon ]]; then
+		echo "gluon dir nonexistent, updating"
 		update
 		exit 0
 	fi
 
 	REMOTE_REF=$(git ls-remote -qht "$GLUON_GIT" | grep "$GLUON_BRANCH" | cut -f1)
-	set +e
-	LOCAL_REF=$(git rev-parse -C gluon HEAD)
 
-	if [[ $? -ne 0 || $REMOTE_REF != $LOCAL_REF ]]; then
+	cd gluon
+	set +e
+	LOCAL_REF=$(git rev-parse HEAD)
+	cd ..
+
+	if [[ $? -ne 0 || $REMOTE_REF != "$LOCAL_REF" ]]; then
 		echo "$REMOTE_REF != $LOCAL_REF, updating"
 		update
 	fi
