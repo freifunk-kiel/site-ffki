@@ -319,7 +319,6 @@ upload() {
       ln -sf \
           "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/factory" \
           "/opt/firmware/ffki/${TARGET}/"
-          
 }
 
 prepare() {
