@@ -31,7 +31,7 @@ build:
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
-    - git clone https://gitlab.toppoint.de/ffki/gluon.git -b master gluon
+    - git clone https://github.com/TobleMiner/gluon.git -b feature-autoupdate-proxy gluon
     - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
     - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
