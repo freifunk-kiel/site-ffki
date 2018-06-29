@@ -3,6 +3,9 @@
 GLUON_GIT="$1"
 GLUON_BRANCH="$2"
 
+echo "$1"
+echo "$2"
+
 function update() {
 	# Kill it with fire
 	rm -rf gluon
