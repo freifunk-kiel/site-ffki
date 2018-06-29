@@ -52,6 +52,7 @@ host:
   script:
       # We can't be sure the cache is actually available right now, thus we might have to update here
     - ./update-git.sh | tee -a debug.log
+    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
     - ./build.sh -c host -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
   artifacts:
     untracked: false
