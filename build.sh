@@ -223,8 +223,6 @@ host() {
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          toolchain
-    ;;
-
   done
 }
 
