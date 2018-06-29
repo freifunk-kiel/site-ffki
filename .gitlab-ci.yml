@@ -34,7 +34,7 @@ prepare:
     - docker push $CONTAINER_IMAGE:latest
     cache:
       key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-      paths: {}
+      paths: []
 
 # Cache maintenance
 
@@ -122,4 +122,4 @@ upload:
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
   cache:
     key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-    paths: {}
+    paths: []
