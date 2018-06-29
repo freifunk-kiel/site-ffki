@@ -40,7 +40,7 @@ usage() {
   echo ""
   echo "-b: Firmware branch name (e.g. development)"
   echo "    Default: current git branch"
-  echo "-c: Build command: update | clean | download | build | sign | upload | prepare"
+  echo "-c: Build command: update | clean | download | host | build | sign | upload | prepare"
   echo "-d: Enable bash debug output"
   echo "-h: Show this help"
   echo "-m: Setting for make options (optional)"
@@ -78,6 +78,9 @@ while getopts b:c:dhm:n:t:w:s: flag; do
           COMMAND="${OPTARG}"
           ;;
         download)
+          COMMAND="${OPTARG}"
+          ;;
+        host)
           COMMAND="${OPTARG}"
           ;;
         build)
@@ -206,6 +209,22 @@ download() {
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          download
+  done
+}
+
+host() {
+  for TARGET in ${TARGETS}; do
+    echo "--- Build toolchain for target: ${TARGET}"
+    make ${MAKEOPTS} \
+         GLUON_SITEDIR="${SITEDIR}" \
+         GLUON_OUTPUTDIR="${SITEDIR}/output" \
+         GLUON_RELEASE="${RELEASE}-${BUILD}" \
+         GLUON_BRANCH="${BRANCH}" \
+         GLUON_PRIORITY="${PRIORITY}" \
+         GLUON_TARGET="${TARGET}" \
+         toolchain
+    ;;
+
   done
 }
 

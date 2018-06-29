@@ -1,17 +1,24 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_CAPATH: /etc/ssl/certs/
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/TobleMiner/gluon.git
   GLUON_BRANCH: feature-autoupdate-proxy
 
+cache:
+  key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+  paths:
+    - gluon
+
 stages:
   - prepare
+  - clone
+  - host
   - build
   - sign
   - upload
 
-variables:
-  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
+# Preparation
 
 prepare:
   stage: prepare
@@ -26,15 +33,43 @@ prepare:
     - docker push $CONTAINER_IMAGE:$CI_BUILD_REF
     - docker push $CONTAINER_IMAGE:latest
 
+# Cache maintenance
+
+clone:
+  stage: clone
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - ./update-git.sh | tee -a debug.log
+  artifacts:
+    untracked: false
+    paths:
+      - debug.log
+
+host:
+  stage: host
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+      # We can't be sure the cache is actually available right now, thus we might have to update here
+    - ./update-git.sh | tee -a debug.log
+    - ./build.sh -c host -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+  artifacts:
+    untracked: false
+    paths:
+      - debug.log
+    
+
+# Actual building
 
 build:
   stage: build
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
-    - git clone $GLUON_GIT -b $GLUON_BRANCH gluon
-    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
-    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
+      # We can't be sure the cache is actually available right now, thus we have to perform all cache steps here, too
+    - ./update-git.sh
+    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+      # We should never need this, should we?
+    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
     - ./build.sh -c build -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
   artifacts:
@@ -44,19 +79,34 @@ build:
       - output      
     expire_in: 1 day
     when: always
+  cache:
+    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    paths:
+      - gluon
+    policy:
+      # This step must not modify the cache
+      pull
 
 sign:
   stage: sign
   image: $CI_REGISTRY_IMAGE/build
   script:
     - echo $SIGNING_KEY > signing_key
-    - git clone $GLUON_GIT -b $GLUON_BRANCH gluon
+      # Update git in case cache is empty
+    - ./update-git.sh | tee -a debug.log
     - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
       - output      
     expire_in: 1 week
+  cache:
+    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    paths:
+      - gluon
+    policy:
+      # This step does not need to modify the cache
+      pull
 
 upload:
   stage: upload
@@ -64,6 +114,13 @@ upload:
   script:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
-      # create fake gluon dir to satisfy build script
-    - mkdir gluon
+      # create fake gluon dir (if none in cache) to satisfy build script
+    - mkdir -p gluon
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
+  cache:
+    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    paths:
+      - gluon
+    policy:
+      # This step must not modify the cache
+      pull
