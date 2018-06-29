@@ -1,0 +1,70 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SSL_CAPATH: /etc/ssl/certs/
+
+
+stages:
+  - prepare
+  - build
+  - sign
+  - upload
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
+
+prepare:
+  stage: prepare
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CONTAINER_IMAGE:latest || true
+    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_BUILD_REF -t $CONTAINER_IMAGE:latest contrib/build-container
+    - docker push $CONTAINER_IMAGE:$CI_BUILD_REF
+    - docker push $CONTAINER_IMAGE:latest
+
+
+build:
+  stage: build
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - export FORCE_UNSAFE_CONFIGURE=1
+    - git clone https://gitlab.toppoint.de/ffki/gluon.git -b master gluon
+    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
+    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
+    #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+    - ./build.sh -c build -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+  artifacts:
+    untracked: false
+    paths:
+      - debug.log
+      - output      
+    expire_in: 1 week
+    when: always
+
+sign:
+  stage: sign
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - echo $SIGNING_KEY > signing_key
+    - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
+  artifacts:
+    untracked: false
+    paths:
+      - output      
+    expire_in: 1 week
+
+upload:
+  stage: upload
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_KEY")
+    - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
+  artifacts:
+    untracked: false
+    paths:
+      - output      
+    expire_in: 1 week
