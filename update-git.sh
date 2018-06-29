@@ -15,9 +15,8 @@ function update() {
 	fi
 
 	REMOTE_REF=$(git ls-remote -qht "$GLUON_GIT" | grep "$GLUON_BRANCH" | cut -f1)
-	LOCAL_REF=$(git rev-parse -C gluon HEAD)
-
 	set +e
+	LOCAL_REF=$(git rev-parse -C gluon HEAD)
 
 	if [[ $? -ne 0 || $REMOTE_REF != $LOCAL_REF ]]; then
 		echo "$REMOTE_REF != $LOCAL_REF, updating"
