@@ -12,8 +12,8 @@ function update() {
 		exit 0
 	fi
 
-	REMOTE_REF=$(git ls-remote -D gluon -qht "$GLUON_GIT" | grep "$GLUON_BRANCH" | cut -f1)
-	LOCAL_REF=$(git rev-parse -D gluon HEAD)
+	REMOTE_REF=$(git ls-remote -C gluon -qht "$GLUON_GIT" | grep "$GLUON_BRANCH" | cut -f1)
+	LOCAL_REF=$(git rev-parse -C gluon HEAD)
 
 	if [[ $REMOTE_REF != $LOCAL_REF ]]; then
 		update
