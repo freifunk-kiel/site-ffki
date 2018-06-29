@@ -44,5 +44,4 @@ build:
     paths:
       - debug.log
     expire_in: 1 week
-
-
+    when: always
