@@ -41,7 +41,7 @@ build:
     paths:
       - debug.log
       - output      
-    expire_in: 1 week
+    expire_in: 1 day
     when: always
 
 sign:
@@ -63,9 +63,3 @@ upload:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
-  artifacts:
-    untracked: false
-    paths:
-      - output      
-    expire_in: 1 week
-    when: always
