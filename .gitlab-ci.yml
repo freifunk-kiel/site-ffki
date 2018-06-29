@@ -6,7 +6,7 @@ variables:
   GLUON_BRANCH: feature-autoupdate-proxy
 
 cache:
-  key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+  key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
   paths:
     - gluon
 
@@ -80,7 +80,7 @@ build:
     expire_in: 1 day
     when: always
   cache:
-    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
     paths:
       - gluon
     policy:
@@ -101,7 +101,7 @@ sign:
       - output      
     expire_in: 1 week
   cache:
-    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
     paths:
       - gluon
     policy:
@@ -118,7 +118,7 @@ upload:
     - mkdir -p gluon
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
   cache:
-    key: $CI_COMMIT_REF_SLUG/$GLUON_GIT/$GLUON_BRANCH
+    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
     paths:
       - gluon
     policy:
