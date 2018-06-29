@@ -1,7 +1,8 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_CAPATH: /etc/ssl/certs/
-
+  GLUON_GIT: https://github.com/TobleMiner/gluon.git
+  GLUON_BRANCH: feature-autoupdate-proxy
 
 stages:
   - prepare
@@ -31,7 +32,7 @@ build:
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
-    - git clone https://github.com/TobleMiner/gluon.git -b feature-autoupdate-proxy gluon
+    - git clone $GLUON_GIT -b $GLUON_BRANCH gluon
     - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
     - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
@@ -49,6 +50,7 @@ sign:
   image: $CI_REGISTRY_IMAGE/build
   script:
     - echo $SIGNING_KEY > signing_key
+    - git clone $GLUON_GIT -b $GLUON_BRANCH gluon
     - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
