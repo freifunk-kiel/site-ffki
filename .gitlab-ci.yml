@@ -32,7 +32,7 @@ build:
     - echo $SIGNING_KEY > signing_key
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
-    - git clone https://gitlab.toppoint.de/ffki/gluon.git -b master gluon
+    - git clone https://gitlab.toppoint.de/ffki/gluon.git -b v2017.1.8 gluon
     - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
     - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
