@@ -1,14 +1,23 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_CAPATH: /etc/ssl/certs/
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
+  GLUON_GIT: https://gitlab.toppoint.de/ffki/gluon.git
+  GLUON_BRANCH: master
 
+cache:
+  key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
+  paths:
+    - gluon
 
 stages:
   - prepare
+  - clone
   - build
+  - sign
+  - upload
 
-variables:
-  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
+# Preparation
 
 prepare:
   stage: prepare
@@ -22,26 +31,71 @@ prepare:
     - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_BUILD_REF -t $CONTAINER_IMAGE:latest contrib/build-container
     - docker push $CONTAINER_IMAGE:$CI_BUILD_REF
     - docker push $CONTAINER_IMAGE:latest
+  cache: {}
 
+# Cache maintenance
+
+clone:
+  stage: clone
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - ./update-git.sh | tee -a debug.log
+  artifacts:
+    untracked: false
+    paths:
+      - debug.log
+
+# Actual building
 
 build:
   stage: build
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
-    - echo $SIGNING_KEY > signing_key
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_KEY")
-    - git clone https://gitlab.toppoint.de/ffki/gluon.git -b master gluon
-    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a  debug.log
-    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a  debug.log
+      # We can't be sure the cache is actually available right now, thus we have to perform all cache steps here, too
+    - ./update-git.sh | tee -a debug.log
+    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+      # We should never need this, should we?
+    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
     - ./build.sh -c build -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
-    - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
-    - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
+      # Bring gluon repo to cacheable state
+    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
   artifacts:
     untracked: false
     paths:
       - debug.log
+      - output
     expire_in: 1 week
     when: always
+
+sign:
+  stage: sign
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - echo $SIGNING_KEY > signing_key
+      # Update git in case cache is empty
+    - ./update-git.sh | tee -a debug.log
+    - ./build.sh -c sign -b $CI_BUILD_REF_NAME -s $(pwd)/signing_key
+  artifacts:
+    untracked: false
+    paths:
+      - output
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
+    paths:
+      - gluon
+    policy:
+      # This step does not need to modify the cache
+      pull
+
+upload:
+  stage: upload
+  image: $CI_REGISTRY_IMAGE/build
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_KEY")
+      # create fake gluon dir to satisfy build script
+    - mkdir -p gluon
+    - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
+  cache: {}

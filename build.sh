@@ -172,6 +172,7 @@ COMMIT="$(git describe --always --dirty)"
 PRIORITY=1
 
 update() {
+  echo "--- Update Gluon Dependencies"
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
@@ -183,7 +184,7 @@ update() {
 
 clean() {
   for TARGET in ${TARGETS}; do
-    echo "--- Update Gluon Dependencies for target: ${TARGET}"
+    echo "--- Clean Gluon Build Artifacts for target: ${TARGET}"
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
@@ -319,7 +320,6 @@ upload() {
       ln -sf \
           "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/factory" \
           "/opt/firmware/ffki/${TARGET}/"
-          
 }
 
 prepare() {
