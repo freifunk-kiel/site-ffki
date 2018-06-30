@@ -20,9 +20,11 @@ function update() {
 	cd gluon
 	set +e
 	LOCAL_REF=$(git rev-parse HEAD)
+	GIT_EXIT=$?
+	set -e
 	cd ..
 
-	if [[ $? -ne 0 || $REMOTE_REF != "$LOCAL_REF" ]]; then
+	if [[ $GIT_EXIT -ne 0 || $REMOTE_REF != "$LOCAL_REF" ]]; then
 		echo "$REMOTE_REF != $LOCAL_REF, updating"
 		update
 	fi
