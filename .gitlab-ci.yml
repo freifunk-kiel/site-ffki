@@ -81,7 +81,7 @@ sign:
     untracked: false
     paths:
       - output
-    expire_in: 1 week
+    expire_in: 1 hour
   cache:
     key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
     paths:
