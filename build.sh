@@ -172,6 +172,7 @@ COMMIT="$(git describe --always --dirty)"
 PRIORITY=1
 
 update() {
+  echo "--- Update Gluon Dependencies"
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
@@ -183,7 +184,7 @@ update() {
 
 clean() {
   for TARGET in ${TARGETS}; do
-    echo "--- Update Gluon Dependencies for target: ${TARGET}"
+    echo "--- Clean Gluon Build Artifacts for target: ${TARGET}"
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
@@ -274,18 +275,7 @@ upload() {
   SSH="${SSH} -o stricthostkeychecking=no -v"
 
   # Determine upload target prefix
-  case "${BRANCH}" in
-    stable| \
-    testing| \
-    nightly| \
-    development)
-      TARGET="${BRANCH}"
-      ;;
-
-    *)
-      TARGET="others/${BRANCH}"
-      ;;
-  esac
+  TARGET="${BRANCH}"
 
   # Create the target directory on server
   ${SSH} \
@@ -319,24 +309,13 @@ upload() {
       ln -sf \
           "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/factory" \
           "/opt/firmware/ffki/${TARGET}/"
-          
 }
 
 prepare() {
   echo "--- Prepare directory for upload"
 
   # Determine upload target prefix
-  case "${BRANCH}" in
-    stable| \
-    testing| \
-    development)
-      TARGET="${BRANCH}"
-      ;;
-
-    *)
-      TARGET="others/${BRANCH}"
-      ;;
-  esac
+  TARGET="${BRANCH}"
 
   # Create the target directory on server
   mkdir \
