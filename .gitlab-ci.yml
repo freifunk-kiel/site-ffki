@@ -44,6 +44,7 @@ clone:
     untracked: false
     paths:
       - debug.log
+  dependencies: []
 
 # Actual building
 
@@ -68,6 +69,7 @@ build:
       - output
     expire_in: 1 day
     when: always
+  dependencies: []
 
 sign:
   stage: sign
@@ -98,4 +100,6 @@ upload:
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
     - ./build.sh -c upload -b $CI_BUILD_REF_NAME -n $CI_JOB_ID
+  dependencies:
+    - sign
   cache: {}
