@@ -65,7 +65,7 @@ build:
     untracked: false
     paths:
       - debug.log
-      - output      
+      - output
     expire_in: 1 day
     when: always
 
@@ -80,7 +80,7 @@ sign:
   artifacts:
     untracked: false
     paths:
-      - output      
+      - output
     expire_in: 1 week
   cache:
     key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
