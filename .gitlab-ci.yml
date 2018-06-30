@@ -13,7 +13,6 @@ cache:
 stages:
   - prepare
   - clone
-  - host
   - build
   - sign
   - upload
@@ -46,20 +45,6 @@ clone:
     paths:
       - debug.log
 
-host:
-  stage: host
-  image: $CI_REGISTRY_IMAGE/build
-  script:
-      # We can't be sure the cache is actually available right now, thus we might have to update here
-    - ./update-git.sh | tee -a debug.log
-    - ./build.sh -c update -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
-    - ./build.sh -c host -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
-  artifacts:
-    untracked: false
-    paths:
-      - debug.log
-    
-
 # Actual building
 
 build:
@@ -74,6 +59,8 @@ build:
     - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
     #- ./build.sh -c download -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
     - ./build.sh -c build -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+      # Bring gluon repo to cacheable state
+    - ./build.sh -c clean -b $CI_BUILD_REF_NAME -n $CI_JOB_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
   artifacts:
     untracked: false
     paths:
@@ -81,13 +68,6 @@ build:
       - output      
     expire_in: 1 day
     when: always
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-    paths:
-      - gluon
-    policy:
-      # This step must not modify the cache
-      pull
 
 sign:
   stage: sign
