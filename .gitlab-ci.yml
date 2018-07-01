@@ -67,7 +67,7 @@ build:
     paths:
       - debug.log
       - output
-    expire_in: 1 day
+    expire_in: 1 hour
     when: always
   dependencies: []
 
@@ -83,7 +83,7 @@ sign:
     untracked: false
     paths:
       - output
-    expire_in: 1 hour
+    expire_in: 1 day
   cache:
     key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
     paths:
