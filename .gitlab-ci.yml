@@ -14,7 +14,6 @@ stages:
   - prepare
   - clone
   - build
-  - sign
   - upload
 
 # Preparation
@@ -34,7 +33,6 @@ prepare:
   cache: {}
 
 # Cache maintenance
-
 clone:
   stage: clone
   image: $CI_REGISTRY_IMAGE/build
@@ -47,7 +45,6 @@ clone:
   dependencies: []
 
 # Actual building
-
 build:
   stage: build
   image: $CI_REGISTRY_IMAGE/build
@@ -58,10 +55,14 @@ build:
     - ./gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
       # We should never need this, should we?
     - ./gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
-    #- ./gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+      # In the past this build step repeadatly break
+    # - ./gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
     - ./gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
       # Bring gluon repo to cacheable state
     - ./gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
+      # Sign
+    - echo $SIGNING_KEY > signing_key
+    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
@@ -70,26 +71,6 @@ build:
     expire_in: 1 day
     when: always
   dependencies: []
-
-sign:
-  stage: sign
-  image: $CI_REGISTRY_IMAGE/build
-  script:
-    - echo $SIGNING_KEY > signing_key
-      # Update git in case cache is empty
-    - ./gitlab-ci/update-git.sh | tee -a debug.log
-    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
-  artifacts:
-    untracked: false
-    paths:
-      - output
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-    paths:
-      - gluon
-    policy:
-      # This step does not need to modify the cache
-      pull
 
 upload:
   stage: upload
@@ -101,5 +82,5 @@ upload:
     - mkdir -p gluon
     - ./gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
   dependencies:
-    - sign
+    - build
   cache: {}
