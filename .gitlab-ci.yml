@@ -14,7 +14,7 @@ stages:
   - prepare
   - clone
   - build
-  - sign
+#  - sign
   - upload
 
 # Preparation
@@ -53,6 +53,7 @@ build:
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
+    - echo $SIGNING_KEY > signing_key
       # We can't be sure the cache is actually available right now, thus we have to perform all cache steps here, too
     - ./gitlab-ci/update-git.sh | tee -a debug.log
     - ./gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
@@ -62,6 +63,7 @@ build:
     - ./gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
       # Bring gluon repo to cacheable state
     - ./gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)  V=s" | tee -a debug.log
+    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
@@ -71,26 +73,26 @@ build:
     when: always
   dependencies: []
 
-sign:
-  stage: sign
-  image: $CI_REGISTRY_IMAGE/build
-  script:
-    - echo $SIGNING_KEY > signing_key
-      # Update git in case cache is empty
-    - ./gitlab-ci/update-git.sh | tee -a debug.log
-    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
-  artifacts:
-    untracked: false
-    paths:
-      - output
-    expire_in: 1 day
-  cache:
-    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
-    paths:
-      - gluon
-    policy:
-      # This step does not need to modify the cache
-      pull
+#sign:
+#  stage: sign
+#  image: $CI_REGISTRY_IMAGE/build
+#  script:
+#    - echo $SIGNING_KEY > signing_key
+#      # Update git in case cache is empty
+#    - ./gitlab-ci/update-git.sh | tee -a debug.log
+#    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+#  artifacts:
+#    untracked: false
+#    paths:
+#      - output
+#    expire_in: 1 day
+#  cache:
+#    key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
+#    paths:
+#      - gluon
+#    policy:
+#      # This step does not need to modify the cache
+#      pull
 
 upload:
   stage: upload
@@ -101,6 +103,7 @@ upload:
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
     - ./gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
-  dependencies:
-    - sign
+# Only required if using separate sign job, ensures precedence of artifacts from sign over build
+#  dependencies:
+#    - sign
   cache: {}
