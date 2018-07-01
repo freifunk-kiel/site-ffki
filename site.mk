@@ -18,6 +18,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-core \
 	gluon-setup-mode \
 	gluon-config-mode-core \
+	respondd-module-airtime \
 	iwinfo \
 	iptables \
 	haveged
