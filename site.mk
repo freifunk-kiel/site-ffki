@@ -1,30 +1,27 @@
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/master/package/features
+GLUON_FEATURES := \
+	config-mode-mesh-vpn \
+	web-private-wifi \
+	ebtables-limit-arp \
+	ebtables-filter-multicast \
+	ebtables-filter-ra-dhcp \
+	mesh-batman-adv-14 \
+	mesh-vpn-fastd \
+	radvd \
+	respondd \
+	status-page \
+	web-advanced \
+	web-wizard \
+	autoupdater
+	
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-14 \
 	gluon-core \
-	gluon-respondd \
-	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-contact-info \
 	gluon-config-mode-core \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn \
-	gluon-config-mode-hostname \
-	gluon-config-mode-geo-location \
-	gluon-ebtables-filter-multicast \
-	gluon-ebtables-filter-ra-dhcp \
-	gluon-ebtables-limit-arp \
-	gluon-web-admin \
-	gluon-web-autoupdater \
-	gluon-web-network \
-	gluon-web-private-wifi \
-	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
-	gluon-radvd \
-	gluon-radv-filterd \
-	gluon-status-page \
 	iwinfo \
 	iptables \
 	haveged
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide \
@@ -41,6 +38,7 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
+	gluon-radv-filterd
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
