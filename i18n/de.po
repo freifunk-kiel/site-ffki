@@ -100,7 +100,7 @@ msgstr ""
 msgid "gluon-config-mode:contact-note"
 msgstr "z.B. E-Mail, Chatname oder Telefonnummer"
 
-msgid gluon-config-mode:contact-help"
+msgid "gluon-config-mode:contact-help"
 msgstr ""
 "Bitte hinterlege hier einen Hinweis, um anderen zu ermöglichen, "
 "Kontakt mit dir aufzunehmen. Beachte, dass dieser Hinweis auch "
