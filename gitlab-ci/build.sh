@@ -15,7 +15,7 @@
 MAKEOPTS="V=s -j 4"
 
 # Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny" # ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
+TARGETS="ar71xx-tiny ar71xx-generic" # " x86-64 ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic"
 
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
@@ -275,7 +275,7 @@ sign() {
   # Add the signature to the the MANIFEST_BRANCH file
   cp -a "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean" \
       "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
-  sed -i "s§BRANCH=${BRANCH}§BRANCH=${MANIFEST_BRANCH}§g" "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
+  sed -i 's/BRANCH='${BRANCH}'/BRANCH='${MANIFEST_BRANCH}'/g' "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
