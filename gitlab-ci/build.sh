@@ -168,6 +168,9 @@ BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
 
+# Name of the autoupdater branch
+MANIFEST_BRANCH="rc"
+
 # Number of days that may pass between releasing an updating
 PRIORITY=1
 
@@ -258,13 +261,24 @@ HOST=$(uname -n)
 EOF
 }
 
-sign() {
+sign() {  
   echo "--- Sign Gluon Firmware Build"
-
+  
+  # keep the clean manifest for later signing of NOC members and for the MANIFEST_BRANCH file
+  cp -a "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
+      "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean"
   # Add the signature to the local manifest
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
+
+  # Add the signature to the the MANIFEST_BRANCH file
+  cp -a "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean" \
+      "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
+  sed -i "s§BRANCH=${BRANCH}§BRANCH=${MANIFEST_BRANCH}§g" "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
+  contrib/sign.sh \
+      "${SIGNKEY}" \
+      "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
 }
 
 upload() {
