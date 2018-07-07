@@ -13,7 +13,7 @@ PACKAGES_SSIDCHANGER_REPO=https://github.com/Freifunk-Nord/gluon-ssid-changer
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 
 #	the version/commit of the git repository to clone
-PACKAGES_FFKI_COMMIT=43eaf88e833c4cbee1b3e8085b77f35cf05d2e5a
+PACKAGES_FFKI_COMMIT=80495abe38a623d4241cffa1add24096c1abc6db
 PACKAGES_SARGON_COMMIT=4e84477564ffc67cb2cf690edc8dea37d6fe0cad
 PACKAGES_EULENFUNK_COMMIT=a4be61c88e4628d3f039510c86cd20fe7f417261
 PACKAGES_SSIDCHANGER_COMMIT=222b96a30259a03ca8ecdb173d9d326077a6efec
