@@ -266,14 +266,14 @@ sign() {
   
   # keep the clean manifest for later signing of NOC members and for the MANIFEST_BRANCH file
   cp -a "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
-      "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean"
+      "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean"
   # Add the signature to the local manifest
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
 
   # Add the signature to the the MANIFEST_BRANCH file
-  cp -a "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean" \
+  cp -a "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean" \
       "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
   sed -i 's/BRANCH='${BRANCH}'/BRANCH='${MANIFEST_BRANCH}'/g' "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
   contrib/sign.sh \
@@ -281,7 +281,7 @@ sign() {
       "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
 
   # Add the signature to the the stable.manifest file
-  cp -a "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean" \
+  cp -a "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean" \
       "${SITEDIR}/output/images/sysupgrade/stable.manifest"
   sed -i 's/BRANCH='${BRANCH}'/BRANCH=stable/g' "${SITEDIR}/output/images/sysupgrade/stable.manifest"
   contrib/sign.sh \
