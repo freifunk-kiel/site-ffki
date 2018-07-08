@@ -279,6 +279,14 @@ sign() {
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
+
+  # Add the signature to the the stable.manifest file
+  cp -a "${SITEDIR}/output/images/sysupgrade/${RELEASE}-${BUILD}.manifest.clean" \
+      "${SITEDIR}/output/images/sysupgrade/stable.manifest"
+  sed -i 's/BRANCH='${BRANCH}'/BRANCH=stable/g' "${SITEDIR}/output/images/sysupgrade/stable.manifest"
+  contrib/sign.sh \
+      "${SIGNKEY}" \
+      "${SITEDIR}/output/images/sysupgrade/stable.manifest"
 }
 
 upload() {
