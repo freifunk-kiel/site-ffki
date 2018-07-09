@@ -13,11 +13,12 @@ GLUON_FEATURES := \
 	web-advanced \
 	web-wizard \
 	autoupdater
-	
+
 GLUON_SITE_PACKAGES := \
 	gluon-core \
 	gluon-setup-mode \
 	gluon-config-mode-core \
+	gluon-radv-filterd \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
@@ -39,7 +40,6 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-radv-filterd
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
