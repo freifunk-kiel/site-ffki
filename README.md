@@ -17,7 +17,7 @@ These builds are created automatically and will possibly break your devices
 without prior notice. Use only if you know what you are doing.
 
 ## release-candidate (rc)
-Built on the site-ffki branch `master`. These builds are initiated manually
+Built on the site-ffki branch `release-candidate`. These builds are initiated manually
 and should be more or less stable. However they are still in testing for a
 reason. Use this if you want to offer your devices as test-platforms for the
 upcoming stable releases.
@@ -41,13 +41,13 @@ You can validate your changes to this repository by calling the validate_site.sh
 
 ## General process
 
-- Usually no commits should affect `master` directly.
+- Usually no commits should affect `release-candidate` directly.
 - Development for new firmwares takes place in the `nightly` branch.
 - Buildbot creates new firmwares from `nightly` as needed.
-- Release for new firmware is prepared through pull request from `nightly` to `master`
-- After consensus over pull request, new master is manually built in buildbot as release candidate.
-- Initial signature by developer allows update of rc nodes.
-- After testing, release candidate is promoted to stable and signed by developers.
+- Release for new firmware is prepared through pull request from `nightly` to `release-candidate`
+- After consensus over pull request, new `release-candidate` is manually built in Gitlab.
+- Initial signature by developer allows update of `rc` nodes.
+- After testing, `rc` is promoted to stable and signed by developers.
 
 ## Releases
 
