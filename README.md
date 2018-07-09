@@ -1,7 +1,7 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-The Freifunk nightly firmware is based on gluon branch master
+The Freifunk nightly firmware is based on gluon branch v2018.1.x
 
 You can always find
 the latest gluon documentation at:

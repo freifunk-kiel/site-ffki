@@ -53,7 +53,7 @@ if [ "$(whoami)" == "root" ]; then
 fi
 
 if [ -d ../openwrt/ ]; then
-  echo openwrt was checked out, this will break, if you build master now
+  echo openwrt was checked out, this will break, if you build v2018.1.x now
 fi
 
 echo "############## starting build process #################" >> build.log

@@ -3,7 +3,7 @@ variables:
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://gitlab.toppoint.de/ffki/gluon.git
-  GLUON_BRANCH: master
+  GLUON_BRANCH: v2018.1.x
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH

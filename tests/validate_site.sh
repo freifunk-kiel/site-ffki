@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_BRANCH='master'
+GLUON_BRANCH='v2018.1.x'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
@@ -59,7 +59,6 @@ echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|mesh-batman-adv-14|web-advanced|web-wizard)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
-#set -x
 cat $testpath/site.mk.sh |
 while read packet; do
   if [ "$packet" != "" ]; then
