@@ -15,7 +15,7 @@
 MAKEOPTS="V=s -j 4"
 
 # Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny" # ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
+TARGETS="ar71xx-generic ar71xx-tiny ramips-rt305x" # ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
 
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
@@ -223,6 +223,7 @@ build() {
              GLUON_RELEASE="${RELEASE}-${BUILD}" \
              GLUON_BRANCH="${BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
+             BROKEN=1 \
              GLUON_TARGET="${TARGET}"
         ;;
 
@@ -232,6 +233,7 @@ build() {
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
              GLUON_RELEASE="${RELEASE}-${BUILD}" \
              GLUON_BRANCH="${BRANCH}" \
+             BROKEN=1 \
              GLUON_TARGET="${TARGET}"
       ;;
     esac
