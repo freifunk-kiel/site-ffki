@@ -44,7 +44,11 @@ for feed in $GLUON_SITE_FEEDS; do
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
+
+echo "####### downloading github.com/freifunk-gluon/packages ..."
 git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
+
+echo "####### downloading github.com/freifunk-gluon/gluon ..."
 cd $testpath
 git init gluon
 cd gluon
