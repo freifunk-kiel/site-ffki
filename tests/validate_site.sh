@@ -61,20 +61,23 @@ cd $testpath/packages/package
 
 echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 # ignore non-gluon packages and standard gluon features
-sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|mesh-batman-adv-14|web-advanced|web-wizard)'> $testpath/site.mk.sh
+sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
 while read packet; do
   if [ "$packet" != "" ]; then
-    echo "check $packet ..."
-    if [ "$(find $testpath/packages/ -type d -name "$packet")" '!=' '' ]; then
-      : find found something
+    echo -n "# $packet"
+    FOUND="$(find $testpath/packages/ -type d -name "$packet")"
+    if [ "$FOUND" '!=' '' ]; then
+      echo " from $(echo $FOUND|sed 's|'$testpath'/packages||g')"
     else
       # check again with prefix gluon-
-      if [ "$(find $testpath/packages/ -type d -name "gluon-$packet")" '!=' '' ]; then
-        : find found something
+      FOUND="$(find $testpath/packages/ -type d -name "gluon-$packet")"
+      if [ "$FOUND" '!=' '' ]; then
+        echo " from $(echo $FOUND|sed 's|'$testpath'/packages||g')"
       else
+        echo
         echo "ERROR: $packet missing"
         exit 1
       fi
