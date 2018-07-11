@@ -2,6 +2,7 @@
 
 # validate_site.sh checks if the site.conf is valid json
 GLUON_BRANCH='v2017.1.8'
+GLUON_PACKAGES_BRANCH='v2017.1.8'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
@@ -43,6 +44,7 @@ for feed in $GLUON_SITE_FEEDS; do
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
+git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
 cd $testpath
 git init gluon
 cd gluon
@@ -54,8 +56,8 @@ cp -a package/ $testpath/packages
 cd $testpath/packages/package
 
 echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
-# ignore standard packages:
-sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged)'> $testpath/site.mk.sh
+# ignore non-gluon packages and standard gluon features
+sed '/GLUON_RELEASE/,$d' $P/site.mk | egrep -v '(#|G|iwinfo|iptables|haveged|vim|mesh-batman-adv-14|web-advanced|web-wizard)'> $testpath/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' $testpath/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' $testpath/site.mk.sh
 cat $testpath/site.mk.sh |
@@ -65,8 +67,13 @@ while read packet; do
     if [ "$(find $testpath/packages/ -type d -name "$packet")" '!=' '' ]; then
       : find found something
     else
-      echo "ERROR: $packet missing"
-      exit 1
+      # check again with prefix gluon-
+      if [ "$(find $testpath/packages/ -type d -name "gluon-$packet")" '!=' '' ]; then
+        : find found something
+      else
+        echo "ERROR: $packet missing"
+        exit 1
+      fi
     fi
   fi
 done
