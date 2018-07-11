@@ -2,6 +2,7 @@
 
 # validate_site.sh checks if the site.conf is valid json
 GLUON_BRANCH='v2018.1.x'
+GLUON_PACKAGES_BRANCH='master'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
@@ -43,7 +44,7 @@ for feed in $GLUON_SITE_FEEDS; do
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
 done
-git clone -b master --single-branch https://github.com/freifunk-gluon/packages
+git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
 cd $testpath
 git init gluon
 cd gluon
