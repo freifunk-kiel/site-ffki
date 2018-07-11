@@ -1,3 +1,5 @@
+# site.mk for Freifunk Kiel release-candidate and next stable
+
 GLUON_SITE_PACKAGES := \
 	gluon-mesh-batman-adv-14 \
 	gluon-core \

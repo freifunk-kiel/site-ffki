@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
+GLUON_REPO="https://github.com/freifunk-gluon/gluon"
 GLUON_BRANCH='v2017.1.8'
 GLUON_PACKAGES_BRANCH='v2017.1.8'
 
@@ -48,11 +49,11 @@ done
 echo "####### downloading github.com/freifunk-gluon/packages ..."
 git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
 
-echo "####### downloading github.com/freifunk-gluon/gluon ..."
+echo "####### downloading gluon ..."
 cd $testpath
 git init gluon
 cd gluon
-git remote add origin https://github.com/freifunk-gluon/gluon
+git remote add origin $GLUON_REPO
 git config core.sparsecheckout true
 echo "package/*" >> .git/info/sparse-checkout
 git pull --depth=1 origin $GLUON_BRANCH
@@ -70,12 +71,12 @@ while read packet; do
     echo -n "# $packet"
     FOUND="$(find $testpath/packages/ -type d -name "$packet")"
     if [ "$FOUND" '!=' '' ]; then
-      echo " from $(echo $FOUND|sed 's|'$testpath'/packages||g')"
+      echo " found as feature in $(echo $FOUND|sed 's|'$testpath'/packages||g')"
     else
       # check again with prefix gluon-
       FOUND="$(find $testpath/packages/ -type d -name "gluon-$packet")"
       if [ "$FOUND" '!=' '' ]; then
-        echo " from $(echo $FOUND|sed 's|'$testpath'/packages||g')"
+        echo " found in $(echo $FOUND|sed 's|'$testpath'/packages||g')"
       else
         echo
         echo "ERROR: $packet missing"
