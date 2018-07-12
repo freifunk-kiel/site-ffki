@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_BRANCH='v2018.1.x'
+GLUON_REPO="https://github.com/T-X/gluon.git"
+GLUON_BRANCH='pr-gluon-alt-esc'
 GLUON_PACKAGES_BRANCH='master'
 
 P=$(pwd)
@@ -48,11 +49,11 @@ done
 echo "####### downloading github.com/freifunk-gluon/packages ..."
 git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
 
-echo "####### downloading github.com/freifunk-gluon/gluon ..."
+echo "####### downloading gluon ..."
 cd $testpath
 git init gluon
 cd gluon
-git remote add origin https://github.com/freifunk-gluon/gluon
+git remote add origin $GLUON_REPO
 git config core.sparsecheckout true
 echo "package/*" >> .git/info/sparse-checkout
 git pull --depth=1 origin $GLUON_BRANCH
