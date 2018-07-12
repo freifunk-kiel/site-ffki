@@ -49,7 +49,7 @@ GLUON_SITE_PACKAGES += \
 #	ffffm-button-bind
 #	better at the bottom for only some models
 
-# from T-X alt-esc package:
+# from https://github.com/T-X/gluon.git branch
 GLUON_SITE_PACKAGES += \
 	gluon-alt-esc-client \
 	gluon-alt-esc-provider
@@ -57,7 +57,7 @@ GLUON_SITE_PACKAGES += \
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1~ngly$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.1~altesc$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
