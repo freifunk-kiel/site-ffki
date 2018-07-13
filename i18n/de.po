@@ -49,7 +49,7 @@ msgstr ""
 "und über deine Internetleitung, online mit einem Freifunk-Server zu verbinden.</p>"
 "<p>Bitte vergiss nicht das Netzwerkkabel vom gelben LAN Port in den blauen WAN Port umzustecken.</p>"
 
-msgid "gluon-config-mode:nopubkey"
+msgid "gluon-config-mode:novpn"
 msgstr ""
 "<p><div class=\"the-key\">Du hast ausgewählt die Internetverbindung (Mesh-VPN) nicht zu nutzen. "
 "Dein Knoten kann also nur eine Internetverbindung aufbauen, wenn andere Freifunk-"
