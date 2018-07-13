@@ -50,9 +50,9 @@ GLUON_SITE_PACKAGES += \
 #	better at the bottom for only some models
 
 # from T-X alt-esc package:
-GLUON_SITE_PACKAGES += \
-	gluon-alt-esc-client \
-	gluon-alt-esc-provider
+#GLUON_SITE_PACKAGES += \
+#	gluon-alt-esc-client \
+#	gluon-alt-esc-provider
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
