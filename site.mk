@@ -64,7 +64,7 @@ DEFAULT_GLUON_RELEASE := 2018.1~altesc$(shell date '+%y%m%d')
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= nightly
+GLUON_BRANCH ?= stable
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic

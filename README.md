@@ -1,7 +1,10 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-The Freifunk nightly firmware is based on gluon branch v2018.1.x
+The Freifunk alt-esc firmware is based on our nightly but in a fork from T-X at
+https://github.com/T-X/gluon.git (BRANCH: pr-gluon-alt-esc which is based on 
+gluon branch v2018.1.x). The autoupdater branch is `stable` so it will not get
+accidentaly updated by a newer other nightly
 
 You can always find
 the latest gluon documentation at:
