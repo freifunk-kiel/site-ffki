@@ -17,7 +17,7 @@ set -e
 # if version is unset, will use the default nightly version from site.mk
 VERSION=${3:-"2018.1~altesc$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
-BRANCH=${2:-"stable"}
+BRANCH=${2:-"alt-esc"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 
