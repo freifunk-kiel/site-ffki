@@ -261,7 +261,7 @@ HOST=$(uname -n)
 EOF
 }
 
-sign() {  
+sign() {
   echo "--- Sign Gluon Firmware Build"
   
   # keep the clean manifest for later signing of NOC members and for the MANIFEST_BRANCH file

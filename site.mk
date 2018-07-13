@@ -1,30 +1,31 @@
-# site.mk for Freifunk Kiel release-candidate and next stable
+# site.mk for Freifunk Kiel
+
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
+GLUON_FEATURES := \
+	config-mode-mesh-vpn \
+	web-private-wifi \
+	ebtables-limit-arp \
+	ebtables-filter-multicast \
+	ebtables-filter-ra-dhcp \
+	mesh-batman-adv-14 \
+	mesh-vpn-fastd \
+	radvd \
+	respondd \
+	status-page \
+	web-advanced \
+	web-wizard \
+	autoupdater
 
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-14 \
 	gluon-core \
-	gluon-respondd \
-	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-contact-info \
 	gluon-config-mode-core \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn \
-	gluon-config-mode-geo-location \
-	gluon-ebtables-filter-multicast \
-	gluon-ebtables-filter-ra-dhcp \
-	gluon-web-admin \
-	gluon-web-autoupdater \
-	gluon-web-network \
-	gluon-web-private-wifi \
-	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
-	gluon-radvd \
 	gluon-radv-filterd \
-	gluon-status-page \
+	respondd-module-airtime \
 	iwinfo \
 	iptables \
 	haveged
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide \
@@ -41,7 +42,6 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
 
 # from ffm-packages
@@ -56,8 +56,8 @@ GLUON_SITE_PACKAGES += \
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2017.1.8
-DEFAULT_GLUON_RELEASE := 2017.1.8~exp$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1~exp$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
@@ -74,7 +74,7 @@ export GLUON_TARGET
 GLUON_REGION ?= eu
 
 # enable generation of images for ath10k devices with 802.11s mode
-GLUON_ATH10K_MESH ?= 11s
+GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 

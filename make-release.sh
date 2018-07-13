@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-VERSION=${3:-"2017.1.8~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.1~exp$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -53,7 +53,7 @@ if [ "$(whoami)" == "root" ]; then
 fi
 
 if [ -d ../openwrt/ ]; then
-  echo openwrt was checked out, this will break, if you build master now
+  echo openwrt was checked out, this will break, if you build v2018.1.x now
 fi
 
 echo "############## starting build process #################" >> build.log
