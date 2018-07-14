@@ -25,7 +25,8 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	iptables \
 	haveged \
-	autoupdater-proxy
+	autoupdater-proxy \
+	tar
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
