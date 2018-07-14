@@ -15,7 +15,7 @@
 MAKEOPTS="V=s -j 4"
 
 # Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi x86-generic x86-geode x86-64 ipq806x ramips-mt7620 ramips-mt7628 ramips-rt305x"
+TARGETS="ar71xx-generic ar71xx-tiny x86-64" # ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
 
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
