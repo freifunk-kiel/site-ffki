@@ -21,12 +21,10 @@ function update() {
 
 	REMOTE_REFS="$(git ls-remote -qht "$GLUON_GIT" | grep "$GLUON_BRANCH" | cut -f1)"
 
-	cd gluon
 	set +e
-	LOCAL_REF=$(git rev-parse HEAD)
+	LOCAL_REF=$(git -C gluon rev-parse HEAD)
 	GIT_EXIT=$?
 	set -e
-	cd ..
 
 	if [[ $GIT_EXIT -ne 0 ]]; then
 		echo "Local repo damaged, forcing update"
