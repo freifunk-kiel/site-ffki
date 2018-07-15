@@ -60,7 +60,7 @@ echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
 echo "see debug output with"
-echo "tail -F ../build.log &"
+echo "tail -F ../build.log|grep -i error|grep -v CFLAGS|egrep -v '(checking|CC|LD|gcc|Entering|leaving|v -f|rm -rf|cp -f|rm -f|Applying|patching|Installing)' &"
 sleep 3
 
 #rm -r output
