@@ -3,9 +3,13 @@
 set -e -o pipefail
 
 function update() {
-	# Kill it with fire
-	rm -rf gluon
-	git clone "$GLUON_GIT" -b "$GLUON_BRANCH" gluon
+	# Try ff first
+	git -C gluon fetch --all && git -C gluon checkout "$GLUON_BRANCH" && git -C gluon pull --ff-only || {
+		# Kill it with fire
+		echo "Fast-Forward failed, killing it with fire"
+		rm -rf gluon
+		git clone "$GLUON_GIT" -b "$GLUON_BRANCH" gluon
+	}
 }
 
 (
