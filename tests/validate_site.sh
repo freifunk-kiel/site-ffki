@@ -41,6 +41,7 @@ for feed in $GLUON_SITE_FEEDS; do
   git clone -b "$branch" --single-branch "$repo" $feed
   if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
+  echo "git checkout $commit"
   git checkout "$commit"
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
