@@ -38,7 +38,7 @@ for feed in $GLUON_SITE_FEEDS; do
     echo "branch $branch_var missing"
     exit 1
   fi
-  git clone -b "$branch" --single-branch "$repo" $feed
+  git clone -b "$branch" --depth 1 --single-branch "$repo" $feed
   if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
   echo "git checkout $commit"
@@ -48,7 +48,7 @@ for feed in $GLUON_SITE_FEEDS; do
 done
 
 echo "####### downloading github.com/freifunk-gluon/packages ..."
-git clone -b $GLUON_PACKAGES_BRANCH --single-branch https://github.com/freifunk-gluon/packages
+git clone -b $GLUON_PACKAGES_BRANCH --depth 1  --single-branch https://github.com/freifunk-gluon/packages
 
 echo "####### downloading gluon ..."
 cd $testpath
@@ -57,7 +57,7 @@ cd gluon
 git remote add origin $GLUON_REPO
 git config core.sparsecheckout true
 echo "package/*" >> .git/info/sparse-checkout
-git pull --depth=1 origin $GLUON_BRANCH
+git pull --depth 1 origin $GLUON_BRANCH
 cp -a package/ $testpath/packages
 cd $testpath/packages/package
 
