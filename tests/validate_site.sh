@@ -7,7 +7,16 @@ GLUON_PACKAGES_BRANCH='master'
 
 P=$(pwd)
 echo "####### validating $P/site.conf ..."
+which lua5.1 
+if [ "$?" == 1 ]; then
+  echo lua5.1 not present!
+  echo install with sudo apt install lua5.1
+  exit 1
+fi
 GLUON_SITEDIR="." lua5.1 tests/site_config.lua
+if [ "$?" == 1 ]; then
+  exit 1
+fi
 
 echo "####### validating $P/make-release.sh ..."
 bash -n $P/make-release.sh
@@ -38,9 +47,10 @@ for feed in $GLUON_SITE_FEEDS; do
     echo "branch $branch_var missing"
     exit 1
   fi
-  git clone -b "$branch" --depth 1 --single-branch "$repo" $feed
+  git clone -b "$branch" --depth 1000 --single-branch "$repo" $feed
   if [ "$?" != "0" ]; then exit 1; fi
   cd $feed
+  echo "git checkout $commit"
   git checkout "$commit"
   if [ "$?" != "0" ]; then exit 1; fi
   cd -
