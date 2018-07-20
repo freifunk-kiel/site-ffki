@@ -1,17 +1,18 @@
 FROM debian:stretch
 
 RUN apt-get update && apt-get install -y \
-	git \
-	subversion \
-	python \
-	build-essential \
-	gawk \
-	unzip \
-	libncurses5-dev \
-	zlib1g-dev \
+    git \
+    subversion \
+    python \
+    build-essential \
+    gawk \
+    unzip \
+    time \
+    libncurses5-dev \
+    zlib1g-dev \
     libssl1.0-dev \
-	wget \
-	curl \
+    wget \
+    curl \
     openssh-client
 RUN apt-get update && apt-get install -y \
     cmake \
@@ -36,4 +37,3 @@ RUN apt-get update && apt-get install -y \
     cd ~ && \
     rm -rf ~/libuecc && \
     rm -rf ~/ecdsautils
-
