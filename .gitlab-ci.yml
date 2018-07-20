@@ -3,7 +3,7 @@ variables:
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/2tata/gluon/
-  GLUON_BRANCH: gluon-config-mode-geo-location-with-map
+  GLUON_BRANCH: gluon-config-mode-geo-location
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
