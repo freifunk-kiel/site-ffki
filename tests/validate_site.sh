@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_REPO="https://github.com/freifunk-gluon/gluon"
-GLUON_BRANCH='v2018.1.x'
+GLUON_REPO="https://github.com/2tata/gluon"
+GLUON_BRANCH='gluon-config-mode-geo-location-with-map'
 GLUON_PACKAGES_BRANCH='master'
 
 P=$(pwd)

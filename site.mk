@@ -49,15 +49,14 @@ GLUON_SITE_PACKAGES += \
 #	ffffm-button-bind
 #	better at the bottom for only some models
 
-# from T-X alt-esc package:
-#GLUON_SITE_PACKAGES += \
-#	gluon-alt-esc-client \
-#	gluon-alt-esc-provider
+# from 2tata's gluon fork 
+GLUON_SITE_PACKAGES += \
+	gluon-config-mode-geo-location-with-geloc-map
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1~ngly$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.1~geo$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
