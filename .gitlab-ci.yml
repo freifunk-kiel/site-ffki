@@ -80,6 +80,7 @@ upload:
     - ssh-add <(echo "$SSH_KEY")
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
+    - cp -a site output/images/
     - ./gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
   dependencies:
     - build
