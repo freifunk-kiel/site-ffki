@@ -51,7 +51,7 @@ GLUON_SITE_PACKAGES += \
 
 # from 2tata's gluon fork 
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-geo-location
+	gluon-config-mode-geo-location-with-map
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
