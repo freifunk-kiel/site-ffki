@@ -76,18 +76,10 @@ upload:
   stage: upload
   image: $CI_REGISTRY_IMAGE/build
   script:
-    - pwd
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
-    - ls
-    - ls output/
-    - ls output/images/
-    - mkdir -p output/images/site
-    - shopt -s extglob
-    - shopt -s dotglob
-    - cp -a !(output) output/images/site
     - ./gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
   dependencies:
     - build
