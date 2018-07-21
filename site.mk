@@ -13,6 +13,7 @@ GLUON_FEATURES := \
 	respondd \
 	status-page \
 	web-advanced \
+	web-wizard \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
@@ -48,13 +49,6 @@ GLUON_SITE_PACKAGES += \
 #	ffffm-button-bind
 #	better at the bottom for only some models
 
-# instead of feature web-wizard so gluon-config-mode-geo-location-with-map can replace gluon-config-mode-geo-location:
-GLUON_SITE_PACKAGES += \
-	gluon-config-mode-hostname \
-	gluon-config-mode-contact-info \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn
-	
 # from 2tata's gluon fork 
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-geo-location-with-map
