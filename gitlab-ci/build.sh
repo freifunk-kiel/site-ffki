@@ -308,6 +308,9 @@ upload() {
           --verbose \
           "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}"
 
+  # Add site metadata
+  tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
+
   # Copy images to server
   rsync \
       --verbose \
