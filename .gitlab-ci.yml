@@ -2,8 +2,8 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
-  GLUON_GIT: https://github.com/2tata/gluon/
-  GLUON_BRANCH: gluon-config-mode-geo-location
+  GLUON_GIT: https://github.com/rubo77/gluon/
+  GLUON_BRANCH: geo-location-with-map-osm-geolocator
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
