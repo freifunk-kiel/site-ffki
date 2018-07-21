@@ -31,15 +31,15 @@ CORES="-j$CORES"
 # set this to "0" if you don't want to use make clean before make
 MAKE_CLEAN="1"
 
-# set this to "V=s" to get more output
-VERBOSE=""
+# set this to "" to get less more output
+VERBOSE="V=s"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
 ONLY_TARGET="ar71xx-generic ar71xx-tiny"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=''
-#DEVICES='DEVICES="tp-link-tl-wr842n-nd-v1 tp-link-tl-wr842n-nd-v2 tp-link-tl-wr842n-nd-v3"'
+#DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
 
 cd ../
 if [ ! -d "site" ]; then
