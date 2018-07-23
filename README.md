@@ -121,3 +121,14 @@ Or build with these commands:
     for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86; do
     	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~exp$D BROKEN=1;
     done
+
+### Code Review
+
+Die Firmware wird in unserem GitLab gebaut. Dabei werden die Commit-Ids des 
+gluon Repositories und des Site-Konfigurations-Repositories in der Firmware 
+verankert. Diese Ids kann man in der Startseite der Erweiterten Einstellungen 
+im Config Mode ersehen. Die Git Id ist genau der commit auf dem die Firmware 
+gebaut wurde. Falls dort ein Plus (+) am Ende erscheint ist dies der 
+"Dirty"-Flag. Die Id wurde erzeugt mit
+
+    git describe --always --dirty=+
