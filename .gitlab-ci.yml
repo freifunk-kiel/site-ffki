@@ -2,7 +2,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
-  GLUON_GIT: https://github.com/rubo77/gluon/
+  GLUON_GIT: https://gitlab.toppoint.de/ruben/gluon/
   GLUON_BRANCH: geo-location-with-map-osm-geolocator
 
 cache:
