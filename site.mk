@@ -81,11 +81,8 @@ GLUON_SITE_PACKAGES += \
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES = -ffffm-button-bind
 endif
-ifeq ($(GLUON_TARGET),x86-generic)
-ifeq ($(GLUON_TARGET),x86-64)
-	GLUON_SITE_PACKAGES += -ffffm-button-bind
-endif
-endif
+# TODO: https://stackoverflow.com/questions/51517970/combine-multiple-ifeq-and-ifneq-in-a-gnu-makefile#51518105
+
 # those work ($(GLUON_TARGET),ar71xx-tiny):
 #GLUON_GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
 #GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
