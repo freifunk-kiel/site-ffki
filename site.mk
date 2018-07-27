@@ -1,34 +1,38 @@
+# site.mk for Freifunk Nord
+
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
+GLUON_FEATURES := \
+	config-mode-mesh-vpn \
+	web-private-wifi \
+	ebtables-limit-arp \
+	ebtables-filter-multicast \
+	ebtables-filter-ra-dhcp \
+	mesh-batman-adv-15 \
+	mesh-vpn-fastd \
+	radvd \
+	respondd \
+	status-page \
+	web-advanced \
+	web-wizard \
+	autoupdater
+
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-15 \
 	gluon-core \
-	gluon-respondd \
-	gluon-autoupdater \
 	gluon-setup-mode \
-	gluon-config-mode-contact-info \
 	gluon-config-mode-core \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-mesh-vpn \
-	gluon-config-mode-geo-location \
-	gluon-ebtables-filter-multicast \
-	gluon-ebtables-filter-ra-dhcp \
-	gluon-web-admin \
-	gluon-web-autoupdater \
-	gluon-web-network \
-	gluon-web-private-wifi \
-	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
-	gluon-radvd \
-	gluon-status-page \
+	gluon-radv-filterd \
+	respondd-module-airtime \
 	iwinfo \
 	iptables \
 	haveged
+
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide
 #	ddhcpd
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
-GLUON_SITE_PACKAGE += \
+GLUON_SITE_PACKAGES += \
 	gluon-quickfix
 
 # from https://github.com/Freifunk-Nord/gluon-ssid-changer:
@@ -38,12 +42,17 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
-	gluon-config-mode-hostname-no-pretty
 #	gluon-config-mode-contact-info-anonymous-hint
+
+# from ffm-packages
+#GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
+#	better at the bottom for only some models
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2017.1.2~rc$(shell date '+%y%m%d%H%M')
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1~exp$(shell date '+%y%m%d')
 
 
 # Allow overriding the release number from the command line
@@ -60,7 +69,7 @@ export GLUON_TARGET
 GLUON_REGION ?= eu
 
 # enable generation of images for ath10k devices with 802.11s mode
-GLUON_ATH10K_MESH ?= 11s
+GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
@@ -136,16 +145,16 @@ USB_PACKAGES_STORAGE := \
 	kmod-nls-koi8r \
 	kmod-nls-utf8
 # from ffki-packages:
-#USB_PACKAGES_STORAGE += \
-#	gluon-usb-media \
-#	gluon-config-mode-usb-media
+USB_PACKAGES_STORAGE += \
+	gluon-usb-media \
+	gluon-config-mode-usb-media
 
 # add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
-#		$(USB_PACKAGES_STORAGE) \
+		$(USB_PACKAGES_STORAGE) \
 		$(USB_PACKAGES_HID) \
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
@@ -153,21 +162,51 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_X86_GENERIC_NETWORK_MODULES)
 endif
 
-#ifeq ($(GLUON_TARGET),ar71xx-generic)
-#	GLUON_TLWR1043_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_TLWR842_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_TLWDR4300_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_TLWR2543_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_WRT160NL_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_DIR825B1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_DIR505A1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_GLINET_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_WNDR3700_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_WZRHPG450H_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_WZRHPAG300H_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#	GLUON_ARCHERC7_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#endif
+# use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wdr4300-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-tl-wr2543n-nd-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_linksys-wrt160nl_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-825-rev-b1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-505-rev-a1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_d-link-dir-505-rev-a2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-inet-6408a-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-inet-6416a-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_netgear-wndr3700v4_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_buffalo-wzr-hp-g450h_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_buffalo-wzr-hp-g300nh_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_tp-link-archer-c7-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
 
-#ifeq ($(GLUON_TARGET),mpc85xx-generic)
-#	GLUON_TLWDR4900_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-#endif
+ifeq ($(GLUON_TARGET),mpc85xx-generic)
+	GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
+
+# from ffm-packages
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+	GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v9_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
+endif
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+endif
