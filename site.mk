@@ -1,5 +1,28 @@
 # site.mk for Freifunk Kiel
 
+# Always call `make` from the command line with the desired release version!
+# otherwise this is generated:
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1.1~geo$(shell date '+%y%m%d')
+
+# Allow overriding the release number from the command line
+GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
+
+GLUON_PRIORITY ?= 0
+GLUON_BRANCH ?= nightly
+export GLUON_BRANCH
+
+GLUON_TARGET ?= ar71xx-generic
+export GLUON_TARGET
+
+# Region code required for some images; supported values: us eu
+GLUON_REGION ?= eu
+
+# enable generation of images for ath10k devices with 802.11s mode
+GLUON_WLAN_MESH ?= 11s
+
+GLUON_LANGS ?= en de
+
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
 GLUON_FEATURES := \
 	config-mode-mesh-vpn \
@@ -44,39 +67,47 @@ GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
 #	gluon-config-mode-contact-info-anonymous-hint
 
-# from ffm-packages
+
+# from T-X alt-esc package:
 #GLUON_SITE_PACKAGES += \
-#	ffffm-button-bind
-#	better at the bottom for only some models
+#	gluon-alt-esc-client \
+#	gluon-alt-esc-provider
 
 # from 2tata's gluon fork 
 GLUON_SITE_PACKAGES += \
 	-gluon-config-mode-geo-location \
 	gluon-config-mode-geo-location-with-map
 
-# Always call `make` from the command line with the desired release version!
-# otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1.1~geo$(shell date '+%y%m%d')
+# from ffm-packages
+GLUON_SITE_PACKAGES += \
+	ffffm-button-bind
 
+#	some models and targets have to be excluded:
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES = -ffffm-button-bind
+endif
+# TODO: https://stackoverflow.com/questions/51517970/combine-multiple-ifeq-and-ifneq-in-a-gnu-makefile#51518105
 
-# Allow overriding the release number from the command line
-GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
-
-GLUON_PRIORITY ?= 0
-GLUON_BRANCH ?= nightly
-export GLUON_BRANCH
-
-GLUON_TARGET ?= ar71xx-generic
-export GLUON_TARGET
-
-# Region code required for some images; supported values: us eu
-GLUON_REGION ?= eu
-
-# enable generation of images for ath10k devices with 802.11s mode
-GLUON_WLAN_MESH ?= 11s
-
-GLUON_LANGS ?= en de
+# those work ($(GLUON_TARGET),ar71xx-tiny):
+#GLUON_GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v9_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
+# ($(GLUON_TARGET),mpc85xx-generic):
+#GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES += ffffm-button-bind
+# ($(GLUON_TARGET),ar71xx-generic):
+#GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind (with some problems due to slider istead of button)
+#GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
+#GLUON_tp-link-tl-wdr4300-v1_SITE_PACKAGES += ffffm-button-bind
+# the rest is unknown
 
 # basic support the USB stack
 #USB_PACKAGES_BASIC := \
@@ -189,29 +220,9 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_buffalo-wzr-hp-g450h_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_buffalo-wzr-hp-g300nh_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-archer-c7-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+	GLUON_gl-ar300m_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
-endif
-
-# from ffm-packages
-ifeq ($(GLUON_TARGET),ar71xx-tiny)
-	GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v9_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
-endif
-ifeq ($(GLUON_TARGET),ar71xx-generic)
-	GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind
-	GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
 endif
