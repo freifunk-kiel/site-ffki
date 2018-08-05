@@ -36,7 +36,7 @@ VERBOSE="V=s"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic ar71xx-tiny"
+ONLY_TARGET="ar71xx-generic ar71xx-tiny ramips-mt76x8"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=''
 #DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
