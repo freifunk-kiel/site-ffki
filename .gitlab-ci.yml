@@ -12,7 +12,6 @@ cache:
 
 stages:
   - prepare
-  - clone
   - build
   - upload
 
@@ -32,25 +31,13 @@ prepare:
     - docker push $CONTAINER_IMAGE:latest
   cache: {}
 
-# Cache maintenance
-clone:
-  stage: clone
-  image: $CI_REGISTRY_IMAGE/build
-  script:
-    - ./gitlab-ci/update-git.sh | tee -a debug.log
-  artifacts:
-    untracked: false
-    paths:
-      - debug.log
-  dependencies: []
-
 # Actual building
 build:
   stage: build
   image: $CI_REGISTRY_IMAGE/build
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
-      # We can't be sure the cache is actually available right now, thus we have to perform all cache steps here, too
+      # former clone step
     - ./gitlab-ci/update-git.sh | tee -a debug.log
     - ./gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
       # We should never need this, should we?
