@@ -26,7 +26,7 @@ prepare:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker pull $CONTAINER_IMAGE:latest || true
-    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_COMMIT_SHA -t $CONTAINER_IMAGE:latest contrib/build-container
+    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$CI_COMMIT_SHA -t $CONTAINER_IMAGE:latest .gitlab-ci/build-container
     - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
     - docker push $CONTAINER_IMAGE:latest
   cache: {}
@@ -38,18 +38,18 @@ build:
   script:
     - export FORCE_UNSAFE_CONFIGURE=1
       # former clone step
-    - ./gitlab-ci/update-git.sh | tee -a debug.log
-    - ./gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+    - ./.gitlab-ci/update-git.sh | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c update -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
       # We should never need this, should we?
-    - ./gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
       # In the past this build step repeadatly break
-    # - ./gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
-    - ./gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+    # - ./.gitlab-ci/build.sh -c download -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all) V=s" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
       # Bring gluon repo to cacheable state
-    - ./gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
+    - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "-j $(nproc --all)" | tee -a debug.log
       # Sign
     - echo $SIGNING_KEY > signing_key
-    - ./gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
+    - ./.gitlab-ci/build.sh -c sign -b $CI_COMMIT_REF_NAME -s $(pwd)/signing_key
   artifacts:
     untracked: false
     paths:
@@ -67,7 +67,7 @@ upload:
     - ssh-add <(echo "$SSH_KEY")
       # create fake gluon dir to satisfy build script
     - mkdir -p gluon
-    - ./gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
+    - ./.gitlab-ci/build.sh -c upload -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID
   dependencies:
     - build
   cache: {}
