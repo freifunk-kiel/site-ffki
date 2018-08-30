@@ -37,6 +37,7 @@ GLUON_FEATURES := \
 	status-page \
 	web-advanced \
 	web-wizard \
+	web-osm \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
@@ -72,11 +73,6 @@ GLUON_SITE_PACKAGES += \
 #GLUON_SITE_PACKAGES += \
 #	gluon-alt-esc-client \
 #	gluon-alt-esc-provider
-
-# from 2tata's gluon fork 
-GLUON_SITE_PACKAGES += \
-	-gluon-config-mode-geo-location \
-	gluon-config-mode-geo-location-with-map
 
 # from ffm-packages
 GLUON_SITE_PACKAGES += \
