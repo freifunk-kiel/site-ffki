@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-VERSION=${3:-"2018.1.0~exp$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.1.1~exp$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -60,7 +60,7 @@ echo "############## starting build process #################" >> build.log
 date >> build.log
 echo "if you want to start over empty the folder ../output/"
 echo "see debug output with"
-echo "tail -F ../build.log &"
+echo "tail -F ../build.log|grep -i error|grep -v CFLAGS|egrep -v '(checking|CC|LD|gcc|Entering|leaving|v -f|rm -rf|cp -f|rm -f|Applying|patching|Installing)' &"
 sleep 3
 
 #rm -r output
