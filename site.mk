@@ -27,7 +27,6 @@ GLUON_LANGS ?= en de
 GLUON_FEATURES := \
 	config-mode-mesh-vpn \
 	web-private-wifi \
-	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
 	mesh-batman-adv-14 \
