@@ -36,7 +36,6 @@ GLUON_FEATURES := \
 	status-page \
 	web-advanced \
 	web-wizard \
-	web-osm \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
