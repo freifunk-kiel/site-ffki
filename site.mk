@@ -32,6 +32,7 @@ GLUON_FEATURES := \
 	mesh-batman-adv-14 \
 	mesh-vpn-fastd \
 	radvd \
+	radv-filterd \
 	respondd \
 	status-page \
 	web-advanced \
@@ -39,7 +40,6 @@ GLUON_FEATURES := \
 	autoupdater
 
 GLUON_SITE_PACKAGES := \
-	gluon-radv-filterd \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
