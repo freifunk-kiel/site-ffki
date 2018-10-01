@@ -77,33 +77,6 @@ GLUON_SITE_PACKAGES += \
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES = -ffffm-button-bind
 endif
-# TODO: https://stackoverflow.com/questions/51517970/combine-multiple-ifeq-and-ifneq-in-a-gnu-makefile#51518105
-
-# those work ($(GLUON_TARGET),ar71xx-tiny):
-#GLUON_GLUON_tp-link-tl-wr841n-nd-v5_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v8_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v9_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v10_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v11_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v12_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr841n-nd-v13_SITE_PACKAGES += ffffm-button-bind
-# ($(GLUON_TARGET),mpc85xx-generic):
-#GLUON_tp-link-tl-wdr4900-v1_SITE_PACKAGES += ffffm-button-bind
-# ($(GLUON_TARGET),ar71xx-generic):
-#GLUON_tp-link-tl-wr1043n-nd-v2_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr1043n-nd-v3_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr1043n-nd-v4_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr1043n-v5_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += ffffm-button-bind (with some problems due to slider istead of button)
-#GLUON_tp-link-tl-wr842n-nd-v3_SITE_PACKAGES += ffffm-button-bind
-#GLUON_tp-link-tl-wdr4300-v1_SITE_PACKAGES += ffffm-button-bind
-# the rest is unknown
-
-# basic support the USB stack
-#USB_PACKAGES_BASIC := \
-#	kmod-usb-core \
-#	kmod-usb2
 
 # support for USB UMTS/3G devices
 USB_PACKAGES_3G := \
