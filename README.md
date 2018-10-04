@@ -119,7 +119,7 @@ Or build with these commands:
     X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
     WDR4900="mpc85xx-generic"
     for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86; do
-    	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~exp$D BROKEN=1;
+    	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~rc$D BROKEN=1;
     done
 
 ### Code Review
