@@ -15,7 +15,15 @@
 MAKEOPTS="V=s -j 4"
 
 # Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-tiny ar71xx-generic ramips-mt76x8" # ar71xx-generic x86-64 ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
+TARGETS="ar71xx-tiny ar71xx-generic x86-64 ar71xx-nand x86-generic x86-64"
+TARGETS=$TARGETS" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
+
+# BROKEN:
+TARGETS=$TARGETS" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+TARGETS=$TARGETS" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
+TARGETS=$TARGETS" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
+TARGETS=$TARGETS" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+TARGETS=$TARGETS" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
 
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
