@@ -150,13 +150,6 @@ if [[ "${#}" > 0 ]]; then
   exit ${E_ILLEGAL_ARGS}
 fi
 
-# Set branch name
-if [[ -z "${BRANCH}" ]]; then
-  BRANCH=$(git symbolic-ref -q HEAD)
-  BRANCH=${BRANCH##refs/heads/}
-  BRANCH=${BRANCH:-HEAD}
-fi
-
 # Set command
 if [[ -z "${COMMAND}" ]]; then
   echo "Error: Build command missing."
@@ -169,15 +162,14 @@ if [[ -z "${RELEASE}" ]]; then
   RELEASE=$(cat "${SITEDIR}/release")
 fi
 
-# Normalize the branch name
-BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
-BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
-
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
 
-# Name of the autoupdater branch
-MANIFEST_BRANCH="rc"
+# Name of the autoupdater branch that is selected on the node: 'rc', 'nightly', 'next' or 'stable'
+BRANCH="stable"
+
+# Determine upload target prefix: 'release-candidate', 'nightly' or 'next'
+TARGET_DIR="release-candidate"
 
 # Number of days that may pass between releasing an updating
 PRIORITY=1
@@ -225,9 +217,7 @@ build() {
   for TARGET in ${TARGETS}; do
     echo "--- Build Gluon Images for target: ${TARGET}"
     case "${BRANCH}" in
-      stable| \
-      testing| \
-      development)
+      stable)
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
@@ -272,21 +262,14 @@ EOF
 sign() {
   echo "--- Sign Gluon Firmware Build"
   
-  # keep the clean manifest for later signing of NOC members and for the MANIFEST_BRANCH file
+  # keep the clean manifest for later signing of NOC members and for the BRANCH file
   cp -a "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
       "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean"
-  # Add the signature to the local manifest
+
+  # Add the signature to the manifest file
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
-
-  # Add the signature to the the MANIFEST_BRANCH file
-  cp -a "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean" \
-      "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
-  sed -i 's/BRANCH='${BRANCH}'/BRANCH='${MANIFEST_BRANCH}'/g' "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
-  contrib/sign.sh \
-      "${SIGNKEY}" \
-      "${SITEDIR}/output/images/sysupgrade/${MANIFEST_BRANCH}.manifest"
 
   # Add the signature to the the stable.manifest file
   cp -a "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean" \
@@ -304,9 +287,6 @@ upload() {
   SSH="ssh"
   SSH="${SSH} -o stricthostkeychecking=no -v"
 
-  # Determine upload target prefix
-  TARGET="${BRANCH}"
-
   # Create the target directory on server
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
@@ -314,7 +294,7 @@ upload() {
       mkdir \
           --parents \
           --verbose \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}"
+          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}"
 
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
@@ -329,47 +309,44 @@ upload() {
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
       "${SITEDIR}/output/images/" \
-      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}"
+      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
-          "/opt/firmware/ffki/${TARGET}/"
+          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}/sysupgrade" \
+          "/opt/firmware/ffki/${TARGET_DIR}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/factory" \
-          "/opt/firmware/ffki/${TARGET}/"
+          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}/factory" \
+          "/opt/firmware/ffki/${TARGET_DIR}/"
 }
 
 prepare() {
   echo "--- Prepare directory for upload"
 
-  # Determine upload target prefix
-  TARGET="${BRANCH}"
-
   # Create the target directory on server
   mkdir \
     --parents \
     --verbose \
-    "${SITEDIR}/output/firmware/${TARGET}"
+    "${SITEDIR}/output/firmware/${TARGET_DIR}"
 
   # Copy images to directory
   mv \
     --verbose \
     "${SITEDIR}/output/images" \
-    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}-${BUILD}"
+    "${SITEDIR}/output/firmware/${TARGET_DIR}/${RELEASE}-${BUILD}"
 
-  # Link latest upload in target to 'current'
+  # Link latest upload in target directory to 'current'
   cd "${SITEDIR}/output"
   ln \
       --symbolic \
       --force \
       --no-target-directory \
       "${RELEASE}-${BUILD}" \
-      "firmware/${TARGET}/current"
+      "firmware/${TARGET_DIR}/current"
 }
 
 (
