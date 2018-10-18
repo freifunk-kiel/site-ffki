@@ -168,6 +168,9 @@ COMMIT="$(git describe --always --dirty)"
 # Name of the autoupdater branch that is selected on the node: 'rc', 'nightly', 'next' or 'stable'
 BRANCH="stable"
 
+# key of the autoupdater branch for the name and BRANCH of the 2nd manifest: 'rc', 'nightly', 'next' or 'stable'
+AU_BRANCH_2="rc"
+
 # Determine upload target prefix: 'release-candidate', 'nightly' or 'next'
 TARGET_DIR="release-candidate"
 
@@ -262,22 +265,26 @@ EOF
 sign() {
   echo "--- Sign Gluon Firmware Build"
   
+  MANIFEST="${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
+  MANIFEST_2="${SITEDIR}/output/images/sysupgrade/${AU_BRANCH_2}.manifest"
+  
   # keep the clean manifest for later signing of NOC members and for the BRANCH file
-  cp -a "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
-      "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean"
+  cp -a "${MANIFEST} ${MANIFEST}.clean"
 
+  # create clean 2nd manifest with AU_BRANCH_2 as BRANCH
+  cp -a "${MANIFEST}.clean ${MANIFEST_2}.clean"
+  sed -i 's/BRANCH='${BRANCH}'/BRANCH='${AU_BRANCH_2}'/g' "${MANIFEST_2}.clean"
+  
   # Add the signature to the manifest file
   contrib/sign.sh \
       "${SIGNKEY}" \
-      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
+      "${MANIFEST}"
 
-  # Add the signature to the the stable.manifest file
-  cp -a "${SITEDIR}/output/images/sysupgrade/manifest-${RELEASE}.clean" \
-      "${SITEDIR}/output/images/sysupgrade/stable.manifest"
-  sed -i 's/BRANCH='${BRANCH}'/BRANCH=stable/g' "${SITEDIR}/output/images/sysupgrade/stable.manifest"
+  # Add the signature to the the 2nd manifest file
+  cp -a "${MANIFEST_2}.clean ${MANIFEST_2}"
   contrib/sign.sh \
       "${SIGNKEY}" \
-      "${SITEDIR}/output/images/sysupgrade/stable.manifest"
+      "${MANIFEST_2}"
 }
 
 upload() {
