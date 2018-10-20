@@ -269,11 +269,11 @@ sign() {
   MANIFEST_2="${SITEDIR}/output/images/sysupgrade/${AU_BRANCH_2}.manifest"
   
   # keep the clean manifest for later signing of NOC members and for the BRANCH file
-  cp -a "${MANIFEST} ${MANIFEST}.clean"
+  cp -a "${MANIFEST}" "${MANIFEST}.clean"
 
   # create clean 2nd manifest with AU_BRANCH_2 as BRANCH
-  cp -a "${MANIFEST}.clean ${MANIFEST_2}.clean"
-  sed -i 's/BRANCH='${BRANCH}'/BRANCH='${AU_BRANCH_2}'/g' "${MANIFEST_2}.clean"
+  cp -a "${MANIFEST}.clean" "${MANIFEST_2}.clean"
+  sed -i 's/BRANCH='"${BRANCH}"'/BRANCH='"${AU_BRANCH_2}"'/g' "${MANIFEST_2}.clean"
   
   # Add the signature to the manifest file
   contrib/sign.sh \
@@ -281,7 +281,7 @@ sign() {
       "${MANIFEST}"
 
   # Add the signature to the the 2nd manifest file
-  cp -a "${MANIFEST_2}.clean ${MANIFEST_2}"
+  cp -a "${MANIFEST_2}.clean" "${MANIFEST_2}"
   contrib/sign.sh \
       "${SIGNKEY}" \
       "${MANIFEST_2}"
