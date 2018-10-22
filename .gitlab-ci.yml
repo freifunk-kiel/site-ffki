@@ -3,7 +3,7 @@ variables:
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/TobleMiner/gluon.git
-  GLUON_BRANCH: feature-autoupdate-proxy
+  GLUON_BRANCH: feature-autoupdate-proxy-rebase
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
