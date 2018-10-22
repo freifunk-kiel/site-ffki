@@ -17,7 +17,7 @@ These builds are created automatically and will possibly break your devices
 without prior notice. Use only if you know what you are doing.
 
 ## release-candidate (rc)
-Built on the site-ffki branch `master`. These builds are initiated manually
+Built on the site-ffki branch `release-candidate`. These builds are initiated manually
 and should be more or less stable. However they are still in testing for a
 reason. Use this if you want to offer your devices as test-platforms for the
 upcoming stable releases.
@@ -33,20 +33,28 @@ You can always find the current release at https://freifunk.in-kiel.de/firmware.
 
 # Development
 
+## Validation
+
+You can validate your changes to this repository by calling the validate_site.sh file with
+
+    tests/validate_site.sh
+
 ## General process
 
-- Usually no commits should affect `master` directly.
+- Usually no commits should affect `release-candidate` directly.
 - Development for new firmwares takes place in the `nightly` branch.
 - Buildbot creates new firmwares from `nightly` as needed.
-- Release for new firmware is prepared through pull request from `nightly` to `master`
-- After consensus over pull request, new master is manually built in buildbot as release candidate.
-- Initial signature by developer allows update of rc nodes.
-- After testing, release candidate is promoted to stable and signed by developers.
+- Release for new firmware is prepared through pull request from `nightly` to `release-candidate`
+- After consensus over pull request, new `release-candidate` is manually built in Gitlab.
+- Initial signature by developer allows update of `rc` nodes.
+- After testing, `rc` is promoted to stable and signed by developers.
 
 ## Releases
 
 These Kieler Freifunk firmwares have been released:
 
+- 2016.2.7
+  - Based on Gluon 2016.2.7
 - 2016.2.6.2
   - Based on Gluon 2016.2.6
   - Deactivated legacy ibss meshing protocol
@@ -111,5 +119,16 @@ Or build with these commands:
     X86="x86-64 x86-generic x86-kvm_guest x86-xen_domu"
     WDR4900="mpc85xx-generic"
     for TARGET in ar71xx-generic ar71xx-mikrotik ar71xx-nand $WDR4900 $RASPBPI $BANANAPI $X86; do
-    	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~exp$D BROKEN=1;
+    	make GLUON_TARGET=$TARGET DEFAULT_GLUON_RELEASE=2016.2.1~rc$D BROKEN=1;
     done
+
+### Code Review
+
+Die Firmware wird in unserem GitLab gebaut. Dabei werden die Commit-Ids des 
+gluon Repositories und des Site-Konfigurations-Repositories in der Firmware 
+verankert. Diese Ids kann man in der Startseite der Erweiterten Einstellungen 
+im Config Mode ersehen. Die Git Id ist genau der commit auf dem die Firmware 
+gebaut wurde. Falls dort ein Plus (+) am Ende erscheint ist dies der 
+"Dirty"-Flag. Die Id wurde erzeugt mit
+
+    git describe --always --dirty=+
