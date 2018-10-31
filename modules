@@ -16,7 +16,7 @@ PACKAGES_SARGON_BRANCH=v2018.x
 
 # *miau!*
 PACKAGES_TSYS_REPO=https://github.com/TobleMiner/gluon-tsys
-PACKAGES_TSYS_COMMIT=4466caeb10ac562eefc846ed1ced260e876b5642
+PACKAGES_TSYS_COMMIT=a75e8842caba77a9271c527a0a423cd4a21a1cbf
 PACKAGES_TSYS_BRANCH=master
 
 # gluon-quickfix
