@@ -43,7 +43,8 @@ GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
-	haveged
+	haveged \
+	autoupdater-proxy
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
