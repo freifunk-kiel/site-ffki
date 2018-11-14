@@ -3,7 +3,7 @@
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
 #DEFAULT_GLUON_RELEASE := 2018.1
-DEFAULT_GLUON_RELEASE := 2018.1.1~ngly$(shell date '+%y%m%d')
+DEFAULT_GLUON_RELEASE := 2018.1.1~multi$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -21,6 +21,8 @@ GLUON_REGION ?= eu
 # enable generation of images for ath10k devices with 802.11s mode
 GLUON_WLAN_MESH ?= 11s
 
+GLUON_MULTIDOMAIN=1
+
 GLUON_LANGS ?= en de
 
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
@@ -37,7 +39,8 @@ GLUON_FEATURES := \
 	status-page \
 	web-advanced \
 	web-wizard \
-	autoupdater
+	autoupdater \
+	config-mode-domain-select
 
 GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
