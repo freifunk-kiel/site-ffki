@@ -29,17 +29,17 @@ CORES=$(($(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)+1))
 CORES="-j$CORES"
 
 # set this to "0" if you don't want to use make clean before make
-MAKE_CLEAN="1"
+MAKE_CLEAN="0"
 
 # set this to "" to get less more output
 VERBOSE="V=s"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic ar71xx-tiny ramips-mt76x8"
+ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-DEVICES=''
-#DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
+#DEVICES=''
+DEVICES='DEVICES=tp-link-tl-wr842n-nd-v3'
 
 cd ../
 if [ ! -d "site" ]; then
@@ -49,7 +49,7 @@ fi
 
 if [ "$(whoami)" == "root" ]; then
   echo "Make may not be run as root"
-  return
+  exit
 fi
 
 if [ -d ../openwrt/ ]; then
