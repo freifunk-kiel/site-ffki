@@ -31,7 +31,7 @@ GLUON_FEATURES := \
 	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
-	mesh-batman-adv-14 \
+	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radvd \
 	radv-filterd \
