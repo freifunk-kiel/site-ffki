@@ -2,8 +2,8 @@
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2018.1
-#DEFAULT_GLUON_RELEASE := 2018.1.1~rc$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1.3~rc$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -43,7 +43,8 @@ GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
-	haveged
+	haveged \
+	autoupdater-proxy
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
