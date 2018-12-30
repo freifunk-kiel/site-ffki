@@ -17,10 +17,14 @@ MAKEOPTS="V=s -j 4"
 # Default to build all Gluon targets if parameter -t is not set
 TARGETS="ar71xx-tiny ar71xx-generic x86-64 ar71xx-nand x86-generic x86-64"
 TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-#TARGETS+=" sunxi-cortexa7" # Banana Pi (M1)
+TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
 
 # BROKEN:
-#TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx ramips-mt7620 ramips-mt7621 x86-geode"
+TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709" # (raspberry Pi 1 und 2)
+TARGETS+=" ipq40xx" # (FitzBox 4040)
+TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
+TARGETS+=" x86-geode"
 TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
 TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
 TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
