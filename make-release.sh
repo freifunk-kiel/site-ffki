@@ -73,10 +73,10 @@ WRT1200AC="mvebu" # Linksys WRT1200AC BROKEN: No AP+IBSS+mesh support
 ONLY_11S="ramips-rt305x ramips-mt7621"    # BROKEN only
 
 ONLY_LEDE="ar71xx-tiny" # Support for for 841 on lede, needs less packages, so the 4MB will suffice!
-ONLY_LEDE+=" x86-geode ipq806x ramips-mt7628"
+ONLY_LEDE+=" x86-geode ipq806x ramips-mt76x8"
 NOT_LEDE="x86-kvm_guest" # The x86-kvm_guest target has been dropped from LEDE; x86-64 should be used
 
-BANANAPI="sunxi"                          # BROKEN: Untested, no sysupgrade support
+BANANAPI="sunxi-cortexa7"                          # BROKEN: Untested, no sysupgrade support
 MICROTIK="ar71xx-mikrotik"                # BROKEN: no sysupgrade support
 
 RASPBPI="brcm2708-bcm2708 brcm2708-bcm2709"
