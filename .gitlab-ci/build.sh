@@ -36,6 +36,7 @@ BUILD="snapshot"
 # Specify deployment server and user
 DEPLOYMENT_SERVER="10.116.250.1"
 DEPLOYMENT_USER="rsync"
+DEPLOYMENT_PATH="/opt/firmware/ffki"
 
 # Path to signing key
 SIGNKEY=""
@@ -294,7 +295,7 @@ upload() {
       mkdir \
           --parents \
           --verbose \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
 
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
@@ -309,19 +310,19 @@ upload() {
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
       "${SITEDIR}/output/images/" \
-      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}"
+      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
-          "/opt/firmware/ffki/${TARGET}/"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET}/${RELEASE}-${BUILD}/factory" \
-          "/opt/firmware/ffki/${TARGET}/"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
 prepare() {
