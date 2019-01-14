@@ -26,9 +26,19 @@ for c in $CONFIGS; do
   if [ "$?" == 1 ]; then
     exit 1
   else
-    echo "OK: $c"
+    echo "Syntak OK"
+    d="$(basename $c)"
+    d=${d%.conf}
+    echo "check if $d is in domain_names"
+    grep "$d" $c
+    if [ "$?" == 1 ]; then
+      echo "file name not present in conf file"
+      exit 1
+    fi
+    echo "OK"
   fi
 done
+
 #GLUON_SITEDIR="./" GLUON_SITE_CONFIG="" lua5.1 tests/site_config.lua
 
 echo "####### validating $P/make-release.sh ..."
