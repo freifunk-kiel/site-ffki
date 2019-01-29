@@ -96,6 +96,7 @@ while getopts b:c:dhm:n:t:w:s: flag; do
           COMMAND="${OPTARG}"
           ;;
         upload)
+          set -x
           COMMAND="${OPTARG}"
           ;;
         prepare)
