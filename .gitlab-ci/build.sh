@@ -293,7 +293,7 @@ upload() {
 
   # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
   echo "Compressing images..."
-  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output" factory sysupgrade
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade
 
   # Copy images to server
   echo "Uploading images..."
