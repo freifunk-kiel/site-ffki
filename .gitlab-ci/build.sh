@@ -309,8 +309,7 @@ upload() {
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
-     tar -xJf -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/" \
-          "images.txz"
+     tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/"
 
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
