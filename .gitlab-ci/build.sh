@@ -269,6 +269,7 @@ sign() {
 }
 
 upload() {
+  set -x
   echo "--- Upload Gluon Firmware Images and Manifest"
 
   # Build the ssh command to use
@@ -290,17 +291,27 @@ upload() {
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
 
+  # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
+  echo "Compressing images..."
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output" factory sysupgrade
+
   # Copy images to server
+  echo "Uploading images..."
   rsync \
       --verbose \
-      --recursive \
-      --compress \
       --progress \
-      --links \
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
-      "${SITEDIR}/output/images/" \
+      "${SITEDIR}/output/images.txz"
       "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
+
+  echo "Uncompressing images..."
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+     tar -xJf -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/" \
+          "images.txz"
+
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
