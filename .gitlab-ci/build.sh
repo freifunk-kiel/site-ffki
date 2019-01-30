@@ -302,7 +302,7 @@ upload() {
       --progress \
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
-      "${SITEDIR}/output/images.txz"
+      "${SITEDIR}/output/images.txz" \
       "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
 
   echo "Uncompressing images..."
