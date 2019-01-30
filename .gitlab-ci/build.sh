@@ -96,7 +96,6 @@ while getopts b:c:dhm:n:t:w:s: flag; do
           COMMAND="${OPTARG}"
           ;;
         upload)
-          set -x
           COMMAND="${OPTARG}"
           ;;
         prepare)
@@ -152,6 +151,13 @@ if [[ "${#}" > 0 ]]; then
   exit ${E_ILLEGAL_ARGS}
 fi
 
+# Set branch name
+if [[ -z "${BRANCH}" ]]; then
+  BRANCH=$(git symbolic-ref -q HEAD)
+  BRANCH=${BRANCH##refs/heads/}
+  BRANCH=${BRANCH:-HEAD}
+fi
+
 # Set command
 if [[ -z "${COMMAND}" ]]; then
   echo "Error: Build command missing."
@@ -164,17 +170,12 @@ if [[ -z "${RELEASE}" ]]; then
   RELEASE=$(cat "${SITEDIR}/release")
 fi
 
+# Normalize the branch name
+BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
+BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
+
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
-
-# Name of the autoupdater branch that is selected on the node: 'rc', 'nightly', 'next' or 'stable'
-BRANCH="stable"
-
-# key of the autoupdater branch for the name and BRANCH of the 2nd manifest: 'rc', 'nightly', 'next' or 'stable'
-AU_BRANCH_2="rc"
-
-# Determine upload target prefix: 'release-candidate', 'nightly' or 'next'
-TARGET_DIR="release-candidate"
 
 # Number of days that may pass between releasing an updating
 PRIORITY=1
@@ -266,27 +267,11 @@ EOF
 
 sign() {
   echo "--- Sign Gluon Firmware Build"
-  
-  MANIFEST="${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
-  MANIFEST_2="${SITEDIR}/output/images/sysupgrade/${AU_BRANCH_2}.manifest"
-  
-  # keep the clean manifest for later signing of NOC members and for the BRANCH file
-  cp -a "${MANIFEST}" "${MANIFEST}.clean"
 
-  # create clean 2nd manifest with AU_BRANCH_2 as BRANCH
-  cp -a "${MANIFEST}.clean" "${MANIFEST_2}.clean"
-  sed -i 's/BRANCH='"${BRANCH}"'/BRANCH='"${AU_BRANCH_2}"'/g' "${MANIFEST_2}.clean"
-  
-  # Add the signature to the manifest file
+  # Add the signature to the local manifest
   contrib/sign.sh \
       "${SIGNKEY}" \
-      "${MANIFEST}"
-
-  # Add the signature to the the 2nd manifest file
-  cp -a "${MANIFEST_2}.clean" "${MANIFEST_2}"
-  contrib/sign.sh \
-      "${SIGNKEY}" \
-      "${MANIFEST_2}"
+      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
 }
 
 upload() {
@@ -295,6 +280,9 @@ upload() {
   # Build the ssh command to use
   SSH="ssh"
   SSH="${SSH} -o stricthostkeychecking=no -v"
+
+  # Determine upload target prefix
+  TARGET="${BRANCH}"
 
   # Create the target directory on server
   ${SSH} \
@@ -319,14 +307,12 @@ upload() {
       --rsh="${SSH}" \
       "${SITEDIR}/output/images/" \
       "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
-
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
-
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
@@ -338,26 +324,29 @@ upload() {
 prepare() {
   echo "--- Prepare directory for upload"
 
+  # Determine upload target prefix
+  TARGET="${BRANCH}"
+
   # Create the target directory on server
   mkdir \
     --parents \
     --verbose \
-    "${SITEDIR}/output/firmware/${TARGET_DIR}"
+    "${SITEDIR}/output/firmware/${TARGET}"
 
   # Copy images to directory
   mv \
     --verbose \
     "${SITEDIR}/output/images" \
-    "${SITEDIR}/output/firmware/${TARGET_DIR}/${RELEASE}-${BUILD}"
+    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}-${BUILD}"
 
-  # Link latest upload in target directory to 'current'
+  # Link latest upload in target to 'current'
   cd "${SITEDIR}/output"
   ln \
       --symbolic \
       --force \
       --no-target-directory \
       "${RELEASE}-${BUILD}" \
-      "firmware/${TARGET_DIR}/current"
+      "firmware/${TARGET}/current"
 }
 
 (
