@@ -69,8 +69,8 @@ GLUON_SITE_PACKAGES += \
 #	gluon-alt-esc-provider
 
 # from ffm-packages
-GLUON_SITE_PACKAGES += \
-	ffffm-button-bind
+# GLUON_SITE_PACKAGES += \
+#	ffffm-button-bind
 
 #	some models and targets have to be excluded:
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
