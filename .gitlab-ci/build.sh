@@ -146,7 +146,7 @@ shift $((OPTIND - 1));
 
 # Check if there are remaining arguments
 if [[ "${#}" > 0 ]]; then
-  echo "Error: To many arguments: ${*}"
+  echo "Error: Too many arguments: ${*}"
   usage
   exit ${E_ILLEGAL_ARGS}
 fi
