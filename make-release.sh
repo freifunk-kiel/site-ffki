@@ -15,8 +15,8 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-#VERSION=${3:-"2018.1.1~rc$(date '+%y%m%d%H%M')"}
-VERSION=${3:-"2018.1.1"}
+#VERSION=${3:-"2018.2.0.0~rc$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.2.0.0"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -26,7 +26,8 @@ SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 BROKEN="BROKEN=1"
 
 # set num cores +1
-CORES=$(($(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)+1))
+#CORES=$(($(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)+1))
+CORES=1
 CORES="-j$CORES"
 
 # set this to "0" if you don't want to use make clean before make
@@ -35,9 +36,11 @@ MAKE_CLEAN="1"
 # set this to "" to get less more output
 VERBOSE="V=s"
 
-#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
+#ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny" or more
+#examples:
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic ar71xx-tiny"
+#ONLY_TARGET="ar71xx-generic ar71xx-tiny"
+ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
 DEVICES=''
 #DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
