@@ -25,11 +25,11 @@ GLUON_LANGS ?= en de
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
 GLUON_FEATURES := \
 	web-private-wifi \
-	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
 	mesh-batman-adv-14 \
 	mesh-vpn-fastd \
+	web-mesh-vpn-fastd \
 	radvd \
 	radv-filterd \
 	respondd \
