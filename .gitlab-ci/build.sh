@@ -268,7 +268,7 @@ build() {
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
        GLUON_RELEASE="${RELEASE}-${BUILD}" \
-       GLUON_BRANCH="${AU_BRANCH}" \
+       GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
 
