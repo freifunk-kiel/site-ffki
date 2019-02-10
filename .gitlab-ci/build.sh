@@ -272,6 +272,9 @@ build() {
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
 
+  cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
+     "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
+
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
