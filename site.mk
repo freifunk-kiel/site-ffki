@@ -59,14 +59,14 @@ GLUON_SITE_PACKAGES += \
 
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
-	gluon-config-mode-ppa \
+	gluon-config-mode-ppa
 #	gluon-config-mode-contact-info-anonymous-hint
 
 
 # from T-X alt-esc package:
 #GLUON_SITE_PACKAGES += \
-	gluon-alt-esc-client \
-	gluon-alt-esc-provider
+#	gluon-alt-esc-client \
+#	gluon-alt-esc-provider
 
 # from ffm-packages
 #GLUON_SITE_PACKAGES += \
