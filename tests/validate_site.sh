@@ -2,8 +2,8 @@
 set -uo pipefail
 
 # validate_site.sh checks if the site.conf is valid json
-GLUON_REPO="https://github.com/freifunk-gluon/gluon"
-GLUON_BRANCH='master'
+GLUON_REPO="https://github.com/rubo77/gluon"
+GLUON_BRANCH='ssid-changer'
 GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
 GLUON_PACKAGES_BRANCH='master'
 

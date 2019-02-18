@@ -55,10 +55,10 @@ GLUON_SITE_PACKAGES += \
 GLUON_SITE_PACKAGES += \
 	gluon-quickfix
 
-# from https://github.com/Freifunk-Nord/gluon-ssid-changer:
+# from https://github.com/rubo77/gluon/tree/ssid-changer
 GLUON_SITE_PACKAGES += \
-	gluon-ssid-changer
-
+	gluon-offline-ssid
+	
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-ppa \
