@@ -57,7 +57,8 @@ GLUON_SITE_PACKAGES += \
 
 # from https://github.com/rubo77/gluon/tree/ssid-changer
 GLUON_SITE_PACKAGES += \
-	gluon-offline-ssid
+	gluon-offline-ssid \
+	gluon-web-offline-ssid
 	
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
