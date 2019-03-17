@@ -159,7 +159,7 @@ fi
 
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
-  RELEASE=$(cat "${SITEDIR}/release")
+  RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
 fi
 
 # Normalize the branch name
@@ -177,7 +177,7 @@ update() {
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
+       GLUON_RELEASE="${RELEASE}" \
        GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        update
@@ -189,7 +189,7 @@ clean() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
+         GLUON_RELEASE="${RELEASE}" \
          GLUON_BRANCH="${BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
@@ -203,7 +203,7 @@ download() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
+         GLUON_RELEASE="${RELEASE}" \
          GLUON_BRANCH="${BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
@@ -221,7 +221,7 @@ build() {
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
+             GLUON_RELEASE="${RELEASE}" \
              GLUON_BRANCH="${BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
              GLUON_TARGET="${TARGET}"
@@ -231,7 +231,7 @@ build() {
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
-             GLUON_RELEASE="${RELEASE}-${BUILD}" \
+             GLUON_RELEASE="${RELEASE}" \
              GLUON_BRANCH="${BRANCH}" \
              GLUON_TARGET="${TARGET}"
       ;;
@@ -242,7 +242,7 @@ build() {
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
+       GLUON_RELEASE="${RELEASE}" \
        GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
@@ -286,7 +286,7 @@ upload() {
       mkdir \
           --parents \
           --verbose \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
@@ -303,25 +303,25 @@ upload() {
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
       "${SITEDIR}/output/images.txz" \
-      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}"
+      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
   echo "Uncompressing images..."
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
-     tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/"
+     tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/"
 
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/sysupgrade" \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/sysupgrade" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}-${BUILD}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
@@ -341,7 +341,7 @@ prepare() {
   mv \
     --verbose \
     "${SITEDIR}/output/images" \
-    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}-${BUILD}"
+    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}"
 
   # Link latest upload in target to 'current'
   cd "${SITEDIR}/output"
@@ -349,7 +349,7 @@ prepare() {
       --symbolic \
       --force \
       --no-target-directory \
-      "${RELEASE}-${BUILD}" \
+      "${RELEASE}" \
       "firmware/${TARGET}/current"
 }
 
