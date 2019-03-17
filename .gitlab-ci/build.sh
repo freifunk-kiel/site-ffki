@@ -14,9 +14,6 @@
 # Default make options
 MAKEOPTS="-j 4"
 
-# Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x" # ar71xx-nand ar71xx-mikrotik mpc85xx-generic x86-generic x86-64"
-
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
 
@@ -148,6 +145,27 @@ if [[ -z "${BRANCH}" ]]; then
   BRANCH=$(git symbolic-ref -q HEAD)
   BRANCH=${BRANCH##refs/heads/}
   BRANCH=${BRANCH:-HEAD}
+fi
+
+# Default to build branch specific targets if parameter -t is not set 
+if [[ -z ${TARGETS+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x"
+      ;;
+    next)
+      TARGETS="ar71xx-tiny ar71xx-generic"
+      #TARGETS+=" x86-64 x86-generic x86-64" # (VMs)
+      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716) 
+      #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
+      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)n
+    *)
+      # Default to all targets
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
+      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+    ;;
+  esac
 fi
 
 # Set command
