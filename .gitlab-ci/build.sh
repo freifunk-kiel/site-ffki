@@ -32,10 +32,13 @@ SIGNKEY=""
 E_ILLEGAL_ARGS=126
 
 # Help function used in error messages and -h option
+
 usage() {
   echo ""
   echo "Build script for Freifunk-Fulda gluon firmware."
   echo ""
+  echo "-a: Autoupdater branch name (e.g. development)"
+  echo "    Default: branch (see -b)"
   echo "-b: Firmware branch name (e.g. development)"
   echo "    Default: current git branch"
   echo "-c: Build command: update | clean | download | build | sign | upload | prepare"
@@ -47,6 +50,8 @@ usage() {
   echo "    Default: \"${BUILD}\""
   echo "-t: Gluon targets architectures to build"
   echo "    Default: \"${TARGETS}\""
+  echo "-u: Upload target"
+  echo "    Default: branch (see -b)"
   echo "-r: Release number (optional)"
   echo "    Default: fetched from release file"
   echo "-w: Path to site directory"
@@ -62,8 +67,11 @@ if [[ "${#}" == 0 ]]; then
 fi
 
 # Evaluate arguments for build script.
-while getopts b:c:dhm:n:t:w:s: flag; do
+while getopts a:b:c:dhm:n:t:u:w:s: flag; do
   case ${flag} in
+    a)
+        AU_BRANCH="${OPTARG}"
+        ;;
     b)
         BRANCH="${OPTARG}"
         ;;
@@ -113,6 +121,9 @@ while getopts b:c:dhm:n:t:w:s: flag; do
     t)
       TARGETS="${OPTARG}"
       ;;
+    u)
+      UPLOAD_TARGET="${OPTARG}"
+      ;;
     r)
       RELEASE="${OPTARG}"
       ;;
@@ -135,7 +146,7 @@ shift $((OPTIND - 1));
 
 # Check if there are remaining arguments
 if [[ "${#}" > 0 ]]; then
-  echo "Error: To many arguments: ${*}"
+  echo "Error: Too many arguments: ${*}"
   usage
   exit ${E_ILLEGAL_ARGS}
 fi
@@ -169,6 +180,14 @@ if [[ -z ${TARGETS+x} ]] ; then
   esac
 fi
 
+if [[ -z "$AU_BRANCH" ]]; then
+  AU_BRANCH="$BRANCH"
+fi
+
+if [[ -z "$UPLOAD_TARGET" ]]; then
+  UPLOAD_TARGET="$BRANCH"
+fi
+
 # Set command
 if [[ -z "${COMMAND}" ]]; then
   echo "Error: Build command missing."
@@ -197,7 +216,7 @@ update() {
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
        GLUON_RELEASE="${RELEASE}" \
-       GLUON_BRANCH="${BRANCH}" \
+       GLUON_BRANCH="${AU_BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        update
 }
@@ -209,7 +228,7 @@ clean() {
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
          GLUON_RELEASE="${RELEASE}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          clean
@@ -223,7 +242,7 @@ download() {
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
          GLUON_RELEASE="${RELEASE}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          download
@@ -233,15 +252,13 @@ download() {
 build() {
   for TARGET in ${TARGETS}; do
     echo "--- Build Gluon Images for target: ${TARGET}"
-    case "${BRANCH}" in
-      stable| \
-      testing| \
-      development)
+    case "${AU_BRANCH}" in
+      stable)
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
              GLUON_RELEASE="${RELEASE}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
              GLUON_TARGET="${TARGET}"
         ;;
@@ -251,7 +268,7 @@ build() {
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
              GLUON_RELEASE="${RELEASE}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_TARGET="${TARGET}"
       ;;
     esac
@@ -265,6 +282,9 @@ build() {
        GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
+
+  cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
+     "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
 
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
@@ -296,7 +316,7 @@ upload() {
   SSH="${SSH} -o stricthostkeychecking=no -v"
 
   # Determine upload target prefix
-  TARGET="${BRANCH}"
+  TARGET="${UPLOAD_TARGET}"
 
   # Create the target directory on server
   ${SSH} \
@@ -348,7 +368,7 @@ prepare() {
   echo "--- Prepare directory for upload"
 
   # Determine upload target prefix
-  TARGET="${BRANCH}"
+  TARGET="${UPLOAD_TARGET}"
 
   # Create the target directory on server
   mkdir \
