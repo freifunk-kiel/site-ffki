@@ -6,19 +6,23 @@ import yaml
 import os
 
 @click.command()
-@click.argument("signkey",type=click.File(mode="r"))
 @click.argument("branch",type=click.STRING)
-def cli(signkey,branch):
+@click.argument("signkey",type=click.File(mode="r"),default=None)
+def cli(branch,signkey):
+    if signkey is not None:
+        signkeystr = signkey.read()
+    else:
+        signkeystr = ""
     with open(".gitlab-ci.yml","r") as f:
         document = yaml.load(f)
         command = ';'.join(document['build']['script'])
         env = { "CI_PIPELINE_ID": "9999"
               , "CI_COMMIT_REF_NAME": branch
-              , "SIGNING_KEY": signkey.read()
+              , "SIGNING_KEY": signkeystr
               }
+        env.update(document['variables'])
         env.update(os.environ)
         res = subprocess.run(command,shell=True,env=env)
-        print(res)
 
 if __name__ == "__main__":
     cli()
