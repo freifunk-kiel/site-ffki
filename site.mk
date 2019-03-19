@@ -151,6 +151,10 @@ USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
+# extra packages for fat clients
+FAT_PACKAGES := \
+	tcpdump
+
 # add addition network drivers and usb stuff only to targes where disk space does not matter
 ifeq ($(GLUON_TARGET),x86-generic)
 	# support the USB stack on x86 devices
@@ -161,7 +165,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
 		$(USB_PACKAGES_GPS) \
-		$(USB_X86_GENERIC_NETWORK_MODULES)
+		$(USB_X86_GENERIC_NETWORK_MODULES) \
+		$(FAT_PACKAGES)
 endif
 
 # use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163
