@@ -220,7 +220,16 @@ BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 COMMIT="$(git describe --always --dirty)"
 
 # Number of days that may pass between releasing an updating
-PRIORITY=1
+if [[ -z ${PRIORITY+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      PRIORITY=0
+      ;;
+    *)
+      PRIORITY=1
+      ;;
+  esac
+fi
 
 update() {
   echo "--- Update Gluon Dependencies"
