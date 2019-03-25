@@ -154,8 +154,8 @@ USB_PACKAGES_STORAGE += \
 FAT_PACKAGES := \
 	tcpdump
 
-# add addition network drivers and usb stuff only to targes where disk space does not matter
-ifeq ($(GLUON_TARGET),x86-generic)
+# add addition network drivers and usb stuff only to targets where disk space does not matter
+ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-geode x86-64)) 
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
