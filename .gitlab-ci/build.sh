@@ -225,9 +225,7 @@ COMMIT="$(git describe --always --dirty)"
 # Number of days that may pass between releasing an updating
 if [[ -z ${PRIORITY+x} ]] ; then
   case "${BRANCH}" in
-    nightly)
-    multidomain)
-    next)
+    nightly|multidomain|next)
       PRIORITY=0
       ;;
     *)
