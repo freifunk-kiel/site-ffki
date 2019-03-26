@@ -14,19 +14,6 @@
 # Default make options
 MAKEOPTS="-j 4"
 
-# Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny" #  most targets
-#TARGETS=$TARGETS" x86-64 ar71xx-nand x86-generic"
-#TARGETS=$TARGETS" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-
-# BROKEN:
-#TARGETS=$TARGETS" ramips-rt305x" # BROKEN: Fonera
-#TARGETS=$TARGETS" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
-#TARGETS=$TARGETS" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
-#TARGETS=$TARGETS" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-#TARGETS=$TARGETS" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
-#TARGETS=$TARGETS" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
-
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
 
@@ -169,6 +156,43 @@ if [[ -z "${BRANCH}" ]]; then
   BRANCH=$(git symbolic-ref -q HEAD)
   BRANCH=${BRANCH##refs/heads/}
   BRANCH=${BRANCH:-HEAD}
+fi
+
+# Default to build branch specific targets if parameter -t is not set 
+if [[ -z ${TARGETS+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x"
+      ;;
+    multidomain)
+      TARGETS="ar71xx-generic ar71xx-tiny"
+      ;;
+    next)
+      TARGETS="ar71xx-tiny ar71xx-generic"
+      #TARGETS+=" x86-64 x86-generic x86-64" # (VMs)
+      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
+      #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
+      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
+
+      # BROKEN:
+      #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709" # (raspberry Pi 1 und 2)
+      #TARGETS+=" ipq40xx" # (FitzBox 4040)
+      #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
+      #TARGETS+=" x86-geode"
+      #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
+      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
+      #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
+      #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
+      ;;
+    *)
+      # Default to all targets
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
+      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+    ;;
+  esac
 fi
 
 if [[ -z "$AU_BRANCH" ]]; then
