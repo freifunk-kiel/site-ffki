@@ -40,7 +40,8 @@ GLUON_FEATURES := \
 	web-advanced \
 	web-wizard \
 	autoupdater \
-	config-mode-domain-select
+	config-mode-domain-select \
+	scheduled-domain-switch
 
 GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
