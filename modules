@@ -11,12 +11,12 @@ PACKAGES_FFKI_BRANCH=2018.1.x
 
 # ddhcpd and roamguide
 PACKAGES_SARGON_REPO=https://github.com/sargon/gluon-sargon.git
-PACKAGES_SARGON_COMMIT=a6c43ace4f6161f257e6c09453b04367aa86d6f6
+PACKAGES_SARGON_COMMIT=bf7fdddbeaae8cfb6379ce97b144ed7c4efbbe49
 PACKAGES_SARGON_BRANCH=master
 
 # *miau!*
 PACKAGES_TSYS_REPO=https://github.com/TobleMiner/gluon-tsys
-PACKAGES_TSYS_COMMIT=6515a439ff9dec253e4a6582842953e5fc27948c
+PACKAGES_TSYS_COMMIT=e704dc0500590ae7209ad3cba96250c2b1aa2d8f
 PACKAGES_TSYS_BRANCH=master
 
 # gluon-quickfix
