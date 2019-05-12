@@ -295,6 +295,9 @@ build() {
   cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
 
+  # Prevent premature downloads
+  echo "deny from all" > "${SITEDIR}/output/images/sysupgrade/.htaccess"
+
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
