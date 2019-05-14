@@ -74,6 +74,9 @@ while getopts a:b:c:dhm:n:t:u:w:s: flag; do
         ;;
     b)
         BRANCH="${OPTARG}"
+	if [ "${BRANCH}" == "release-candidate" ] ; then
+          BRANCH="rc"
+	fi
         ;;
     c)
       case "${OPTARG}" in
