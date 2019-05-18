@@ -122,7 +122,8 @@ These Kieler Freifunk firmwares have been released:
 
 ## Building
 
-You can easily create your own experimental firmware with the build script `make-release.sh`
+You can easily create your own experimental firmware with the build script `make-release`,
+which itself needs following python modules: click and pyyaml
 
 Or build with these commands:
 

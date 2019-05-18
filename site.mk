@@ -29,7 +29,7 @@ GLUON_FEATURES := \
 	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
-	mesh-batman-adv-14 \
+	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radvd \
 	radv-filterd \
@@ -150,8 +150,12 @@ USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
-# add addition network drivers and usb stuff only to targes where disk space does not matter
-ifeq ($(GLUON_TARGET),x86-generic)
+# extra packages for fat clients
+FAT_PACKAGES := \
+	tcpdump
+
+# add addition network drivers and usb stuff only to targets where disk space does not matter
+ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-geode x86-64)) 
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
@@ -160,7 +164,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
 		$(USB_PACKAGES_GPS) \
-		$(USB_X86_GENERIC_NETWORK_MODULES)
+		$(USB_X86_GENERIC_NETWORK_MODULES) \
+		$(FAT_PACKAGES)
 endif
 
 # use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163
