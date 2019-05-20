@@ -1,11 +1,26 @@
-Änderungen mit Firmwareversion 2017.1.8 basierend auf Gluon 2017.1.8
-====================================================================
+Änderungen mit Firmwareversion 2018.1.4-667 basierend auf Gluon 2018.1.x (c3eaef9)
+==================================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
 
- * Kontaktfeld ist nicht mehr Pflicht
+* Based on Gluon 2018.1.4 + c3eaef90 + Fonera Patch
+* Switch from autoupdater to [MIAU](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater) (Mesh-Independent-AUtoupdater)
+* Roamguide
+  * Removed unused script running roamguide in a loop
+  * Fixed locking
+  * Added support for two WLAN AP interfaces
+* ddhcpd
+  * Updated to r2
+  * Switched from spare block to spare lease count
+  * Integrated enable flag into gluon config and site.conf
+* New packages
+  * [autoupdater-proxy](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater-proxy)
+* Patches
+  * Added patch injection system into gluon build system
+  * Support for Fonera 2.0n devices
 
+  
 Offizielle Changelogs zum nachlesen:
 ------------------------------------
 
@@ -17,7 +32,58 @@ Offizielle Changelogs zum nachlesen:
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.6.html
 * https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.8.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.2.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.3.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.4.html
+
+<br>
+
+Änderungen mit Firmwareversion 2018.1.1-461 basierend auf Gluon 2018.1.x (e107415)
+==================================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Der ddhcpd [1] verteilt IP Adressen an Clients direkt auf dem Knoten, lokal auch wenn der Knoten nicht mit dem Internet verbunden ist und ohne die Gateways zu belasten
+ * Einige Filter dämmen die Broadcasts im Netz ein bisschen ein und haben das Rauschen im Netz reduziert.
+ * Kontaktfeld ist nicht mehr Pflicht
+ * Ein SSH Login ist nur noch per SSH-Key mögllich
+ * Viele neue unterstütze Router Modelle
+ * Der gluon-ssid-changer [2] schaltet die SSID eines Routers jetzt auf offline, wenn dieser eine Stunde offline ist und man kann diesen jetzt im Config mode an- und ausschalten (default an).
+ * Die WiFi-Reset Funktion des WiFi Buttons [3] ermittelt jetzt auch das nächste Gateway neu. und hat eine Option, das Mesh-VPN für 5h zu deaktivieren.
+ 
+ Bekannte Fehler:
+ 
+ * Es gibt einen Fehler, der dafür sorgt dass der roamguide nicht läuft.
+
+ - [1] - https://github.com/sargon/ddhcpd
+ - [2] - https://github.com/Freifunk-Nord/gluon-ssid-changer/
+ - [3] - https://github.com/rubo77/ffm-packages/tree/2018.1.x/ffffm-button-bind
+ 
+<br>
+
+Änderungen mit Firmwareversion 2018.1 basierend auf Gluon 2018.1
+================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Neu: gluon-alt-esc [1] ist leider noch nicht verfügbar als Paket für Gluon 2018.x.
+ 
+ - [1] - https://github.com/rubo77/gluon-alt-esc
+  
+<br>
+
+Änderungen mit Firmwareversion 2017.1.8 basierend auf Gluon 2017.1.8
+====================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Kontaktfeld ist nicht mehr Pflicht
 
 <br>
 
@@ -41,10 +107,10 @@ Freifunk Kiel spezifische Änderungen:
 
  * quickfix [1] verbesserung: der Grund für die ersten 5 Reboots wird jetzt reboot-sicher geloggt
  * Neu: Bei WR1043ND und WR740/841/2N/ND kann ist der WiFi Button deaktiviert und man kann diverse Funktionen im Config mode aktivieren [2]
- * Neu: gluon-ssid-changer 3] schaltet die SSID eines Routers auf "FF_Offline_Knotenname" wenn dieser 24h offline ist
+ * Neu: gluon-ssid-changer [3] schaltet die SSID eines Routers auf "FF_Offline_Knotenname" wenn dieser 24h offline ist
 
  - [1] - https://github.com/Freifunk-Nord/eulenfunk-packages/tree/v2016.2.x/gluon-quickfix
- - [2] - https://github.com/rubo77/ffm-packages/tree/master/ffffm-button-bind
+ - [2] - https://github.com/rubo77/ffm-packages/tree/2016.2.x/ffffm-button-bind
  - [3] - https://github.com/Freifunk-Nord/gluon-ssid-changer/
 
 Release Note: https://github.com/freifunk-kiel/site-ffki/releases/tag/v2016.2.7
