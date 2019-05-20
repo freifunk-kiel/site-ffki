@@ -1,3 +1,46 @@
+Änderungen mit Firmwareversion 2018.1.4-667 basierend auf Gluon 2018.1.x (c3eaef9)
+==================================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+* Based on Gluon 2018.1.4 + c3eaef90 + Fonera Patch
+* Switch from autoupdater to [MIAU](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater) (Mesh-Independent-AUtoupdater)
+* Roamguide
+  * Removed unused script running roamguide in a loop
+  * Fixed locking
+  * Added support for two WLAN AP interfaces
+* ddhcpd
+  * Updated to r2
+  * Switched from spare block to spare lease count
+  * Integrated enable flag into gluon config and site.conf
+* New packages
+  * [autoupdater-proxy](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater-proxy)
+* Patches
+  * Added patch injection system into gluon build system
+  * Support for Fonera 2.0n devices
+
+  
+Offizielle Changelogs zum nachlesen:
+------------------------------------
+
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.2.html
+* https://gluon.readthedocs.io/en/latest/releases/v2017.1.3.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.4.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.6.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
+* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.8.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.1.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.2.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.3.html
+* https://gluon.readthedocs.io/en/latest/releases/v2018.1.4.html
+
+<br>
+
 Änderungen mit Firmwareversion 2018.1.1-461 basierend auf Gluon 2018.1.x (e107415)
 ==================================================================================
 
@@ -19,22 +62,7 @@ Freifunk Kiel spezifische Änderungen:
  - [1] - https://github.com/sargon/ddhcpd
  - [2] - https://github.com/Freifunk-Nord/gluon-ssid-changer/
  - [3] - https://github.com/rubo77/ffm-packages/tree/2018.1.x/ffffm-button-bind
-   
-Offizielle Changelogs zum nachlesen:
-------------------------------------
-
-* https://gluon.readthedocs.io/en/latest/releases/v2017.1.html
-* https://gluon.readthedocs.io/en/latest/releases/v2017.1.1.html
-* https://gluon.readthedocs.io/en/latest/releases/v2017.1.2.html
-* https://gluon.readthedocs.io/en/latest/releases/v2017.1.3.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.4.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.5.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.6.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.7.html
-* https://gluon.readthedocs.io/en/v2017.1.x/releases/v2017.1.8.html
-* https://gluon.readthedocs.io/en/latest/releases/v2018.1.html
-* https://gluon.readthedocs.io/en/latest/releases/v2018.1.1.html
-
+ 
 <br>
 
 Änderungen mit Firmwareversion 2018.1 basierend auf Gluon 2018.1
@@ -49,6 +77,15 @@ Freifunk Kiel spezifische Änderungen:
   
 <br>
 
+Änderungen mit Firmwareversion 2017.1.8 basierend auf Gluon 2017.1.8
+====================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+ * Kontaktfeld ist nicht mehr Pflicht
+
+<br>
 
 Änderungen mit Firmwareversion 2017.1.7 basierend auf Gluon 2017.1.7
 ====================================================================
