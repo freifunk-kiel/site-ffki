@@ -53,6 +53,25 @@ You can validate your changes to this repository by calling the validate_site.sh
 
 These Kieler Freifunk firmwares have been released:
 
+- 2018.1.4
+  - Date: 2019-02-11
+  - Based on Gluon 2018.1.4
+  - Switch from autoupdater to [MIAU](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater) (Mesh-Independent-AUtoupdater)
+  - Roamguide
+    - Removed unused script running roamguid in a loop
+    - Fixed locking
+    - Added support for two WLAN AP interfaces
+  - ddhcpd
+    - Updated to r2
+    - Switched from spare block to spare lease count
+    - Integrated enable flag into gluon config and site.conf
+  - New packages
+    - [autoupdater-proxy](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater-proxy)
+  - Patches
+    - Added patch injection system into gluon build system
+    - Support for Fonera 2.0n devices
+- 2018.1.1
+  - Based on Gluon 2018.1.1
 - 2016.2.7
   - Based on Gluon 2016.2.7
 - 2016.2.6.2
@@ -103,7 +122,8 @@ These Kieler Freifunk firmwares have been released:
 
 ## Building
 
-You can easily create your own experimental firmware with the build script `make-release.sh`
+You can easily create your own experimental firmware with the build script `make-release`,
+which itself needs following python modules: click and pyyaml
 
 Or build with these commands:
 

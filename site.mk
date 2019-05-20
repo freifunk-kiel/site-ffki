@@ -2,8 +2,8 @@
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-DEFAULT_GLUON_RELEASE := 2018.1
-#DEFAULT_GLUON_RELEASE := 2018.1.1~rc$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2018.1
+DEFAULT_GLUON_RELEASE := 2018.1.4~rc$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -29,7 +29,7 @@ GLUON_FEATURES := \
 	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
-	mesh-batman-adv-14 \
+	mesh-batman-adv-15 \
 	mesh-vpn-fastd \
 	radvd \
 	radv-filterd \
@@ -43,7 +43,8 @@ GLUON_SITE_PACKAGES := \
 	respondd-module-airtime \
 	iwinfo \
 	iptables \
-	haveged
+	haveged \
+	autoupdater-proxy
 
 # from sargon:
 GLUON_SITE_PACKAGES += \
@@ -149,8 +150,12 @@ USB_PACKAGES_STORAGE += \
 	gluon-usb-media \
 	gluon-config-mode-usb-media
 
-# add addition network drivers and usb stuff only to targes where disk space does not matter
-ifeq ($(GLUON_TARGET),x86-generic)
+# extra packages for fat clients
+FAT_PACKAGES := \
+	tcpdump
+
+# add addition network drivers and usb stuff only to targets where disk space does not matter
+ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
 	# support the USB stack on x86 devices
 	# and add a few common USB NICs
 	GLUON_SITE_PACKAGES += \
@@ -159,7 +164,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 		$(USB_PACKAGES_TETHERING) \
 		$(USB_PACKAGES_3G) \
 		$(USB_PACKAGES_GPS) \
-		$(USB_X86_GENERIC_NETWORK_MODULES)
+		$(USB_X86_GENERIC_NETWORK_MODULES) \
+		$(FAT_PACKAGES)
 endif
 
 # use the target names of https://github.com/freifunk-gluon/gluon/blob/master/targets/ar71xx-generic#L163

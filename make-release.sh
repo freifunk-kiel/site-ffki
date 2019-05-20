@@ -15,8 +15,8 @@ set -u
 set -e
 
 # if version is unset, will use the default version from site.mk
-#VERSION=${3:-"2018.1.1~rc$(date '+%y%m%d%H%M')"}
-VERSION=${3:-"2018.1.1"}
+#VERSION=${3:-"2018.1.3~rc$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2018.1.4"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -30,17 +30,17 @@ CORES=$(($(lscpu|grep -e '^CPU(s):'|xargs|cut -d" " -f2)+1))
 CORES="-j$CORES"
 
 # set this to "0" if you don't want to use make clean before make
-MAKE_CLEAN="1"
+MAKE_CLEAN="0"
 
 # set this to "" to get less more output
 VERBOSE="V=s"
 
 #ONLY_TARGET must be set to "" or i.e. "ar71xx-tiny"
 #ONLY_TARGET=""
-ONLY_TARGET="ar71xx-generic ar71xx-tiny"
+ONLY_TARGET="ar71xx-generic"
 #to build only one device set DEVICES list (only if $ONLY_TARGET!="")
-DEVICES=''
-#DEVICES='DEVICES=tp-link-tl-wr841n-nd-v7'
+#DEVICES=''
+DEVICES='DEVICES=tp-link-tl-wr842n-nd-v3'
 
 cd ../
 if [ ! -d "site" ]; then
@@ -50,7 +50,7 @@ fi
 
 if [ "$(whoami)" == "root" ]; then
   echo "Make may not be run as root"
-  return
+  exit
 fi
 
 if [ -d ../openwrt/ ]; then

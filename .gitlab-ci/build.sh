@@ -14,17 +14,6 @@
 # Default make options
 MAKEOPTS="-j 4"
 
-# Default to build all Gluon targets if parameter -t is not set
-TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
-TARGETS=$TARGETS" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-
-# BROKEN:
-#TARGETS=$TARGETS" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
-#TARGETS=$TARGETS" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
-#TARGETS=$TARGETS" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-#TARGETS=$TARGETS" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
-#TARGETS=$TARGETS" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
-
 # Default is set to use current work directory
 SITEDIR="$(pwd)"
 
@@ -34,6 +23,7 @@ BUILD="snapshot"
 # Specify deployment server and user
 DEPLOYMENT_SERVER="10.116.250.1"
 DEPLOYMENT_USER="rsync"
+DEPLOYMENT_PATH="/opt/firmware/ffki"
 
 # Path to signing key
 SIGNKEY=""
@@ -42,10 +32,13 @@ SIGNKEY=""
 E_ILLEGAL_ARGS=126
 
 # Help function used in error messages and -h option
+
 usage() {
   echo ""
   echo "Build script for Freifunk-Fulda gluon firmware."
   echo ""
+  echo "-a: Autoupdater branch name (e.g. development)"
+  echo "    Default: branch (see -b)"
   echo "-b: Firmware branch name (e.g. development)"
   echo "    Default: current git branch"
   echo "-c: Build command: update | clean | download | build | sign | upload | prepare"
@@ -57,6 +50,8 @@ usage() {
   echo "    Default: \"${BUILD}\""
   echo "-t: Gluon targets architectures to build"
   echo "    Default: \"${TARGETS}\""
+  echo "-u: Upload target"
+  echo "    Default: branch (see -b)"
   echo "-r: Release number (optional)"
   echo "    Default: fetched from release file"
   echo "-w: Path to site directory"
@@ -72,10 +67,16 @@ if [[ "${#}" == 0 ]]; then
 fi
 
 # Evaluate arguments for build script.
-while getopts b:c:dhm:n:t:w:s: flag; do
+while getopts a:b:c:dhm:n:t:u:w:s: flag; do
   case ${flag} in
+    a)
+        AU_BRANCH="${OPTARG}"
+        ;;
     b)
         BRANCH="${OPTARG}"
+	if [ "${BRANCH}" == "release-candidate" ] ; then
+          BRANCH="rc"
+	fi
         ;;
     c)
       case "${OPTARG}" in
@@ -123,6 +124,9 @@ while getopts b:c:dhm:n:t:w:s: flag; do
     t)
       TARGETS="${OPTARG}"
       ;;
+    u)
+      UPLOAD_TARGET="${OPTARG}"
+      ;;
     r)
       RELEASE="${OPTARG}"
       ;;
@@ -145,9 +149,46 @@ shift $((OPTIND - 1));
 
 # Check if there are remaining arguments
 if [[ "${#}" > 0 ]]; then
-  echo "Error: To many arguments: ${*}"
+  echo "Error: Too many arguments: ${*}"
   usage
   exit ${E_ILLEGAL_ARGS}
+fi
+
+# Set branch name
+if [[ -z "${BRANCH}" ]]; then
+  BRANCH=$(git symbolic-ref -q HEAD)
+  BRANCH=${BRANCH##refs/heads/}
+  BRANCH=${BRANCH:-HEAD}
+fi
+
+# Default to build branch specific targets if parameter -t is not set 
+if [[ -z ${TARGETS+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x"
+      ;;
+    next)
+      TARGETS="ar71xx-tiny ar71xx-generic"
+      #TARGETS+=" x86-64 x86-generic x86-64" # (VMs)
+      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716) 
+      #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
+      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)n
+      ;;
+    *)
+      # Default to all targets
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
+      TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+    ;;
+  esac
+fi
+
+if [[ -z "$AU_BRANCH" ]]; then
+  AU_BRANCH="$BRANCH"
+fi
+
+if [[ -z "$UPLOAD_TARGET" ]]; then
+  UPLOAD_TARGET="$BRANCH"
 fi
 
 # Set command
@@ -159,31 +200,35 @@ fi
 
 # Set release number
 if [[ -z "${RELEASE}" ]]; then
-  RELEASE=$(cat "${SITEDIR}/release")
+  RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
 fi
+
+# Normalize the branch name
+BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
+BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
 
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
 
-# Name of the autoupdater branch that is selected on the node: 'rc', 'nightly', 'next' or 'stable'
-BRANCH="stable"
-
-# key of the autoupdater branch for the name and BRANCH of the 2nd manifest: 'rc', 'nightly', 'next' or 'stable'
-AU_BRANCH_2="rc"
-
-# Determine upload target prefix: 'release-candidate', 'nightly' or 'next'
-TARGET_DIR="release-candidate"
-
 # Number of days that may pass between releasing an updating
-PRIORITY=1
+if [[ -z ${PRIORITY+x} ]] ; then
+  case "${BRANCH}" in
+    nightly)
+      PRIORITY=0
+      ;;
+    *)
+      PRIORITY=1
+      ;;
+  esac
+fi
 
 update() {
   echo "--- Update Gluon Dependencies"
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
-       GLUON_BRANCH="${BRANCH}" \
+       GLUON_RELEASE="${RELEASE}" \
+       GLUON_BRANCH="${AU_BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        update
 }
@@ -194,8 +239,8 @@ clean() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_RELEASE="${RELEASE}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          clean
@@ -208,8 +253,8 @@ download() {
     make ${MAKEOPTS} \
          GLUON_SITEDIR="${SITEDIR}" \
          GLUON_OUTPUTDIR="${SITEDIR}/output" \
-         GLUON_RELEASE="${RELEASE}-${BUILD}" \
-         GLUON_BRANCH="${BRANCH}" \
+         GLUON_RELEASE="${RELEASE}" \
+         GLUON_BRANCH="${AU_BRANCH}" \
          GLUON_PRIORITY="${PRIORITY}" \
          GLUON_TARGET="${TARGET}" \
          download
@@ -219,13 +264,14 @@ download() {
 build() {
   for TARGET in ${TARGETS}; do
     echo "--- Build Gluon Images for target: ${TARGET}"
-    case "${BRANCH}" in
+    case "${AU_BRANCH}" in
       stable)
         make ${MAKEOPTS} \
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
              GLUON_RELEASE="${RELEASE}-${BUILD}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_RELEASE="${RELEASE}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_PRIORITY="${PRIORITY}" \
              GLUON_TARGET="${TARGET}"
         ;;
@@ -235,7 +281,8 @@ build() {
              GLUON_SITEDIR="${SITEDIR}" \
              GLUON_OUTPUTDIR="${SITEDIR}/output" \
              GLUON_RELEASE="${RELEASE}-${BUILD}" \
-             GLUON_BRANCH="${BRANCH}" \
+             GLUON_RELEASE="${RELEASE}" \
+             GLUON_BRANCH="${AU_BRANCH}" \
              GLUON_TARGET="${TARGET}"
       ;;
     esac
@@ -245,10 +292,16 @@ build() {
   make ${MAKEOPTS} \
        GLUON_SITEDIR="${SITEDIR}" \
        GLUON_OUTPUTDIR="${SITEDIR}/output" \
-       GLUON_RELEASE="${RELEASE}-${BUILD}" \
+       GLUON_RELEASE="${RELEASE}" \
        GLUON_BRANCH="${BRANCH}" \
        GLUON_PRIORITY="${PRIORITY}" \
        manifest
+
+  cp "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest" \
+     "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest.clean"
+
+  # Prevent premature downloads
+  echo "deny from all" > "${SITEDIR}/output/images/sysupgrade/.htaccess"
 
   echo "--- Write Build file"
   cat > "${SITEDIR}/output/images/build" <<EOF
@@ -264,35 +317,23 @@ EOF
 
 sign() {
   echo "--- Sign Gluon Firmware Build"
-  
-  MANIFEST="${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
-  MANIFEST_2="${SITEDIR}/output/images/sysupgrade/${AU_BRANCH_2}.manifest"
-  
-  # keep the clean manifest for later signing of NOC members and for the BRANCH file
-  cp -a "${MANIFEST}" "${MANIFEST}.clean"
 
-  # create clean 2nd manifest with AU_BRANCH_2 as BRANCH
-  cp -a "${MANIFEST}.clean" "${MANIFEST_2}.clean"
-  sed -i 's/BRANCH='"${BRANCH}"'/BRANCH='"${AU_BRANCH_2}"'/g' "${MANIFEST_2}.clean"
-  
-  # Add the signature to the manifest file
+  # Add the signature to the local manifest
   contrib/sign.sh \
       "${SIGNKEY}" \
-      "${MANIFEST}"
-
-  # Add the signature to the the 2nd manifest file
-  cp -a "${MANIFEST_2}.clean" "${MANIFEST_2}"
-  contrib/sign.sh \
-      "${SIGNKEY}" \
-      "${MANIFEST_2}"
+      "${SITEDIR}/output/images/sysupgrade/${BRANCH}.manifest"
 }
 
 upload() {
+  set -x
   echo "--- Upload Gluon Firmware Images and Manifest"
 
   # Build the ssh command to use
   SSH="ssh"
   SSH="${SSH} -o stricthostkeychecking=no -v"
+
+  # Determine upload target prefix
+  TARGET="${UPLOAD_TARGET}"
 
   # Create the target directory on server
   ${SSH} \
@@ -301,59 +342,71 @@ upload() {
       mkdir \
           --parents \
           --verbose \
-          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
 
   # Add site metadata
   tar -czf "${SITEDIR}/output/images/site.tgz" --exclude='gluon' --exclude='output' "${SITEDIR}"
 
+  # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
+  echo "Compressing images..."
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade
+
   # Copy images to server
+  echo "Uploading images..."
   rsync \
       --verbose \
-      --recursive \
-      --compress \
       --progress \
-      --links \
       --chmod=ugo=rwX \
       --rsh="${SSH}" \
-      "${SITEDIR}/output/images/" \
-      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}"
+      "${SITEDIR}/output/images.txz" \
+      "${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER}:${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}"
+
+  echo "Uncompressing images..."
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+     tar -xJf "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/images.txz" -C "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/"
+
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}/sysupgrade" \
-          "/opt/firmware/ffki/${TARGET_DIR}/"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/sysupgrade" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
   ${SSH} \
       ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
       -- \
       ln -sf \
-          "/opt/firmware/ffki/${TARGET_DIR}/${RELEASE}-${BUILD}/factory" \
-          "/opt/firmware/ffki/${TARGET_DIR}/"
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
 prepare() {
   echo "--- Prepare directory for upload"
 
+  # Determine upload target prefix
+  TARGET="${UPLOAD_TARGET}"
+
   # Create the target directory on server
   mkdir \
     --parents \
     --verbose \
-    "${SITEDIR}/output/firmware/${TARGET_DIR}"
+    "${SITEDIR}/output/firmware/${TARGET}"
 
   # Copy images to directory
   mv \
     --verbose \
     "${SITEDIR}/output/images" \
-    "${SITEDIR}/output/firmware/${TARGET_DIR}/${RELEASE}-${BUILD}"
+    "${SITEDIR}/output/firmware/${TARGET}/${RELEASE}"
 
-  # Link latest upload in target directory to 'current'
+  # Link latest upload in target to 'current'
   cd "${SITEDIR}/output"
   ln \
       --symbolic \
       --force \
       --no-target-directory \
-      "${RELEASE}-${BUILD}" \
-      "firmware/${TARGET_DIR}/current"
+      "${RELEASE}" \
+      "firmware/${TARGET}/current"
 }
 
 (
