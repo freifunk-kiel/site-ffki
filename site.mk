@@ -23,7 +23,7 @@ GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
-# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.1.x/package/features
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.2.x/package/features
 GLUON_FEATURES := \
 	web-private-wifi \
 	ebtables-limit-arp \
