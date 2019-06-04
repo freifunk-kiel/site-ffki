@@ -25,8 +25,8 @@ GLUON_LANGS ?= en de
 
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.2.x/package/features
 GLUON_FEATURES := \
+	config-mode-geo-location-osm \
 	web-private-wifi \
-	ebtables-limit-arp \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
 	mesh-batman-adv-15 \
