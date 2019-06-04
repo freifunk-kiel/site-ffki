@@ -92,6 +92,7 @@ echo "####### validating GLUON_SITE_PACKAGES from $P/site.mk ..."
 sed '0,/^GLUON_LANGS/d' "$P/site.mk" | sed '/GLUON_TARGET/,$d' | egrep -v '(#|G|iwinfo|iptables|haveged|vim|socat|tar|mesh-batman-adv-1[45]|web-advanced|web-wizard)'> "$testpath"/site.mk.sh
 sed -i 's/\s\\$//g;/^$/d' "$testpath"/site.mk.sh
 sed -i 's/gluon-mesh-batman-adv-1[45]/gluon-mesh-batman-adv/g' "$testpath"/site.mk.sh
+sed -i 's/gluon-config-mode-geo-location-with-map/gluon-config-mode-geo-location/g' $testpath/site.mk.sh
 cat "$testpath"/site.mk.sh |
 while read packet; do
   if [ "$packet" != "" ]; then
