@@ -369,7 +369,7 @@ upload() {
 
   # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
   echo "Compressing images..."
-  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade other
 
   # Copy images to server
   echo "Uploading images..."
@@ -398,6 +398,12 @@ upload() {
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+      ln -sf \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/other" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
