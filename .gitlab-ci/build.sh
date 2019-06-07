@@ -189,7 +189,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       ;;
     *)
       # Default to all targets
-      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 ipq40xx"
       TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
     ;;
   esac
