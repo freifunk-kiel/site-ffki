@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     gawk \
     unzip \
+    time \
     libncurses5-dev \
     zlib1g-dev \
     libssl1.0-dev \
