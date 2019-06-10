@@ -1,3 +1,29 @@
+Änderungen mit Firmwareversion 2018.2.1-xxx basierend auf Gluon 2018.2.x (d303316)
+==================================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+Diese Firmware basiert auf Gluon v2018.2.1+19  (Gluon-Tag v2018.2.1 +19 Commits) und wurde
+von uns um folgende Modifikation erweitert:
+
+- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
+
+Mit dem Sprung von Gluon v2018.1.4 auf v2018.2.1 ist die Liste der unterstützten Geräte weiter gewachsen,
+es wurden wieder einige Fehler behoben und der Setup Mode wurde um die Unterstützung einer eingebetteten
+Karte erweitert. Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+
+- https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.1.html
+- https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.html
+
+Nach dem Wechsel von batman-adv compat 14 auf batman-adv compat 15 ist der Management-Datenverkehr
+auf das Vierfache angewachsen. Das entsprach so nicht unseren Erwartungen. Das Mesh-Netzwerk organisiert
+mit diesem Datenverkehr seine Struktur und ein leichter Anstieg des Datenverkehrs war durch die in batman-adv compat 15
+verwendete Struktur zur Unterstützung zukünfigter Feature-Erweiterungen (TVLV) zu erwarten gewesen. In Zusammenarbeit mit 
+den batman-adv Entwicklern haben wir den Datenverkehr analysiert: daraufhin konnte ein Bug identifiziert und behoben
+werden.
+
+
 Änderungen mit Firmwareversion 2018.1.4-667 basierend auf Gluon 2018.1.x (c3eaef9)
 ==================================================================================
 
