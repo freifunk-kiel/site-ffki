@@ -3,7 +3,7 @@ variables:
   GIT_SSL_CAPATH: /etc/ssl/certs/
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/build
   GLUON_GIT: https://github.com/rubo77/gluon.git/
-  GLUON_BRANCH: ssid-changer
+  GLUON_BRANCH: gluon-ssid-changer
   BROKEN: BROKEN=1
 
 cache:
