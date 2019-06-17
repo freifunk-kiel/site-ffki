@@ -91,7 +91,7 @@ fi
 for TARGET in $TARGETS; do
   date >> build.log
   echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-  OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION"
+  OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION GLUON_DEPRECATED=upgrade"
   echo -e "\n===========\n\n\n\n\nmake $OPTIONS update" >> build.log
   time make $OPTIONS update >> build.log 2>&1
   if [ $MAKE_CLEAN = 1 ]; then
