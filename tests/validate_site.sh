@@ -74,7 +74,7 @@ for feed in $GLUON_SITE_FEEDS; do
   cd -
 done
 
-echo "####### Lua linter check fo all package feeds ..."
+echo "####### Lua linter check for all package feeds ..."
 ~/.luarocks/bin/luacheck --config "$P/tests/.luacheckrc" "$testpath/packages"
 
 echo "####### downloading $GLUON_PACKAGES_REPO ..."
