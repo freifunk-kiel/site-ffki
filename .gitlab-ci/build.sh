@@ -168,8 +168,8 @@ if [[ -z ${TARGETS+x} ]] ; then
       TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x"
       ;;
     next)
-      #TARGETS="ar71xx-tiny ar71xx-generic"
-      TARGETS+=" x86-64 x86-generic" # (VMs)
+      TARGETS="ar71xx-tiny ar71xx-generic"
+      #TARGETS+=" x86-64 x86-generic" # (VMs)
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
       #TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)

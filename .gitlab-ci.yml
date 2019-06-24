@@ -7,8 +7,8 @@ variables:
   DEPRECATED: upgrade
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
-  # set to '', 'V=s' or 'V=s BUILD_LOG=1'
-  VERBOSE: ''
+  # set to '' or 'V=s BUILD_LOG=1'
+  VERBOSE: 'V=s BUILD_LOG=1'
 
 cache:
   key: $CI_COMMIT_REF_SLUG-$GLUON_GIT-$GLUON_BRANCH
@@ -47,6 +47,7 @@ build:
     - MAKEOPTS="$MAKEOPTS $BROKEN GLUON_DEPRECATED=$DEPRECATED"
     - 'echo "building with those options: $MAKEOPTS"'
       # former clone step
+    - set -x
     - ./.gitlab-ci/update-git.sh 2>&1 | tee -a debug.log
     - ./.gitlab-ci/build.sh -c update -b next -a next -n $CI_PIPELINE_ID -m "-j $MAKEOPTS" 2>&1 | tee -a debug.log
       # We should never need this, should we?
