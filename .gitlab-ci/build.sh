@@ -221,6 +221,9 @@ if [[ -z "${RELEASE}" ]]; then
     nightly)
       RELEASE="${RELEASE}~ngly"
       ;;
+    next)
+      RELEASE="${RELEASE}~next"
+      ;;
     *)
       # Do nothing
       ;;
