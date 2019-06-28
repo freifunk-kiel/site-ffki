@@ -1,18 +1,19 @@
-Änderungen mit Firmwareversion 2018.2.1-xxx basierend auf Gluon 2018.2.x (d303316)
+Änderungen mit Firmwareversion 2018.2.2-740 basierend auf Gluon 2018.2.x (800c3b2)
 ==================================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
 
-Diese Firmware basiert auf Gluon v2018.2.1+19  (Gluon-Tag v2018.2.1 +19 Commits) und wurde
+Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.2) und wurde
 von uns um folgende Modifikation erweitert:
 
 - Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
 
-Mit dem Sprung von Gluon v2018.1.4 auf v2018.2.1 ist die Liste der unterstützten Geräte weiter gewachsen,
+Mit dem Sprung von Gluon v2018.1.4 auf v2018.2.2 ist die Liste der unterstützten Geräte weiter gewachsen,
 es wurden wieder einige Fehler behoben und der Setup Mode wurde um die Unterstützung einer eingebetteten
 Karte erweitert. Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
 
+- https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.2.html
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.1.html
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.html
 
