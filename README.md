@@ -55,8 +55,8 @@ You can validate your changes to this repository by calling the validate_site.sh
 
 These Kieler Freifunk firmwares have been released (for details see [CHANGELOG](CHANGELOG.md) ):
 
-- 2018.2.1 (in review)
-  - Based on Gluon tag 2018.2.1 +1 commit (2018.2.x) +1 patch
+- 2018.2.2-747
+  - Based on Gluon tag 2018.2.2 +1 patch
 - 2018.1.4
   - Based on Gluon tag 2018.1.4 +1 commit (2018.1.x) +1 patch
 - 2018.1.1

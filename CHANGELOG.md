@@ -1,5 +1,5 @@
-Änderungen mit Firmwareversion 2018.2.2-740 basierend auf Gluon 2018.2.x (800c3b2)
-==================================================================================
+Änderungen mit Firmwareversion 2018.2.2-747 basierend auf Gluon 2018.2.2
+========================================================================
 
 Freifunk Kiel spezifische Änderungen:
 -------------------------------------
