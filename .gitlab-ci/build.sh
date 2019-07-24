@@ -169,15 +169,27 @@ if [[ -z ${TARGETS+x} ]] ; then
       ;;
     next)
       TARGETS="ar71xx-tiny ar71xx-generic"
-      #TARGETS+=" x86-64 x86-generic x86-64" # (VMs)
-      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716) 
+      #TARGETS+=" x86-64 x86-generic" # (VMs)
+      #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
-      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)n
+      #TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
+
+      # BROKEN:
+      #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710" # (raspberry Pi 1, 2 und 3)
+      #TARGETS+=" ipq40xx" # (FitzBox 4040)
+      #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
+      #TARGETS+=" x86-geode"
+      #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
+      #TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
+      #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
+      #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
       ;;
     *)
       # Default to all targets
-      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 sunxi x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt7628 ramips-rt305x"
+      TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 ipq40xx"
       TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
     ;;
   esac
@@ -198,14 +210,22 @@ if [[ -z "${COMMAND}" ]]; then
   exit ${E_ILLEGAL_ARGS}
 fi
 
-# Set release number
-if [[ -z "${RELEASE}" ]]; then
-  RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
-fi
-
 # Normalize the branch name
 BRANCH="${BRANCH#origin/}" # Use the current git branch as autoupdate branch
 BRANCH="${BRANCH//\//-}"   # Replace all slashes with dashes
+
+# Set release number
+if [[ -z "${RELEASE}" ]]; then
+  RELEASE=$(sed -e "s/BUILD/$BUILD/" "${SITEDIR}/release")
+  case "${BRANCH}" in
+    nightly)
+      RELEASE="${RELEASE}~ngly"
+      ;;
+    *)
+      # Do nothing
+      ;;
+  esac
+fi
 
 # Get the GIT commit description
 COMMIT="$(git describe --always --dirty)"
