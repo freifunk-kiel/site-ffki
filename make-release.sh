@@ -15,7 +15,7 @@ set -u
 set -e
 
 # if version is unset, will use the default nightly version from site.mk
-VERSION=${3:-"2018.2.1~ngly$(date '+%y%m%d%H%M')"}
+VERSION=${3:-"2019.1~ngly$(date '+%y%m%d%H%M')"}
 # branch must be set to either rc, nightly or stable
 BRANCH=${2:-"stable"}
 # must point to valid ecdsa signing key created by ecdsakeygen, relative to Gluon base directory
@@ -91,7 +91,7 @@ fi
 for TARGET in $TARGETS; do
   date >> build.log
   echo "Starting work on target $TARGET $DEVICES" | tee -a build.log
-  OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION"
+  OPTIONS="GLUON_TARGET=$TARGET $BROKEN $CORES GLUON_BRANCH=$BRANCH GLUON_RELEASE=$VERSION GLUON_DEPRECATED=upgrade"
   echo -e "\n===========\n\n\n\n\nmake $OPTIONS update" >> build.log
   time make $OPTIONS update >> build.log 2>&1
   if [ $MAKE_CLEAN = 1 ]; then
