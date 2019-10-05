@@ -181,7 +181,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
       #TARGETS+=" x86-geode"
       TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
-      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13, Netgear R6120 und archer c50)
       #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
       #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
