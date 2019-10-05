@@ -165,7 +165,7 @@ fi
 if [[ -z ${TARGETS+x} ]] ; then
   case "${BRANCH}" in
     nightly)
-      TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x"
+      TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x ramips-mt76x8"
       ;;
     next)
       TARGETS="ar71xx-tiny ar71xx-generic"
