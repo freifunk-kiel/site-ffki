@@ -7,7 +7,7 @@ variables:
   DEPRECATED: upgrade
   # set to '' or 'BROKEN=1'
   BROKEN: 'BROKEN=1'
-  # set to '' or 'V=s BUILD_LOG=1'
+  # set to '', 'V=s' or 'V=s BUILD_LOG=1'
   VERBOSE: ''
 
 cache:
@@ -53,7 +53,7 @@ build:
     - ./.gitlab-ci/build.sh -c clean -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Apply patches
     - ./.gitlab-ci/patch.sh patches gluon
-      # Build8.2
+      # Build
     - ./.gitlab-ci/build.sh -c build -b $CI_COMMIT_REF_NAME -n $CI_PIPELINE_ID -m "$MAKEOPTS" 2>&1 | tee -a debug.log
       # Revert patches
     - ./.gitlab-ci/patch.sh -r patches gluon
