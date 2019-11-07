@@ -10,6 +10,7 @@ GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
 GLUON_BRANCH ?= nightly
+GLUON_DEPRECATED ?= upgrade
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
@@ -164,6 +165,11 @@ FAT_PACKAGES := \
 	tcpdump \
 	gre \
 	wireguard
+
+#zram for tiny devices
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+	GLUON_SITE_PACKAGES += zram-swap
+endif
 
 # add addition network drivers and usb stuff only to targets where disk space does not matter
 ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
