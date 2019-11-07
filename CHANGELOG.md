@@ -1,3 +1,21 @@
+Änderungen mit Firmwareversion 2018.2.3-887 basierend auf Gluon 2018.2.3
+========================================================================
+
+Freifunk Kiel spezifische Änderungen:
+-------------------------------------
+
+Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.3) und wurde
+von uns um folgende Modifikation erweitert:
+
+- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM seltener abstürzen
+- Die DDHCPD-Integration verliert in der neuesten Version nicht mehr die Gatewayinformation, wodurch die Nutzer einen stabileren Netzzugang bekommen 
+- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
+
+Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+
+- https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.3.html
+
+
 Änderungen mit Firmwareversion 2018.2.2-747 basierend auf Gluon 2018.2.2
 ========================================================================
 
