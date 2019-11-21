@@ -169,6 +169,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       ;;
     next)
       TARGETS="ar71xx-tiny ar71xx-generic"
+      TARGETS+=" ath79-generic, lantiq-xrx200, lantiq-xway, mpc85xx-p1020" # new targets in master
       #TARGETS+=" x86-64 x86-generic" # (VMs)
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
@@ -177,18 +178,20 @@ if [[ -z ${TARGETS+x} ]] ; then
 
       # BROKEN:
       #TARGETS+=" brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710" # (raspberry Pi 1, 2 und 3)
-      #TARGETS+=" ipq40xx" # (FitzBox 4040)
+      #TARGETS+=" ipq40xx-generic" # (FitzBox 4040)
       #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
       #TARGETS+=" x86-geode"
       TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
       TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
       #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
-      #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
-      #TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
+      #TARGETS+=" ipq806x-generic" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      # removed: "mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
+      # all targets ordered:
+      # ar71xx-generic ar71xx-nand ar71xx-tiny ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-64 x86-generic x86-geode"
       ;;
     *)
-      # rc and stable defaults to all targets
+      # rc defaults to all targets
       TARGETS="ar71xx-generic ar71xx-nand ar71xx-tiny brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx ipq806x mpc85xx-generic mvebu-cortexa9 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-64 x86-generic x86-geode"
     ;;
   esac
