@@ -50,6 +50,7 @@ Freifunk Kiel spezifische Änderungen:
 -------------------------------------
 
 * Based on Gluon 2018.1.4 + c3eaef90 + Fonera Patch
+* Switch from batman-adv compat 14 to batman-adv compat 15
 * Switch from autoupdater to [MIAU](https://github.com/TobleMiner/gluon-tsys/tree/master/autoupdater) (Mesh-Independent-AUtoupdater)
 * Roamguide
   * Removed unused script running roamguide in a loop
