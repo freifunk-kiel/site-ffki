@@ -10,6 +10,7 @@ GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
 
 GLUON_PRIORITY ?= 0
 GLUON_BRANCH ?= nightly
+GLUON_DEPRECATED ?= upgrade
 export GLUON_BRANCH
 
 GLUON_TARGET ?= ar71xx-generic
@@ -49,7 +50,7 @@ GLUON_SITE_PACKAGES := \
 # from sargon:
 GLUON_SITE_PACKAGES += \
 	roamguide \
-	ddhcpd
+	ddhcpd-batman-adv
 
 # from https://github.com/Freifunk-Nord/eulenfunk-packages
 GLUON_SITE_PACKAGES += \
@@ -77,6 +78,15 @@ GLUON_SITE_PACKAGES += \
 #	some models and targets have to be excluded:
 ifeq ($(GLUON_TARGET),ar71xx-tiny)
 	GLUON_tp-link-tl-wr841n-nd-v7_SITE_PACKAGES = -ffffm-button-bind
+endif
+
+# a5-v11 gets too large
+ifeq ($(GLUON_TARGET),ramips-rt305x)
+	GLUON_a5-v11_SITE_PACKAGES += \
+	 -ffffm-button-bind \
+	 -gluon-config-mode-ppa \
+	 -config-mode-geo-location-osm \
+	 -status-page
 endif
 
 # support for USB UMTS/3G devices
@@ -156,6 +166,11 @@ FAT_PACKAGES := \
 	gre \
 	wireguard
 
+#zram for tiny devices
+ifeq ($(GLUON_TARGET),ar71xx-tiny)
+	GLUON_SITE_PACKAGES += zram-swap
+endif
+
 # add addition network drivers and usb stuff only to targets where disk space does not matter
 ifeq ($(GLUON_TARGET),$(filter $(GLUON_TARGET),x86-generic x86-64)) 
 	# support the USB stack on x86 devices
@@ -193,6 +208,10 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_buffalo-wzr-hp-g300nh_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_tp-link-archer-c7-v2_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 	GLUON_gl-ar300m_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
+endif
+
+ifeq ($(GLUON_TARGET),ramips-mt76x8)
+	GLUON_netgear-r6120_SITE_PACKAGES := $(USB_PACKAGES_STORAGE)
 endif
 
 ifeq ($(GLUON_TARGET),mpc85xx-generic)

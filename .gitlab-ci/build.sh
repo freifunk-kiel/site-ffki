@@ -181,7 +181,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
       #TARGETS+=" x86-geode"
       #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
-      #TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      #TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13, Netgear R6120 und archer c50)
       #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
       #TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
@@ -191,6 +191,8 @@ if [[ -z ${TARGETS+x} ]] ; then
       # Default to all targets
       TARGETS="ar71xx-generic ar71xx-tiny ar71xx-nand brcm2708-bcm2708 brcm2708-bcm2709 ramips-mt7621 x86-generic x86-geode x86-64 ramips-mt7620 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 ipq40xx"
       TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)-
+      TARGETS+=" ipq806x" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
+      TARGETS+=" mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
     ;;
   esac
 fi
@@ -369,7 +371,7 @@ upload() {
 
   # Compress images (Saves around 40% space, relevant because of shitty VDSL 50 upload speeds)
   echo "Compressing images..."
-  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade
+  tar -cJf "${SITEDIR}/output/images.txz" -C "${SITEDIR}/output/images/" factory sysupgrade other
 
   # Copy images to server
   echo "Uploading images..."
@@ -398,6 +400,12 @@ upload() {
       -- \
       ln -sf \
           "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/factory" \
+          "${DEPLOYMENT_PATH}/${TARGET}/"
+  ${SSH} \
+      ${DEPLOYMENT_USER}@${DEPLOYMENT_SERVER} \
+      -- \
+      ln -sf \
+          "${DEPLOYMENT_PATH}/${TARGET}/${RELEASE}/other" \
           "${DEPLOYMENT_PATH}/${TARGET}/"
 }
 
