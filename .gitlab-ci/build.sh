@@ -169,11 +169,11 @@ if [[ -z ${TARGETS+x} ]] ; then
       ;;
     next)
       TARGETS="ar71xx-tiny ar71xx-generic"
-      TARGETS+=" ath79-generic lantiq-xrx200 lantiq-xway mpc85xx-p1020" # new targets in master
+      #TARGETS+=" ath79-generic lantiq-xrx200 lantiq-xway mpc85xx-p1020" # new targets in master
       #TARGETS+=" x86-64 x86-generic" # (VMs)
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
-      TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
+      #TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750)
       #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
 
       # BROKEN:
@@ -181,8 +181,8 @@ if [[ -z ${TARGETS+x} ]] ; then
       #TARGETS+=" ipq40xx-generic" # (FitzBox 4040)
       #TARGETS+=" ramips-mt7621" # (D-Link DIR-860L (B1) Ubiquiti EdgeRouter X, ZBT WG3526)
       #TARGETS+=" x86-geode"
-      TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
-      TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
+      #TARGETS+=" ramips-rt305x" # BROKEN: (fonera, vocore a5)
+      #TARGETS+=" ramips-mt76x8" # BROKEN: unstable WiFi (tp-link 841 v13 und archer c50)
       #TARGETS+=" ar71xx-mikrotik" # BROKEN: no sysupgrade support (mikrotik-nand)
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
       #TARGETS+=" ipq806x-generic" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
