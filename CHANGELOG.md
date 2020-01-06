@@ -1,3 +1,17 @@
+Änderungen mit Firmwareversion 2018.2.4-??? basierend auf Gluon 2018.2.4
+========================================================================
+
+Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.4) und wurde
+von uns um folgende Modifikation erweitert:
+
+- Aktuelle version des DDHCPD, welche jetzt in einigen Situationen erfolgreich
+  Adressen verteilt. 
+
+Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+
+- https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.4.html
+
+
 Änderungen mit Firmwareversion 2018.2.3-889 basierend auf Gluon 2018.2.3
 ========================================================================
 
@@ -7,7 +21,7 @@ Freifunk Kiel spezifische Änderungen:
 Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.3) und wurde
 von uns um folgende Modifikation erweitert:
 
-- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM seltener abstürzen
+V- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM seltener abstürzen
 - Die DDHCPD-Integration verliert in der neuesten Version nicht mehr die Gatewayinformation, wodurch die Nutzer einen stabileren Netzzugang bekommen 
 - Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
 
