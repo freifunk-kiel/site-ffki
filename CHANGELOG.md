@@ -1,4 +1,4 @@
-Änderungen mit Firmwareversion 2018.2.4-??? basierend auf Gluon 2018.2.4
+Änderungen mit Firmwareversion 2018.2.4-925 basierend auf Gluon 2018.2.4
 ========================================================================
 
 Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.4) und wurde
