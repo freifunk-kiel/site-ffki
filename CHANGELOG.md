@@ -4,10 +4,15 @@
 Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.4) und wurde
 von uns um folgende Modifikation erweitert:
 
-- Aktuelle version des DDHCPD, welche jetzt in einigen Situationen erfolgreich
-  Adressen verteilt. 
+- Aktuelle version des DDHCPD, welche jetzt in einigen zusätzlichen Situationen
+  erfolgreich Adressen verteilt.
+- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM 
+  seltener abstürzen (seit v2018.2.3-889)
+- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen
+  (seit v2016.2.3)
 
-Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links
+erfahren:
 
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.4.html
 
@@ -21,11 +26,15 @@ Freifunk Kiel spezifische Änderungen:
 Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.3) und wurde
 von uns um folgende Modifikation erweitert:
 
-V- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM seltener abstürzen
-- Die DDHCPD-Integration verliert in der neuesten Version nicht mehr die Gatewayinformation, wodurch die Nutzer einen stabileren Netzzugang bekommen 
-- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
+- Das Zram sorgt für eine Speicherkomprimierung, wodurch Geräte mit wenig RAM
+  seltener abstürzen
+- Die DDHCPD-Integration verliert in der neuesten Version nicht mehr die
+  Gatewayinformation, wodurch die Nutzer einen stabileren Netzzugang bekommen 
+- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen
+  (seit v2016.2.3)
 
-Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links
+erfahren:
 
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.3.html
 
@@ -39,22 +48,26 @@ Freifunk Kiel spezifische Änderungen:
 Diese Firmware basiert auf Gluon v2018.2.x (Gluon-Tag v2018.2.2) und wurde
 von uns um folgende Modifikation erweitert:
 
-- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen (seit v2016.2.3)
+- Fonera Patchset: Patches um Geräte des Herstellers Fonera zu unterstützen
+  (seit v2016.2.3)
 
-Mit dem Sprung von Gluon v2018.1.4 auf v2018.2.2 ist die Liste der unterstützten Geräte weiter gewachsen,
-es wurden wieder einige Fehler behoben und der Setup Mode wurde um die Unterstützung einer eingebetteten
-Karte erweitert. Weitere Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
+Mit dem Sprung von Gluon v2018.1.4 auf v2018.2.2 ist die Liste der unterstützten
+Geräte weiter gewachsen, es wurden wieder einige Fehler behoben und der Setup
+Mode wurde um die Unterstützung einer eingebetteten Karte erweitert. Weitere
+Details zu den Updates von Gluon könnt ihr unter folgenden Links erfahren:
 
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.2.html
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.1.html
 - https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.html
 
-Nach dem Wechsel von batman-adv compat 14 auf batman-adv compat 15 ist der Management-Datenverkehr
-auf das Vierfache angewachsen. Das entsprach so nicht unseren Erwartungen. Das Mesh-Netzwerk organisiert
-mit diesem Datenverkehr seine Struktur und ein leichter Anstieg des Datenverkehrs war durch die in batman-adv compat 15
-verwendete Struktur zur Unterstützung zukünfigter Feature-Erweiterungen (TVLV) zu erwarten gewesen. In Zusammenarbeit mit 
-den batman-adv Entwicklern haben wir den Datenverkehr analysiert: daraufhin konnte ein Bug identifiziert und behoben
-werden.
+Nach dem Wechsel von batman-adv compat 14 auf batman-adv compat 15 ist der
+Management-Datenverkehr auf das Vierfache angewachsen. Das entsprach so nicht
+unseren Erwartungen. Das Mesh-Netzwerk organisiert mit diesem Datenverkehr seine
+Struktur und ein leichter Anstieg des Datenverkehrs war durch die in batman-adv
+compat 15 verwendete Struktur zur Unterstützung zukünfigter
+Feature-Erweiterungen (TVLV) zu erwarten gewesen. In Zusammenarbeit mit  den
+batman-adv Entwicklern haben wir den Datenverkehr analysiert: daraufhin konnte
+ein Bug identifiziert und behoben werden.
 
 
 Änderungen mit Firmwareversion 2018.1.4-667 basierend auf Gluon 2018.1.x (c3eaef9)
