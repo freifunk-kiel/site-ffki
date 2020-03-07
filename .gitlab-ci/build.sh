@@ -174,6 +174,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
       TARGETS+=" ramips-mt7620" # (gl-inet mt300 und mt750, TP-Link Archer C2 (v1), C20 (v1), C20i, C50 (v1))
+      TARGETS+=" ath79-generic" # (devolo WiFi pro)
       #TARGETS+=" sunxi-cortexa7" # (Banana Pi M1)
 
       # BROKEN:
