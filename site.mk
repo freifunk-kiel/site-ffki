@@ -2,8 +2,8 @@
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
-#DEFAULT_GLUON_RELEASE := 2019.1.1
-DEFAULT_GLUON_RELEASE := 2019.1.1~ngly$(shell date '+%y%m%d')
+#DEFAULT_GLUON_RELEASE := 2020.1.1
+DEFAULT_GLUON_RELEASE := 2020.1.1~ngly$(shell date '+%y%m%d')
 
 # Allow overriding the release number from the command line
 GLUON_RELEASE ?= $(DEFAULT_GLUON_RELEASE)
@@ -24,7 +24,7 @@ GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
-# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2019.1.x/package/features
+# for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2020.1.x/package/features
 GLUON_FEATURES := \
 	config-mode-geo-location-osm \
 	web-private-wifi \
