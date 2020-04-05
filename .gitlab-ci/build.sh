@@ -169,7 +169,7 @@ if [[ -z ${TARGETS+x} ]] ; then
       ;;
     next)
       TARGETS="ar71xx-tiny ar71xx-generic"
-      TARGETS+=" ath79-generic lantiq-xrx200 lantiq-xway mpc85xx-p1020" # new targets in master
+      TARGETS+=" lantiq-xrx200 lantiq-xway mpc85xx-p1020" # new targets in master
       #TARGETS+=" x86-64 x86-generic" # (VMs)
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
       #TARGETS+=" mpc85xx-generic" # (tp-link-tl-wdr4900-v1)
