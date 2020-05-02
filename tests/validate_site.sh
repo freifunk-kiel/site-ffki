@@ -5,7 +5,7 @@ set -uo pipefail
 GLUON_REPO="https://github.com/freifunk-gluon/gluon"
 GLUON_BRANCH='v2020.1.x'
 GLUON_PACKAGES_REPO="https://github.com/freifunk-gluon/packages"
-GLUON_PACKAGES_BRANCH='v2019.1.x'
+GLUON_PACKAGES_BRANCH='v2020.1.x'
 
 P="$(pwd)"
 echo "####### check if lua5.1 is installed ..."
