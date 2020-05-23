@@ -24,6 +24,9 @@ GLUON_WLAN_MESH ?= 11s
 
 GLUON_LANGS ?= en de
 
+# enable WPA3 for non-tiny devices
+GLUON_FEATURES_standard := wireless-encryption-wpa3
+
 # for feature packs see https://github.com/freifunk-gluon/gluon/blob/v2018.2.x/package/features
 GLUON_FEATURES := \
 	config-mode-geo-location-osm \
