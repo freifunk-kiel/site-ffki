@@ -1,7 +1,7 @@
 Firmware Site Config for Freifunk Kiel
 --------------------------------------
 
-The Freifunk next firmware is based on gluon branch `master`.
+The Freifunk next firmware is based on gluon branch `2020.2.x`.
 
 The autoupdater branch is set to `next`.
 
