@@ -3,7 +3,7 @@ Firmware Site Config for Freifunk Kiel
 
 [![Build Status](https://travis-ci.org/freifunk-kiel/site-ffki.svg?branch=nightly)](https://travis-ci.org/freifunk-kiel/site-ffki)
 
-The Freifunk nightly firmware is based on gluon branch v2020.1.x
+The Freifunk nightly firmware is based on gluon branch v2020.2.x
 
 You can always find
 the latest gluon documentation at:
