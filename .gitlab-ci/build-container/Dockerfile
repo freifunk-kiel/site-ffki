@@ -3,7 +3,7 @@ FROM debian:stretch
 RUN apt-get update && apt-get install -y \
     git \
     subversion \
-    python3 \
+    python \
     build-essential \
     gawk \
     unzip \

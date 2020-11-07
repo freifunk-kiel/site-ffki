@@ -168,7 +168,8 @@ if [[ -z ${TARGETS+x} ]] ; then
       TARGETS="ar71xx-generic ar71xx-tiny x86-64 ramips-rt305x ramips-mt76x8"
       ;;
     next)
-      TARGETS="ar71xx-tiny ar71xx-generic"
+      TARGETS="ar71xx-tiny"
+      #TARGETS+=" ar71xx-generic " # not building on master any more (use ath79-generic instead)
       TARGETS+=" lantiq-xrx200 lantiq-xway mpc85xx-p1020" # new targets in master
       #TARGETS+=" x86-64 x86-generic" # (VMs)
       #TARGETS+=" ar71xx-nand" # (Netgear WNDR3700, WNDR4300, ZyXEL NBG6716)
@@ -188,8 +189,8 @@ if [[ -z ${TARGETS+x} ]] ; then
       #TARGETS+=" brcm2708-bcm2710" # BROKEN: Untested (raspberry-pi-3)
       #TARGETS+=" ipq806x-generic" # BROKEN: unstable wifi drivers (tp-link-archer-c2600)
       # removed: "mvebu-cortexa9" # BROKEN: No AP+IBSS or 11s support (linksys-wrt1200ac)
-      # all targets ordered:
-      # ar71xx-generic ar71xx-nand ar71xx-tiny ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-64 x86-generic x86-geode"
+      # make list-targets:
+      # ar71xx-generic ar71xx-tiny ar71xx-nand ath79-generic brcm2708-bcm2708 brcm2708-bcm2709 ipq40xx-generic ipq806x-generic lantiq-xrx200 lantiq-xway mpc85xx-generic mpc85xx-p1020 ramips-mt7620 ramips-mt7621 ramips-mt76x8 ramips-rt305x sunxi-cortexa7 x86-generic x86-geode x86-legacy x86-64 
       ;;
     *)
       # rc defaults to all targets
