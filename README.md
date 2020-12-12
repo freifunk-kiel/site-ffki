@@ -3,7 +3,7 @@ Firmware Site Config for Freifunk Kiel
 
 [![Build Status](https://travis-ci.org/freifunk-kiel/site-ffki.svg?branch=nightly)](https://travis-ci.org/freifunk-kiel/site-ffki)
 
-The Freifunk next firmware is based on gluon branch `2020.2.x`.
+The Freifunk next firmware is based on gluon branch `master`.
 
 The autoupdater branch is set to `next`.
 
