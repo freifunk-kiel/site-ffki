@@ -2,7 +2,7 @@
 # when building gluon.
 
 # for each feed name given, add the corresponding PACKAGES_* lines
-GLUON_SITE_FEEDS='ffki sargon tsys eulenfunk ssidchanger button'
+GLUON_SITE_FEEDS='ffki sargon tsys eulenfunk ssidchanger button community'
 
 # usb support and gluon-config-mode-ppa
 PACKAGES_FFKI_REPO=https://github.com/freifunk-kiel/ffki-packages
@@ -33,3 +33,8 @@ PACKAGES_SSIDCHANGER_BRANCH=2018.1.x
 PACKAGES_BUTTON_REPO=https://github.com/rubo77/ffm-packages
 PACKAGES_BUTTON_COMMIT=3968a3f86e84cceab88cd58e7cc0ffbd71a599a1
 PACKAGES_BUTTON_BRANCH=2018.1.x
+
+# Freifunk Community Packages
+PACKAGES_COMMUNITY_REPO=https://github.com/freifunk-gluon/community-packages
+PACKAGES_COMMUNITY_COMMIT=25b56f908e61eef36cb8ebea0b3c4f907d226774
+PACKAGES_COMMUNITY_BRANCH=master
